@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Sunpn>
+  <ConnString value="Data Source=192.168.15.139;Initial Catalog=Bonus;User ID=sa;Password=admin123" />
+  <CorpID value="wx512ad5972960e003" />
+  <ServerUrl value="ganwuhua009.iok.la:33735" />
+  <Access_Token value="" />
+  <Access_YouXRQ value="2018-06-21 22:04:35" />
+  <Corpsecret value="YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c" />
+  <JSAPI_Ticket value="" />
+  <Ticket_YouXRQ value="2018-08-22 12:49:34" />
+  <sToken value="pvUcoJyNqQiYkuhgWP2NWsEyqskS" />
+  <sEncodingAESKey2 value="BvTFlNwUs7111PQDUCalde98Az6VNip2ztGFhPO6amK" />
+  <SuiteTicket value="rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p" />
+  <SuiteId value="wx4bfea8a0d4feffd0" />
+  <suite_access_token value="" />
+  <suiteAccess_YouXRQ value="2018-06-25 12:25:02" />
+  <Access_Token_Qiye value="w5wUa2ImrMUe6ImIOPwu9Cheut-xMdwSpmV65gfIOmhqSDY7eHAxD9vhXpRIbw5R_4TRtEdcobCSfK78gs8qYHMW1FhF_ggojlPWxvF92Zpoj90645l0ehZ1yKduU9k3ItgJ7EBbQhnq61XxwfljBw4KmyRPZMJ_t6JLeBarNkKvN_DBIZ57CbZnP8z58iIWSTorRsCVLEw0LVOcynvXhQ" />
+  <Qiye_YouXRQ value="2018-06-23 00:10:59" />
+</Sunpn>

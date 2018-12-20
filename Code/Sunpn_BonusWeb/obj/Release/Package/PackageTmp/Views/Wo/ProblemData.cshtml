@@ -1,0 +1,203 @@
+﻿@using System.Data
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>反馈记录</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <script src="~/Scripts/datePicker.js"></script>
+    <script src="~/Scripts/jquery-weui.js"></script>
+</head>
+
+<body>
+    <div class="weui-cells__title">选择日期</div>
+    <div class="weui-cell">
+        <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+            <input class="weui-input" value="" id="startTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+        </div> <span style="color:gray">&nbsp;到&nbsp;</span>
+        <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+            <input class="weui-input" value="" id="endTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+        </div>
+        <input type="button" name="name" onclick="selectData()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索.png'); background-repeat: no-repeat;background-position: center;width:40px; margin-top: 1px; " />
+        @*<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="selectData()">查询</a>*@
+    </div>
+    <script>
+	var starttime = new datePicker();
+	starttime.init({
+    'trigger': '#startTime', /*按钮选择器，用于触发弹出插件*/
+	'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+	'minDate':'1900-1-1',/*最小日期*/
+	'maxDate': (new Date().getFullYear()) + '-' + 12 + '-' + 31,/*最大日期*/
+	'onSubmit':function(){/*确认时触发事件*/
+	    var theSelectData = starttime.value;
+	},
+	'onClose':function(){/*取消时触发事件*/
+	}
+});
+var endtime = new datePicker();
+endtime.init({
+    'trigger': '#endTime', /*按钮选择器，用于触发弹出插件*/
+    'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+    'minDate': '1900-1-1',/*最小日期*/
+    'maxDate': '2100-12-31',/*最大日期*/
+    'onSubmit': function () {/*确认时触发事件*/
+        var theSelectData = endtime.value;
+    },
+    'onClose': function () {/*取消时触发事件*/
+    }
+});
+    </script>
+    @*反馈记录*@
+    <div id="contentfankui">
+        @if (ViewBag.ProblemData == null)
+        {
+            <br />
+            <br />
+            <center><span style="color:gray">暂无记录</span></center>
+        }
+        else
+        {
+
+
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>公司名称</th>
+                                <th>时间</th>
+                                <th>联系人</th>
+                                <th>联系方式</th>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.ProblemData != null)
+                        {
+                            DataTable DeBonData = ViewBag.ProblemData;
+                            for (int i = 0; i < DeBonData.Rows.Count; i++)
+                            {
+                                <tr onclick="javascript: document.getElementById('@DeBonData.Rows[i]["resonId"]').click();">
+                                    <td>@DeBonData.Rows[i]["CompanyName"]</td>
+                                    <td>@DeBonData.Rows[i]["CommitTime"]</td>
+                                    <td>@DeBonData.Rows[i]["Name"]</td>
+                                    <td>@DeBonData.Rows[i]["lxType"]</td>
+                                    <td hidden="hidden">
+                                        <a href="/Wo/ImageDetail?ResonId=@DeBonData.Rows[i]["resonId"]" id="@DeBonData.Rows[i]["resonId"]">查看</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+
+        }
+    </div>
+ 
+
+
+
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        if (window.name != "bencalie")
+        {
+            //如果页面的 name 属性不是指定的名称就刷新它
+            location.reload();
+            window.name = "bencalie";
+        } else
+        {
+            //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+            window.name = "";
+        }
+
+        var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+        if (browserRule.test(navigator.userAgent))
+        {
+            window.onpageshow = function (event)
+            {
+                if (event.persisted)
+                {
+                    window.location.reload()
+                }
+            };
+        }
+
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        if (right_div2 = "") {
+
+        } else {
+            right_div2.onscroll = function () {
+                var right_div2_top = this.scrollTop;
+                var right_div2_left = this.scrollLeft;
+                document.getElementById("right_div1").scrollLeft = right_div2_left;
+            }
+        }
+        //更具日期查询反馈记录
+        function selectData()
+        {
+            var startTime = $("#startTime").val();
+            var endTime = $("#endTime").val();
+            if (startTime.length > 0 && endTime.length > 0)
+            {
+                var startTmp = startTime.split("-");
+                var endTmp = endTime.split("-");
+                var sd = new Date(startTmp[0], startTmp[1], startTmp[2]);
+                var ed = new Date(endTmp[0], endTmp[1], endTmp[2]);
+                if (sd.getTime() > ed.getTime())
+                {
+                    alert("开始日期不能大于结束日期");
+                    return false;
+                }
+            }
+            $.ajax({
+                type: "POST",
+                url: '/Wo/SelectFankui',
+                data: { startTime: startTime, endTime: endTime },
+                success: function (data)
+                {
+                    $("#contentfankui").html(data);
+                },
+                //beforeSend: function ()
+                //{
+
+
+                //    $.showLoading("查询");
+                //},
+                error: function (XMLHttpRequest, textStatus, errorThrown)
+                {
+                    layer.msg('错误', { time: 3000, icon: 5 });
+                }
+            })
+        }
+     
+
+    </script>
+</body>
+</html>

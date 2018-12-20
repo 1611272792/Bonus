@@ -1,0 +1,48 @@
+﻿@using System.Data;
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery-weui.js"></script>
+<div class="weui-cells" id="emp" style="float:left;width:100%;margin-top:0px;">
+    @if (ViewBag.dname != null)
+    {
+        DataTable dn = ViewBag.dname;
+        for (int i = 0; i < dn.Rows.Count; i++)
+        {
+            <a href="/UserManager/Info?EmpID=@dn.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId" id="@dn.Rows[i]["EmpID"]" hidden="hidden"></a>
+            <div class="weui-cell weui-cell_swiped" id="emp" style="float:left;width:100%;margin-top:0px;">
+                <div class="weui-cell__bd">
+                    <div class="weui-cell" onclick="javascript: document.getElementById('@dn.Rows[i]["EmpID"]').click();">
+                        @*<div class="weui-cell__hd"><img src="~/Content/weixin/images/yuangong.png" alt="" style="width:20px;margin-right:5px;display:block"></div>*@
+                        <div class="weui-cell__hd" style="margin-right:20px;">
+                            @if (dn.Rows[i]["EmpPhotos"].ToString() == null || dn.Rows[i]["EmpPhotos"].ToString() == "")
+                            {
+                                <div style="border-radius: 50%;background-color:#319ee3;display:flex;align-items:center;justify-content:center;width:150%;border:1px solid #DFDFDF;color:white;">@dn.Rows[i]["Name"].ToString().Substring(0, 1)</div>
+                            }
+                            else
+                            {
+                                <img src="@dn.Rows[i]["EmpPhotos"].ToString()" style="border-radius: 50%;width:25px;border:1px solid #DFDFDF;height:25px;margin:0px auto;margin-right:-12px;">
+                            }
+                        </div>
+                        <div class="weui-cell__bd">
+                            <p>@dn.Rows[i]["Name"].ToString()</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell__ft">
+                    <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/UserManager/Info?EmpID=@dn.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId">编辑</a>
+                    @*<a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure('@dn.Rows[i]["EmpID"]')">删除</a>*@
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+
+</div>
+

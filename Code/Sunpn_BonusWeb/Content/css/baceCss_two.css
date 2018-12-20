@@ -1,0 +1,36 @@
+﻿
+/*单选框样式的颜色*/
+.weui-cells_checkbox .weui-check:checked + .weui-icon-checked:before {
+    content: '\EA06';
+    color: #319ee3!important;
+}
+
+/*单选框字体颜色*/
+.ziticolor {
+    color: #319ee3!important;
+}
+
+/*按钮颜色*/
+.weui-btn_primary {
+    background-color: #319ee3!important;
+}
+
+/*按钮:hover事件颜色*/
+.weui-btn_primary:hover {
+    background-color: #0e81ca!important;
+}
+
+/*弹框确定颜色*/
+.weui-dialog__btn {
+    color: #319ee3!important;
+}
+
+/*弹框取消颜色*/
+.weui-dialog__btn.default{
+        color: #5f646e!important;
+}
+
+
+.textonly {
+   color:gray;
+}

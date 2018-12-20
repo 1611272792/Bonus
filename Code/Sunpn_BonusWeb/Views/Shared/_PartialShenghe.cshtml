@@ -1,0 +1,44 @@
+﻿@using System.Data;
+
+    @*全部记录*@
+
+    @if (ViewBag.kehuList == null)
+    {
+        <br />
+            <br />
+            <center><span style="color:gray">暂无记录</span></center>
+    }
+    else
+    {
+        DataTable dt = ViewBag.kehuList;
+        <table class="table table-bordered table-striped table-hover text-center">
+            <tr id="right_table1">
+                <th>公司名</th>
+                <th>负责人</th>
+                @*<th>联系方式</th>
+                    <th>申请日期</th>
+                    <th>可用日期</th>*@
+                <th>是否过期</th>
+                <th>操作</th>
+            </tr>
+            @for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                <tr>
+                    <td>@dt.Rows[i]["CompanyName"]</td>
+                    <td>@dt.Rows[i]["Name"]</td>
+                    @*<td>@dt.Rows[i]["CompanyPhone"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>*@
+                    <td>
+                        @dt.Rows[i]["a"]
+                    </td>
+                    <td>
+                        <a href="/KeHuManager/Shenghe?cid=@dt.Rows[i]["CompanyID"].ToString()" id="btnsh">审核</a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+
+

@@ -1,0 +1,140 @@
+﻿@using System.Data;
+@*部门未领取*@
+<div id="DepDetail" hidden="hidden">
+    <div style="float:right"><button onclick="DepPayBonus()">发放</button></div>
+    @if (ViewBag.Dep == null)
+    {
+        <br />
+            <br />
+            <center><span style="color:gray">暂无数据</span></center>
+    }
+    else
+    {
+        <div id="right_div">
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table table-bordered">
+                        <tr>
+                            <th>名称</th>
+                            <th>未领取奖金</th>
+                            <th class="thf">
+                                @*<input id="Checkbox4" onchange="GetAll2()" class="ckstyle2" type="checkbox" />*@
+                                <div class="weui-cells_checkbox">
+                                    <label for="Checkbox3">
+                                        <input type="checkbox" class="weui-check" id="Checkbox3" onchange="GetAll()" />
+                                        <i class="weui-icon-checked"></i>全选
+                                    </label>
+                                </div>
+                            </th>
+                            @*<th class="thf"><input id="Checkbox3" onchange="GetAll()" class="ckstyle" type="checkbox" />  全选 </th>*@
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="right_div2">
+                <table id="right_table2" class="table table-bordered">
+                    @if (ViewBag.Dep != null)
+                    {
+                        DataTable dsDep = ViewBag.Dep;
+                        for (int i = 0; i < dsDep.Rows.Count; i++)
+                        {
+                            <tr>
+                                <td onclick="javascript: document.getElementById('@dsDep.Rows[i]["DepartName"]').click();">@dsDep.Rows[i]["DepartName"]</td>
+                                <td onclick="javascript: document.getElementById('@dsDep.Rows[i]["DepartName"]').click();">@dsDep.Rows[i]["noGet"]</td>
+                                <td>
+                                    <div class="weui-cells_checkbox">
+                                        <label for="@dsDep.Rows[i]["DepartID"]">
+                                            <input type="checkbox" class="weui-check" id="@dsDep.Rows[i]["DepartID"]" name="cks" value="@dsDep.Rows[i]["DepartID"]" />
+                                            <i class="weui-icon-checked"></i>
+                                        </label>
+                                    </div>
+                                    @*<input type="checkbox" name="cks" class="ckstyle check" value="@dsDep.Rows[i]["DepartID"]" />*@
+                                </td>
+                                @*<td>@dsDep.Rows[i]["NoGet"]</td>*@
+                                @*<td>@dsDep.Rows[i]["sumBonus"]</td>*@
+                                <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/DepGain?depBounsID=@dsDep.Rows[i]["DepartID"]" id="@dsDep.Rows[i]["DepartName"]"></a></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+
+@*个人未领取*@
+<div id="EmpDetail">
+    <div style="float:right"><button onclick="EmpPayBonus()">发放</button></div>
+    @if (ViewBag.Emp == null)
+    {
+        <br />
+            <br />
+            <center><span style="color:gray">奖金已全部发放,暂无数据</span></center>
+    }
+    else
+    {
+        <div id="right_div">
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table table-bordered">
+                        <tr>
+                            <th>姓名</th>
+                            <th>未领取奖金</th>
+                            <th class="thf2">
+                                @*<input id="Checkbox4" onchange="GetAll2()" class="ckstyle2" type="checkbox" />*@
+                                <div class="weui-cells_checkbox">
+                                    <label for="Checkbox4">
+                                        <input type="checkbox" class="weui-check" id="Checkbox4" onchange="GetAll2()" />
+                                        <i class="weui-icon-checked"></i>全选
+                                    </label>
+                                </div>
+                            </th>
+                            @*<th>全选</th>*@
+                            @*<th>总获得奖金</th>*@
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="right_div2">
+                <table id="right_table2" class="table table-bordered">
+                    @if (ViewBag.Emp != null)
+                    {
+                        DataTable dsEmp = ViewBag.Emp;
+                        for (int i = 0; i < dsEmp.Rows.Count; i++)
+                        {
+                            <tr>
+
+                                <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["Name"]').click();">@dsEmp.Rows[i]["Name"]</td>
+                                <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["Name"]').click();">@dsEmp.Rows[i]["noGet"]</td>
+                                <td>
+                                    <div class="weui-cells_checkbox">
+                                        <label for="@dsEmp.Rows[i]["EmpID"]">
+                                            <input type="checkbox" class="weui-check" id="@dsEmp.Rows[i]["EmpID"]" name="cks2" value="@dsEmp.Rows[i]["EmpID"]" />
+                                            <i class="weui-icon-checked"></i>
+                                        </label>
+                                    </div>@*<input type="checkbox" name="cks2" class="ckstyle2 check2" value="@dsEmp.Rows[i]["EmpID"]" />*@
+                                </td>
+
+
+                                <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/EmpGain?empBounsID=@dsEmp.Rows[i]["EmpID"]" id="@dsEmp.Rows[i]["Name"]"></a></td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                </table>
+            </div>
+        </div>
+    }
+</div>

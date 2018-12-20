@@ -1,0 +1,11 @@
+E:\zyl\zyl\公司项目\发放奖金项目\最新版奖金系统\源代码新\Sunpn_BonusWeixin\bin\Debug\Sunpn_BonusWeixin.dll
+E:\zyl\zyl\公司项目\发放奖金项目\最新版奖金系统\源代码新\Sunpn_BonusWeixin\bin\Debug\Sunpn_BonusWeixin.pdb
+E:\zyl\zyl\公司项目\发放奖金项目\最新版奖金系统\源代码新\Sunpn_BonusWeixin\bin\Debug\Sunpn.dll
+E:\zyl\zyl\公司项目\发放奖金项目\最新版奖金系统\源代码新\Sunpn_BonusWeixin\obj\Debug\Sunpn_BonusWeixin.dll
+E:\zyl\zyl\公司项目\发放奖金项目\最新版奖金系统\源代码新\Sunpn_BonusWeixin\obj\Debug\Sunpn_BonusWeixin.pdb
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\bin\Debug\Sunpn_BonusWeixin.dll
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\bin\Debug\Sunpn_BonusWeixin.pdb
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\bin\Debug\Sunpn.dll
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\obj\Debug\Sunpn_BonusWeixin.csprojResolveAssemblyReference.cache
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\obj\Debug\Sunpn_BonusWeixin.dll
+E:\奖金系统\Bonus源码\Code\Sunpn_BonusWeixin\obj\Debug\Sunpn_BonusWeixin.pdb

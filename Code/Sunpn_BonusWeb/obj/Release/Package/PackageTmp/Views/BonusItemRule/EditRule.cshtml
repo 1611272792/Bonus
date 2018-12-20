@@ -1,0 +1,166 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑规则</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @*<div class="weui-cells__title">编辑规则</div>*@
+    @if (ViewBag.er != null)
+    {
+        DataTable er = ViewBag.er;
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">奖金项名称</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" value="@er.Rows[0]["BIName"]" id="BIName" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">规则名称</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" value="@er.Rows[0]["BIRuleID"]" id="RuleID" hidden="hidden" />
+                    <input class="weui-input" value="@er.Rows[0]["BIRuleName"]" id="RuleName" />
+                </div>
+            </div>
+            @*<div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">累计月份</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" type="text" value="@er.Rows[0]["ActiveDate"]" id="Activedate" />
+                </div>
+            </div>*@
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">刨除人数</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" type="number" value="@er.Rows[0]["RemainNum"]" id="avgnum" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">平均受益金额</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" type="number" value="@er.Rows[0]["AvgMoney"]" id="avgmoney" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+                </div>
+            </div>
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="editSure()">保存</a>
+            <a href="javascript:;" class="weui-btn weui-btn_warn" onclick="del()">删除</a>
+        </div>
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        //编辑确认按钮
+        function editSure() {
+            var BIRuleID = $("#RuleID").val();
+            var rname = $("#RuleName").val();//规则名称
+
+            var avgnum = $("#avgnum").val();
+            var avgmoney = $("#avgmoney").val();
+            var BonusItemID = GetQueryString("BonusItemID");
+            var BIType = GetQueryString("BIType");
+            if (rname == null || rname == "") {
+                $.toptip('请输入规则名称', 'warning');
+                return false;
+            } else if (avgnum == "" || avgnum == null) {
+                $.toptip('请输入受益人数', 'warning');
+                return false;
+            } else if (avgmoney == "" || avgmoney == null) {
+                $.toptip('请输入平均受益金额', 'warning');
+                return false;
+            } else {
+                debugger;
+                $.confirm("确认修改该规则？", function () {
+                    $.post("/BonusItemRule/EditSureGS", { BIRuleID: BIRuleID, BonusItemID, BonusItemID, BIType: BIType, rname: rname, avgnum: avgnum, avgmoney: avgmoney}, function (data) {
+                        if (data == "ok") {
+                            $.toast("修改成功，下月生效!");
+                            location.reload();
+                        } else if (data == "big") {
+                            $.toast("刨除人数大于公司总人数，不符合要求", "cancel");
+                            location.reload();
+                        } else if (data == "bigd") {
+                            $.toast("刨除人数大于部门总人数，不符合要求", "cancel");
+                            location.reload();
+                        } else if (data == "no") {
+                            $.toast("修改失败", "cancel");
+                            location.reload();
+                        } else {
+                            $.toast("修改失败", "cancel");
+                            location.reload();
+                        }
+                    });
+                }, function () {
+                    location.reload();
+                });
+            }
+        }
+
+
+        //function del() {
+        //    debugger;
+        //    var BIRuleID = $("#RuleID").val();
+        //    var BonusItemID = GetQueryString("BonusItemID");
+        //    $.post("/BonusItemRule/Delete", { BIRuleID: BIRuleID, BonusItemID: BonusItemID }, function (data) {
+        //        if (data == "ok") {
+        //            ////返回上一页并刷新
+        //            //window.location.href = document.referrer;
+
+        //            ////刷新当前页面
+        //            //document.location.reload();
+
+        //            //返回上一页重载页面，本地刷新
+        //            javascript: history.go(-1).reload();
+        //            location.reload();
+        //        } else {
+        //            alert("删除失败")
+        //        }
+        //    })
+        //}
+
+        function del() {
+            var BIRuleID = $("#RuleID").val();
+            var BonusItemID = GetQueryString("BonusItemID");
+            $.confirm("确认删除该规则？", function () {
+                $.post("/BonusItemRule/Delete", { BIRuleID: BIRuleID, BonusItemID: BonusItemID }, function (data) {
+                    if (data = "ok") {
+                        $.toast("删除成功");
+                        location.reload();
+                    }
+                    else {
+                        $.toast("删除失败", "cancel");
+                    }
+                })
+            }, function () {
+                location.reload();
+            });
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+﻿body {
+    border:0px;
+    padding:0px;
+    margin:0px;
+}
+/*下拉框*/
+.SelectBonus{
+    width:100%;
+    padding-left:3px;
+    border:1px solid #808080;
+    font-size:16px;
+    /*border-radius:4px 4px;*/
+    height:30px;
+}
+/*输入框*/
+.InputBonus{
+    width:100%;
+    padding-left:3px;
+    border:1px solid #808080;
+    font-size:16px;
+    border-radius:4px 4px;
+    height:30px;
+}
+/*文本域*/
+.TextBonus{
+    width:100%;
+    padding-left:3px;
+    border:1px solid #808080;
+    font-size:16px;
+    border-radius:4px 4px;
+}
+/*金额选择单选框*/
+.jexz{
+    width:20%;
+    padding-top:50%;
+    /*padding:5%;*/
+    margin:2%;
+    padding:0;
+    border:1px solid #ffffff;
+    float:left;
+    text-align:center;
+    background-color:#e9e9e9;
+    border-radius:4px 4px;
+
+}
+/*金额选择表格*/
+.tableje{
+    /*border:1px solid red;*/
+    width:100%;
+}
+.tableje tr td{
+    /*border:1px solid red;*/
+}
+/*按钮*/
+/*扫码*/
+.btnSaoMa{
+    width:auto;
+    padding:2px 6px 2px 6px;
+    border:0px;
+    background-color:#319ee3;
+    color:white;
+    font-size:16px;
+    height:30px;
+    border-radius:4px 4px;
+    letter-spacing:5px;
+    float:right;
+}
+/*原因*/
+.yy{
+    margin-top:5px;
+}
+/*添加按钮*/
+.btnAdd{
+    width:auto;
+     padding:2px 6px 2px 6px;
+     border:0px;
+     background-color:#ffd800;
+     color:white;
+     font-size:16px;
+     border-radius:4px 4px;
+    letter-spacing:5px;
+    float:right;
+}
+/*确认发放按钮*/
+.btnSendMoney{
+    width:100%;
+    height:40px;
+    background-color:#319ee3;
+    color:white;
+    letter-spacing:5px;
+    border:0px;
+    border-radius:0px 0px;
+    margin:0 auto;
+    font-size:16px;
+
+    
+    margin-bottom:10px;
+}

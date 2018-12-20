@@ -1,0 +1,108 @@
+﻿@using System.Data;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门奖金管理</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    @*<link href="~/Content/weui.css" rel="stylesheet" />*@
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <span id="CompanyId" hidden="hidden">@ViewBag.CompanyId</span>
+    @*<div id="search" style="width:50%">
+        <div class="weui-search-bar__form" style="margin-top:5%;margin-left:5%">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="qq" placeholder="部门搜索" required />
+            </div>
+        </div>
+        <input type="button" name="name" onclick="search()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索.png'); background-repeat: no-repeat;background-position: center;width:40px; margin-top: 1px; " />
+</div>*@
+    <div id="search" style="width:100%;margin-top:3.2%;float:left;margin-bottom:-10px;margin-left:3%;">
+        <div class="weui-search-bar__form" style="width:84%;float:left;padding-top: 2px;padding-bottom: 2px;">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="qq" placeholder="部门搜索" required />            </div>
+        </div>
+        <input type="button" name="name" onclick="search()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索 (2).png'); background-repeat: no-repeat;background-size:contain;background-position: center;width:40px;height:31px;margin-left:5px; " />
+    </div>
+
+    <div class="weui-cells" id="departshit"  style="float:left;width:100%;margin-top:17.5px;">
+        @if (ViewBag.dname != null)
+        {
+            DataTable dn = ViewBag.dname;
+            for (int i = 0; i < dn.Rows.Count; i++)
+            {
+                <a class="weui-cell weui-cell_access" href="/DepartBouns/Detail?DepartID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId">
+                    <div class="weui-cell__hd">
+                        <img src="/Content/weixin/images/depart.png" style="width:20px;margin-right:5px;display:block" />
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>@dn.Rows[i]["DepartName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+   
+    </div>
+ 
+    <script type="text/javascript">
+        //模糊查询
+        $(function () {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().replace(/\s|\xA0/g, "");
+            var empName="";
+            $("#qq").bigAutocomplete({
+                url: "/DepartBouns/GetInfo?keyword=" + kw + "&CompanyId=" + CompanyId,
+                callback: function (data) {
+                    empName = data.title;
+                    //alert(empName);
+                    if (empName.length > 0) {
+                        $("#departshit").load("/DepartBouns/SearchDepart?departName=" + empName + "&CompanyId=" + CompanyId)
+                    }
+                }
+            });
+        })
+
+        //搜索方法
+        function search() {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().replace(/\s|\xA0/g, "");
+            if (kw == "" || kw == null) {
+                location.reload();
+            } else {
+                $("#departshit").load("/DepartBouns/SearchDepart?departName=" + kw + "&CompanyId=" + CompanyId)
+            }
+        }
+
+        //回车键触发的搜索
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                search();
+            }
+        }
+    </script>
+</body>
+</html>

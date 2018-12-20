@@ -1,0 +1,50 @@
+﻿@using System.Data;
+<div id="DepDetail">
+    @if (ViewBag.Dep == null)
+    {
+        <br />
+            <br />
+            <center><span style="color:gray">暂无数据</span></center>
+    }
+    else
+    {
+    <div id="right_div">
+        <div id="right_div1">
+            <div id="right_divx">
+                <table id="right_table1" class="table table-bordered">
+                    <tr>
+                        <th>来源</th>
+                        <th>金额</th>
+                        <th>日期</th>
+                        <th>状态</th>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="right_div2">
+            <table id="right_table2" class="table table-bordered">
+                @if (ViewBag.Dep != null)
+                {
+                    DataTable dsDep = ViewBag.Dep;
+                    for (int i = 0; i < dsDep.Rows.Count; i++)
+                    {
+                        <tr>
+                            <td>@dsDep.Rows[i]["BIName"]</td>
+                            <td>@dsDep.Rows[i]["EarMoney"]</td>
+                            <td>@dsDep.Rows[i]["EarDate"]</td>
+                            <td>@dsDep.Rows[i]["isget"]</td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                }
+
+            </table>
+        </div>
+    </div>
+    }
+</div>

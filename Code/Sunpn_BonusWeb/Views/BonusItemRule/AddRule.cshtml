@@ -1,0 +1,139 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加规则</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @*<div class="weui-cells__title">添加规则</div>*@
+  @if (ViewBag.bi != null)
+  {
+      DataTable bi = ViewBag.bi;
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">奖金项名称</label></div>
+            <div class="weui-cell__hd">
+                <input class="weui-input" value="@bi.Rows[0]["BIName"]" id="" readonly="readonly" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">规则名称</label></div>
+            <div class="weui-cell__hd">
+                <input class="weui-input" value="" id="RuleName" />
+            </div>
+        </div>
+        @*<div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">累计月份</label></div>
+            <div class="weui-cell__hd">
+                <input class="weui-input" type="text" value="" id="activedate" />
+            </div>
+        </div>*@
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">刨除人数</label></div>
+            <div class="weui-cell__hd">
+                <input class="weui-input" type="text" value="" id="avgnum" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">平均受益金额</label></div>
+            <div class="weui-cell__hd">
+                <input class="weui-input" type="text" value="" id="avgmoney" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"/>
+            </div>
+        </div>
+    </div>
+    <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="addSure()">确认</a>
+        <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+    </div>
+  }
+  else
+  {
+    <div class="weui-loadmore weui-loadmore_line">
+        <span class="weui-loadmore__tips">暂无数据</span>
+    </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+  }
+
+    <script>
+        function change() {
+            var type = $("#type").val();
+            if (type == "0") {
+                $("#gd").fadeIn(400);
+                $("#gs").fadeOut(50);
+            }
+            else {
+                $("#gs").fadeIn(400);
+                $("#gd").fadeOut(50);
+            }
+        }
+
+        //添加确认按钮
+        function addSure() {
+            var rname = $("#RuleName").val().trim().replace(/\s|\xA0/g, "");//规则名称
+            var avgnum = $("#avgnum").val().trim().replace(/\s|\xA0/g, "");
+            var avgmoney = $("#avgmoney").val().trim().replace(/\s|\xA0/g, "");
+
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+            var BIType = GetQueryString("BIType");
+            var BonusItemID = GetQueryString("BonusItemID");
+            var CompanyID = GetQueryString("CompanyID");
+                //固定金额或公式计算
+                    if (rname == null || rname == "") {
+                        $.toptip('请输入规则名称', 'warning');
+                        return false;
+                    } else if (avgnum == "" || avgnum == null) {
+                        $.toptip('请输入刨除人数', 'warning');
+                        return false;
+                    } else if (avgmoney == "" || avgmoney == null) {
+                        $.toptip('请输入平均受益金额', 'warning');
+                        return false;
+                    } else if (CompanyID == "" || CompanyID == null) {
+                        $.toptip('身份验证有误，请联系管理员', 'warning');
+                        return false;
+                    } else {
+                        debugger;
+                        $.confirm("确认添加该规则？", function () {
+                            $.post("/BonusItemRule/AddSureGS", { BonusItemID: BonusItemID, BIType: BIType, rname: rname, avgnum: avgnum, avgmoney: avgmoney,CompanyID:CompanyID }, function (data) {
+                                if (data == "ok") {
+                                    $.toast("添加成功");
+                                    //location.reload();
+                                    window.history.back(-1);
+                                } else if (data == "big") {
+                                    $.toast("刨除人数大于公司总人数，不符合要求", "cancel");
+                                } else if (data == "bigd") {
+                                    $.toast("刨除人数大于部门总人数，不符合要求", "cancel");
+                                } else if (data == "have") {
+                                    $.toast("此规则名称已存在请重新填写", "cancel");
+                                } else if (data == "no") {
+                                    $.toast("添加失败", "cancel");
+                                } else {
+                                    $.toast("添加失败", "cancel");
+                                }
+                            });
+                        }, function () {
+                            location.reload();
+                        });
+
+                    }
+                }
+    </script>
+</body>
+</html>

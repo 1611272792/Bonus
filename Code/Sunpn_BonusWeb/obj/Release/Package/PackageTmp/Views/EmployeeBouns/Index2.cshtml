@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_LayoutFooter.cshtml";
+}
+<script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+<link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+<form class="weui-search-bar__form">
+    <div class="weui-search-bar__box">
+        <i class="weui-icon-search"></i>
+        <input type="text" class="weui-search-bar__input" id="qq" placeholder="搜索" required />
+    </div>
+
+</form>
+<script type="text/javascript">
+        $(function () {
+            var kw = $("#qq").val();
+            $("#qq").bigAutocomplete({
+                url: "/EmployeeBouns/GetInfo?keyword=" + kw,
+                callback: function (data) {
+                    alert(data);
+                }
+            });
+        })
+
+</script>
+<div class="weui-cells__title">选择部门</div>
+<div class="weui-cells">
+    @if (ViewBag.dname != null)
+    {
+        DataTable dn = ViewBag.dname;
+        for (int i = 0; i < dn.Rows.Count; i++)
+        {
+            <a class="weui-cell weui-cell_access" href="/EmployeeBouns/Detail?DepartID=@dn.Rows[i]["DepartID"]&DepartName=@dn.Rows[i]["DepartName"].ToString()">
+                <div class="weui-cell__bd">
+                    <p>@dn.Rows[i]["DepartName"].ToString()</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+</div>
+
+
+

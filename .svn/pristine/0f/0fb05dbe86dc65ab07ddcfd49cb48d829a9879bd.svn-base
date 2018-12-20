@@ -1,0 +1,371 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加奖金项</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <link href="~/Content/css/JCheck.css" rel="stylesheet" />
+    <script src="~/Content/js/JCheck.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <style>
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        .addsend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+        }
+
+        .ChooseMoney {
+            border: 1px solid #319ee3;
+            background-color: #8dd2fc;
+            color: red;
+        }
+
+        .layui-colla-content {
+            background-color: white;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [class*="radio-group-"],
+        [class*="checkbox-group-"] {
+            padding-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+            [class*="radio-group-"] > h3,
+            [class*="checkbox-group-"] > h3 {
+                margin-bottom: 10px;
+            }
+
+        .u-radio,
+        .u-checkbox {
+            line-height: 24px;
+        }
+
+            .u-radio .icon,
+            .u-checkbox .icon {
+                display: inline-block;
+                *zoom: 1;
+                *display: inline;
+                position: relative;
+                top: -2px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+
+            .u-radio .icon {
+                background: url("/Content/Images/rnocheck.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-radio.z-checked .icon {
+                background-image: url("/Content/Images/rcheck.png");
+            }
+
+            .u-checkbox .icon {
+                background: url("/Content/Images/noSelect.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-checkbox.z-checked .icon {
+                background-image: url("/Content/Images/check_icon.png");
+            }
+    </style>
+
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @*<div class="weui-cells__title">添加奖金项</div>*@
+    <div class="weui-cells weui-cells_form">
+        @*<div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">编号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="add_BonusItemID" name="" placeholder="请填写编号" required="required"/>
+            </div>
+        </div>*@
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="add_BIName" name="" placeholder="请填写名称" required="required" @*onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"*@/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">类型</label></div>
+            @*<div class="weui-cell__bd">
+                <select class="weui-select" name="select" id="add_BIType" onchange="changeType()">
+                    <option>请选择奖金类型</option>
+                    <option value="0">公司级奖金</option>
+                    <option value="1">部门级奖金</option>
+                </select>
+            </div>*@
+            @*<div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_BIType" value="0" />
+                    <i class="weui-icon-checked"></i><span id="gs">公司级</span>
+                </label>
+            </div>
+            <div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_BIType" value="1" />
+                    <i class="weui-icon-checked"></i><span id="bm">部门级</span>
+                </label>
+            </div>*@
+            <label class="u-radio" data-name="radio1" style="float:right;margin-right:2%;">
+                <input name="add_BIType" type="radio" value="0" checked="checked">
+                <i class="icon"></i>
+                <span class="text">公司级</span>
+            </label>
+            <label class="u-radio" data-name="radio1" style="float:right">
+                <input name="add_BIType" value="1" type="radio">
+                <i class="icon"></i>
+                <span class="text">部门级</span>
+            </label>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
+            <div class="weui-cell__bd">
+                @*<select class="weui-select" name="select" id="add_Pri" onchange="changeDep()">
+                    <option>请选择负责人</option>
+                    @if (ViewBag.pri != null)
+                    {
+                        DataTable pri = ViewBag.pri;
+                        for (int i = 0; i < pri.Rows.Count; i++)
+                        {
+                            <option value="@pri.Rows[i]["EmpID"]">@pri.Rows[i]["Name"]</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">暂无可选</option>
+                    }
+                </select>*@
+            </div>
+            <input class="weui-input" id="add_BIPri" name="" placeholder="请选择负责人" required="required" />
+            <input type="text" name="name" hidden="hidden" id="EmpID" />
+        </div>
+        <div id="sybm"  hidden="hidden">
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">受益部门</label></div>
+                <div class="weui-cell__bd">
+                    @*<select class="weui-select" name="select" id="add_BIDepID">
+                        <option>请选择受益部门</option>
+                    </select>*@
+
+                    <select class="weui-select" name="select" id="add_BIDepID">
+                        <option>请选择受益部门</option>
+                        @if (ViewBag.dep != null)
+                        {
+                            DataTable dep = ViewBag.dep;
+                            for (int i = 0; i < dep.Rows.Count; i++)
+                            {
+                                <option value="@dep.Rows[i]["DepartID"]">@dep.Rows[i]["DepartName"]</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">暂无可选</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">有效月份</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="add_InDate" type="number" placeholder="请填写有效月份" required="required"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+            </div>
+        </div>
+        @*<div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">是否启用</label></div>
+            <div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_BIState" value="0" />
+                    <i class="weui-icon-checked"></i><span id="qi">启用</span>
+                </label>
+            </div>
+            <div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_BIState" value="1" />
+                    <i class="weui-icon-checked"></i><span id="jin">启用</span>
+                </label>
+            </div>
+        </div>*@
+    </div>
+    <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="addSure()">确认</a>
+        <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+    </div>
+
+    <script>
+        $('.u-radio').jRadio();
+        $('.u-checkbox').jCheckbox();
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+
+        $(function () {
+            var CompanyID = GetQueryString("CompanyID");
+            var kw = $("#add_BIPri").val();
+            $("#add_BIPri").bigAutocomplete({
+                url: "/BonusImpower/GetEmp?keyword=" + kw + "&CompanyID=" + CompanyID,
+                callback: function (data) {
+                    if (data != "" && data != null) {
+                        $("#EmpID").val(data.EmpID);
+                    }
+                }
+            });
+        })
+
+        //添加确认按钮
+        function addSure() {
+            debugger;
+            if ($("#add_BIName").val() == "" || $("#add_BIName").val() == null) {
+                $.toptip('请填写奖金项名称', 'warning');
+            } else if ($(":radio[name='add_BIType']:checked").val() == "" || $(":radio[name='add_BIType']:checked").val() == null) {
+                $.toptip('请填写奖金项类型', 'warning');
+            } else if ($("#EmpID").val() == "" || $("#EmpID").val() == null) {
+                $.toptip('请选择有效奖金项负责人', 'warning');
+            } else if ($("#add_InDate").val() == "" || $("#add_InDate").val() == null) {
+                $.toptip('请选择奖金项有效月份', 'warning');
+            }
+            else {
+                if ($(":radio[name='add_BIType']:checked").val() == "0") {
+                    //var BonusItemID = $("#add_BonusItemID").val().trim().replace(/\s|\xA0/g, "");
+                    var BIName = $("#add_BIName").val().trim().replace(/\s|\xA0/g, "");
+                    var BIPrincipal = $("#EmpID").val();
+                    var BIState = 0;
+                    var BIType = $(":radio[name='add_BIType']:checked").val();
+                    var CompanyID = GetQueryString("CompanyID");
+                    var BIDepID = 0;
+                    var InDate = $("#add_InDate").val();
+                    $.confirm("确认添加该奖金项？", function () {
+                        $.post("/BonusItem/AddSure", {BIName: BIName, BIPrincipal: BIPrincipal, BIState: BIState, BIType: BIType, BIDepID: BIDepID, CompanyID: CompanyID, InDate: InDate }, function (data) {
+                            if (data == "ok") {
+                                $.toast("添加成功");
+                                location.reload();
+                                //window.history.back(-1);
+                                //javascript: history.go(-1).reload();
+                            } else if (data == "have") {
+                                $.toast("此奖金项编号已存在，请重新填写", "cancel");
+                                location.reload();
+                            } else if (data == "no") {
+                                $.toast("添加失败", "cancel");
+                                location.reload();
+                            } else {
+                                $.toast("添加失败", "cancel");
+                                location.reload();
+                            }
+                        });
+                    }, function () {
+                        location.reload();
+                    });
+                } else {
+                    //var BonusItemID = $("#add_BonusItemID").val().trim().replace(/\s|\xA0/g, "");
+                    var BIName = $("#add_BIName").val().trim().replace(/\s|\xA0/g, "");
+                    var BIPrincipal = $("#EmpID").val();
+                    var BIState = 0;
+                    var BIType = $(":radio[name='add_BIType']:checked").val();
+                    var BIDepID = $("#add_BIDepID").val();
+                    var CompanyID = GetQueryString("CompanyID");
+                    var InDate = $("#add_InDate").val();
+                    $.confirm("确认添加该奖金项？", function () {
+                        $.post("/BonusItem/AddSure", { BIName: BIName, BIPrincipal: BIPrincipal, BIState: BIState, BIType: BIType, BIDepID: BIDepID, CompanyID: CompanyID, InDate: InDate }, function (data) {
+                            if (data == "ok") {
+                                $.toast("添加成功");
+                                //location.reload();
+                                window.history.back(-1);
+                            } else if (data == "have") {
+                                $.toast("此奖金项编号已存在，请重新填写", "cancel");
+                                location.reload();
+                            } else if (data == "no") {
+                                $.toast("添加失败", "cancel");
+                                location.reload();
+                            } else {
+                                $.toast("添加失败", "cancel");
+                                location.reload();
+                            }
+                        });
+                    }, function () {
+                        location.reload();
+                    });
+                }
+
+            }
+        }
+
+        //单选框按钮的单击事件
+        $(":radio[name='add_BIType']").click(function () {
+            if ($(this).val() == "1") {
+                $("#sybm").fadeIn(400);
+            } else {
+                $("#sybm").fadeOut(50);
+            }
+        });
+
+        ////如果是部门级奖金需要选择受益部门
+        //function changeDep() {
+        //    var Pri = $("#EmpID").val();
+        //    $.post("/BonusItem/SYDepart", { Pri: Pri ,CompanyID: GetQueryString("CompanyID")}, function (data) {
+        //        var str = '';
+        //        if (data != "" && data != null) {
+        //            var json = eval('(' + data + ')');
+        //            for (var o in json) {
+        //                str += '<option value="' + json[o].DepartID + '">' + json[o].DepartName + '</option>';
+        //            }
+        //            $("#add_BIDepID").find("option").remove();
+        //            $("#add_BIDepID").append(str);
+        //        }
+        //        else {
+        //            str = '<option value="0">暂无部门</option>';
+        //            $("#add_BIDepID").find("option").remove();
+        //            $("#add_BIDepID").append(str);
+        //        }
+        //    });
+        //}
+    </script>
+</body>
+</html>

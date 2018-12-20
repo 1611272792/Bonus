@@ -1,0 +1,210 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>客户管理</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div id="search" style="width:100%;margin-top:10px;margin-right:15px">
+        <div class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="CompanySs" placeholder="公司搜索" required />
+            </div>
+
+        </div>
+    </div>
+    <div class="weui-cell" style="float:left">
+
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="CompanyShenghe" value="1" checked="checked" />
+                <i class="weui-icon-checked"></i><span id="shno">已过期</span>
+            </label>
+        </div>
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="CompanyShenghe" value="0" />
+                <i class="weui-icon-checked"></i><span id="shyes">全部</span>
+            </label>
+        </div>
+    </div>
+
+    
+
+    <div style="display:none;" id="sheng">
+        @*全部记录*@
+
+        @if (ViewBag.kehuList == null)
+        {
+            <br />
+            <br />
+            <center><span style="color:gray">暂无记录</span></center>
+        }
+        else
+        {
+            DataTable dt = ViewBag.kehuList;
+            <table class="table table-bordered table-striped table-hover text-center">
+                <tr id="right_table1">
+                    <th>公司名</th>
+                    <th>负责人</th>
+                    @*<th>联系方式</th>
+                    <th>申请日期</th>
+                    <th>可用日期</th>*@
+                    <th>是否过期</th>
+                    <th>操作</th>
+                </tr>
+                @for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    <tr>
+                        <td>@dt.Rows[i]["CompanyName"]</td>
+                        <td>@dt.Rows[i]["Name"]</td>
+                        @*<td>@dt.Rows[i]["CompanyPhone"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>*@
+                        <td>
+                            @dt.Rows[i]["a"]
+                        </td>
+                        <td>
+                            <a href="/KeHuManager/Shenghe?cid=@dt.Rows[i]["CompanyID"].ToString()" id="btnsh">审核</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        }
+    </div>
+  
+    <div id="weishen">
+        @*未审核记录*@
+        @if (ViewBag.weiShenghe == null)
+        {
+            <br />
+            <br />
+            <center><span style="color:gray">暂无记录</span></center>
+        }
+        else
+        {
+            DataTable dt = ViewBag.weiShenghe;
+            <table class="table table-bordered table-striped table-hover text-center">
+                <tr id="right_table1">
+                    <th>公司名</th>
+                    <th>负责人</th>
+                    @*<th>联系方式</th>
+                    <th>申请日期</th>
+                    <th>可用日期</th>*@
+                    <th>是否过期</th>
+                    <th>操作</th>
+                </tr>
+                @for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    <tr>
+                        <td>@dt.Rows[i]["CompanyName"]</td>
+                        <td>@dt.Rows[i]["Name"]</td>
+                        @*<td>@dt.Rows[i]["CompanyPhone"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>
+                        <td>@dt.Rows[i]["beginDate"]</td>*@
+                        <td>
+                            已过期
+                        </td>
+                        <td>
+                            <a href="/KeHuManager/Shenghe?cid=@dt.Rows[i]["CompanyID"].ToString()" id="btnsh">审核</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        }
+    </div>
+
+    
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        //搜索
+        var kw = $("#CompanySs").val();
+        
+        var empName = "";
+        $("#CompanySs").bigAutocomplete({
+            url: "/KeHuManager/GetInfo?keyword=" + kw,
+            callback: function (data)
+            {
+                console.log(data);
+                empName = data.title;
+                //alert(empName);
+                console.log(empName.length);
+                if (empName.length > 0)
+                {
+                    //$("#jiazai").show();
+                    $("#weishen").hide();
+                    
+                    $("#sheng").load("/KeHuManager/SearchInfo?CompanyName=" + empName);
+                    $("#sheng").show();
+                    //$("#jiazai").hide();
+                }
+            }
+        });
+
+        if ($(":radio[name='CompanyShenghe']:checked").val() == "1")
+        {
+            $("#shno").addClass("ziticolor");
+            $("#shyes").removeClass("ziticolor");
+            //$("#DepDetail").hide();
+            //$("#EmpDetail,#search").show();
+        } else if ($(":radio[name='CompanyShenghe']:checked").val() == "0")
+        {
+            $("#shyes").addClass("ziticolor");
+            $("#shno").removeClass("ziticolor");
+            //$("#EmpDetail,#search").hide();
+            //$("#DepDetail").show();
+        }
+
+        //单选框点击事件
+        $(":radio[name='CompanyShenghe']").click(function ()
+        {
+            if ($(this).val() == "1")
+            {
+                $("#shno").addClass("ziticolor");
+                $("#shyes").removeClass("ziticolor");
+                $("#sheng").hide();
+                $("#weishen").show();
+
+            } else
+            {
+                $("#shyes").addClass("ziticolor");
+                $("#shno").removeClass("ziticolor");
+                $("#weishen").hide();
+                $("#sheng").show();
+            }
+        });
+
+        //审核点击事件
+        $("#btnsh").click(function ()
+        {
+
+        })
+
+    </script>
+</body>
+</html>

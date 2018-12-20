@@ -1,0 +1,1729 @@
+﻿@using System.Data
+@using Sunpn_BonusWeb.Models
+
+@{
+    ViewBag.Title = "发放奖金";
+    Layout = "~/Views/Shared/_LayoutFooter.cshtml";
+}
+<link href="~/Content/zidong/jquery-ui.css" rel="stylesheet" />
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<script src="~/Content/weixin/js/ydui.flexible.js"></script>
+<link href="~/Content/css/JCheck.css" rel="stylesheet" />
+<script src="~/Content/js/JCheck.js"></script>
+<script src="~/Content/zidong/jquery-ui.js"></script>
+@*<link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>*@
+<script src="~/Content/js/jjweixinIos.js"></script>
+
+@*<style>
+       .weui-btn .weui-btn_primary{
+            background-color:red;
+        }
+    </style>*@
+<div class="layui-collapse" id="vv" lay-filter="test">
+    <input type="hidden" value="@ViewBag.userid" id="benrenId" />
+    <input type="hidden" id="companyid" value="@ViewBag.companyId" />
+    <input type="hidden" id="chooseUserId" value="" />
+    <div style="background-color:white;padding-top:3%;height:20%;">
+        <table style="width:100%;height:auto;margin-bottom:10px;background-color:white;">
+            <tr>
+                <td style="width:5%"></td>
+                <td style="width:50%">
+                    <div style="background-color:#319ee3;width:30%;font-size:1em;height:30px;float:left;text-align:center;padding-top:5px;color:white;">奖金项</div>
+                    <select id="money" class="weui-select" style="float:left;width:70%">
+                        @if (ViewBag.BonusItemsList == null)
+                        {
+
+                        }
+                        else
+                        {
+                            List<BonusItems> BonusItemsList = ViewBag.BonusItemsList;
+                            foreach (var item in BonusItemsList)
+                            {
+                        <option value="@item.BonusItemsId,@item.BonusMoney,@item.BonusType">@item.BonusName:@item.BonusMoney</option>
+                            }
+
+                        }
+                    </select>
+                </td>
+                <td style="width:20%" class="typeClick">
+
+                    @*<input type="radio" name="myprice" id="jiang" value="奖" >*@
+                    <label class="u-radio" data-name="radio1" style="float:right">
+                        <input name="myprice" type="radio" value="奖" checked>
+                        <i class="icon"></i>
+                        <span class="text">奖励</span>
+                    </label>
+
+                </td>
+                <td style="width:20%;padding-right:2%;" class="typeClick">
+
+                    <label class="u-radio" data-name="radio1" style="float:right">
+                        <input name="myprice" value="罚" type="radio">
+                        <i class="icon"></i>
+                        <span class="text">处罚</span>
+                    </label>
+
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">金额选择</h2>
+        <div class="layui-colla-content layui-show" style="overflow:hidden;">
+            <input type="hidden" value="a" id="xzfs" />
+            <table class="tableje">
+                @if (ViewBag.BonusParamList == null)
+                {
+
+                }
+                else
+                {
+                <tr>
+                    @{
+                            List<BonusParameter> bpList = ViewBag.BonusParamList;
+                            for (int i = 0; i < bpList.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                        <td class="jexz ChooseMoney">
+                            <span>
+                                @bpList[i].TypeName
+                            </span>
+                            <br />
+                            <span>@bpList[i].BonusNum</span>
+                            <input type="hidden" value="@bpList[i].BonusNum" />
+                        </td>
+                                }
+                                else
+                                {
+                        <td class="jexz">
+                            <span>
+                                @bpList[i].TypeName
+                            </span>
+                            <br />
+                            <span>@bpList[i].BonusNum</span>
+                            <input type="hidden" value="@bpList[i].BonusNum" />
+                        </td>
+                                }
+
+                            }
+                    }
+                    <td class="jexz" style="margin-top:3%;width:50%;">
+                        <input type="hidden" value="qt" />
+                        <div style="background-color:#319ee3;width:20%;font-size:1em;height:30px;float:left;text-align:center;padding-top:5px;color:white;">其他</div>
+                        <input type="number" placeholder="输入金额" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " class="InputBonus" id="qtje" style="float:left;width:80%;border-radius:0px;" disabled />
+                    </td>
+                </tr>
+
+
+
+
+                }
+
+            </table>
+
+
+
+
+        </div>
+    </div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">
+            对象选择
+
+        </h2>
+        <div class="layui-colla-content layui-show">
+            <div>
+                <div style="background-color:#319ee3;width:10%;height:30px;float:left;text-align:center;font-size:1em;padding-top:5px;color:white;">名字</div>
+
+                <input type="text" class="InputBonus" id="UserZidong" style="float:left;font-size:1em;border-radius:0px;width:69%;" placeholder="请输入名字的拼音首字母" />
+                <div style="width:5%;float:left;margin-left:-35px;padding-top:4px;">
+                    <i class="icon-qrscan" style="font-size:25px;" onclick="dj()"></i>
+
+                </div>
+                <div style="width:12%;float:left;margin-left:8%;">
+                    @*<input type="button" value="添加" id="addUsers" class="btnSaoMa"/>*@
+                    <a href="#" class="weui-btn weui-btn_mini weui-btn_primary addsend" id="tianjia">
+                        <img src="~/Content/Images/加号 (3).png" />
+                    </a>
+                </div>
+            </div>
+
+
+
+            <table class="layui-table" lay-skin="line">
+                <thead>
+                    <tr>
+                        <th>工号</th>
+                        <th>姓名</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="luckyPer"></tbody>
+
+            </table>
+
+        </div>
+    </div>
+    <div class="layui-colla-item">
+        <h2 class="layui-colla-title">原因</h2>
+        <div class="layui-colla-content layui-show" style="overflow:hidden;">
+            <p class="yy">
+                @if (ViewBag.BonusResonList != null)
+                {
+                @*<input id="Radio1" type="radio" name="res" class="res" value="0" checked="checked" />*@
+                <label class="u-radio z-checked" data-name="radio2">
+                    <input name="res" value="0" type="radio" checked="checked">
+                    <i class="icon"></i>
+                    <span class="text">常用原因：</span>
+                </label>
+                }
+                else
+                {
+                <label class="u-radio" data-name="radio2">
+                    <input name="res" value="0" type="radio">
+                    <i class="icon"></i>
+                    <span class="text">常用原因：</span>
+                </label>
+                @*<input id="Radio1" type="radio" name="res" class="res" value="0"  />*@
+                }
+
+                @*<input type="button" value="添加常用原因" class="btnAdd" id="btnReson" style="float:right;" />*@
+            </p>
+            <p id="cyyy" class="yy">
+                @if (ViewBag.BonusResonList != null)
+                {
+                    List<BonusReson> BonusResonlist = ViewBag.BonusResonList;
+                <select id="Select1" class="SelectBonus  weui-select">
+
+                    @foreach (var item in BonusResonlist)
+                        {
+                        <option value="@item.BonusResonName">@item.BonusResonName</option>
+                        }
+                </select>
+                }
+                else
+                {
+                <input type="text" id="Select1" value="无常用原因" disabled="disabled" class="InputBonus" />
+                }
+            </p>
+
+            <p class="yy">
+                @if (ViewBag.BonusResonList != null)
+                {
+                @*<input id="Radio2" type="radio" name="res" class="res" value="1" />*@
+                <label class="u-radio" data-name="radio2">
+                    <input name="res" value="1" type="radio">
+                    <i class="icon"></i>
+                    <span class="text">其他：</span>
+                </label>
+                }
+                else
+                {
+                @*<input id="Radio2" type="radio" name="res" class="res" value="1" checked="checked" />*@
+                <label class="u-radio z-checked" data-name="radio2">
+                    <input name="res" value="1" type="radio" checked="checked">
+                    <i class="icon"></i>
+                    <span class="text">其他：</span>
+                </label>
+                }
+                <a href="javascript:;" style="float:right;" class="weui-btn weui-btn_mini weui-btn_primary" id="btnAddCy">添加常用</a>
+
+                @*<input type="button" class="btnSaoMa" id="btnAddCy" value="添加常用"/>*@
+            </p>
+            <p class="yy">
+                @if (ViewBag.BonusResonList != null)
+                {
+                <textarea id="TextArea1" class="TextBonus" rows="3" disabled="disabled"></textarea>
+                }
+                else
+                {
+                <textarea id="TextArea1" class="TextBonus" rows="3"></textarea>
+                }
+
+            </p>
+            <p class="yy">
+                <label class="gonglabel">选择图片：</label>
+
+
+                <ul id="content" class="Con1" style="list-style:none"></ul>
+                <span class="weui-uploader__input-box" onclick="xztp()" id="btnimg">
+
+                </span>
+                @*<button type="button" id="btnimg" class="btn btn-info " onclick="xztp()"></button>*@
+
+            </p>
+
+
+
+
+
+        </div>
+    </div>
+    @*<div style="width:100%;overflow:hidden;">*@
+    <div style="margin:0 auto;width:95%;">
+        @*<input type="button" value="确认" id="btnSend" class="btnSendMoney" /></div>*@
+        <a href="javascript:;" id="btnSend" class="weui-btn weui-btn_primary">确认</a>
+        @*</div>*@
+    </div>
+</div>
+@*确认*@
+<div class="js_dialog" id="iosDialog1" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd"><strong class="weui-dialog__title"></strong></div>
+        <div class="weui-dialog__bd" id="confirmMes">11</div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" id="qx">取消</a>
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="qd">确定</a>
+        </div>
+    </div>
+</div>
+@*成功提示*@
+<div id="toast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">已完成</p>
+    </div>
+</div>
+@*错误提示*@
+<div id="toast_error" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-warn weui-icon_toast"></i>
+        <p class="weui-toast__content" id="errorMsg">错误，请重试</p>
+    </div>
+</div>
+@*加载提示*@
+<div id="loadingToast" style="display:none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-loading weui-icon_toast"></i>
+        <p class="weui-toast__content">数据加载中</p>
+    </div>
+</div>
+
+@*多选人员*@
+<div id="ChooseEmp" style="display:none;">
+    <p style="position:fixed;width:100%;font-size:1.5em;padding:3%;">
+        <span style="color:#ff0000;" id="btncancel">取消</span>
+        @*<input type="button" value="确定" id="btnok" />*@
+        <span id="btnok" style="float:right;color:#0094ff">保存</span>
+    </p>
+    <div id="a">
+        <div id="showLetter" class="showLetter"><span>A</span></div>
+        <!--城市索引查询-->
+        <div class="letter">
+            <ul>
+                @if (ViewBag.zimu == null)
+            {
+
+            }
+            else
+            {
+                DataTable dt = ViewBag.zimu;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                        <li><a href="javascript:;">@dt.Rows[i][0].ToString()</a></li>
+                    }
+                }
+
+
+            </ul>
+        </div>
+        <!--城市列表-->
+        <div class="container">
+            <div class="city" id="userDetial">
+                @if (ViewBag.userList == null)
+            {
+
+            }
+            else
+            {
+                List<Users> userList = ViewBag.userList;
+                foreach (var item in userList)
+                {
+                        <div class="city-list">
+                            <span class="city-letter" id="@item.Shou">@item.Shou</span>
+                            @foreach (var items in item.user)
+                    {
+                                <label class="u-checkbox aa" data-name="xzry" style="float:right;margin-top:10px;">
+                                    <input name="xzry" type="checkbox" value="@items.userid">
+                                    <i class="icon"></i>
+                                    <span class="text"></span>
+                                </label>
+                                @*<input name="xzry" type="checkbox" value="@items.userid" checked>*@
+                                <p data-id="@items.userid">
+                                    @*<img src="~/Content/Images/del.png" />*@
+                                    @items.name
+                                    :
+                                    @items.userid
+                                    @*<div style="width:30px;border:1px solid red;float:left;margin-top:-85%;">
+                                        <img src="~/Content/Images/del.png" />
+
+                                    </div>
+                                    <span style="float:left;"></span>*@
+
+                                </p>
+
+                            }
+
+
+                        </div>
+                    }
+
+
+                }
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <!--显示点击的是哪一个字母-->
+   
+</div>
+<input type="hidden" id="UpLoadImg" />
+<link href="~/Content/css/ssCss.css" rel="stylesheet" />
+<link href="~/Content/css/BonusOutputCss.css" rel="stylesheet" />
+<link href="~/Content/css/baseCss_three.css" rel="stylesheet" />
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="~/Content/js/BonusOutJs.js"></script>
+<link href="~/weui-master/dist/style/weui.min.css" rel="stylesheet" />
+<link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+<script src="~/Content/js/zepto.js"></script>
+<script src="~/Content/js/city.js"></script>
+<style>
+        .weui-select{
+      -webkit-appearance:none;
+      border:1px solid black;
+      outline:0;
+      background-color:transparent;
+      width:100%;
+      font-size:inherit;
+      height:30px;
+      line-height:30px;
+      position:relative;
+      z-index:1;
+      padding-left:15px;
+      border-radius:0px;
+    }
+         /*.demo-icons-me:before {
+                color: #4599d5;
+            }*/
+         /*#qian{
+
+         }*/
+            #jjff .tabbar-txt {
+                color: #4599d5;
+            }
+
+         .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+        .addsend{
+            padding-left:10px;
+            padding-right:10px;
+            padding-top:2.5px;
+            padding-bottom:2.5px;
+            /*border:1px solid red;*/
+            /*width:20%;
+            height:30px;*/
+            /*background-image:url('../../Content/Images/加号 (2).png');*/
+        }
+        .ChooseMoney{
+            border:1px solid #319ee3;
+            background-color:#8dd2fc;
+            color:red;
+        }
+
+        .layui-colla-content{
+            background-color:white;
+        }
+        /*.demo-icons-list:before {
+            color: gray;
+        }
+        #jjff .tabbar-txt{
+             color: #4599d5;
+        }
+        #jjff .demo-icons-contact{
+            color:#4599d5;
+        }*/
+        .text{
+            font-size:16px;
+        }
+         .selera{
+                    color:#5bb1e8;
+                }
+        *,
+            *:before,
+            *:after {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            [class*="radio-group-"],
+            [class*="checkbox-group-"] {
+                padding-left: 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+                [class*="radio-group-"] > h3,
+                [class*="checkbox-group-"] > h3 {
+                    margin-bottom: 10px;
+                }
+
+            .u-radio,
+            .u-checkbox {
+                line-height: 24px;
+            }
+
+                .u-radio .icon,
+                .u-checkbox .icon {
+                    display: inline-block;
+                    *zoom: 1;
+                    *display: inline;
+                    position: relative;
+                    top: -2px;
+                    width: 24px;
+                    height: 24px;
+                    vertical-align: middle;
+                }
+
+                .u-radio .icon {
+                    background: url("/Content/Images/rnocheck.png");
+                    -webkit-background-size: contain;
+                    background-size: contain;
+                }
+
+                .u-radio.z-checked .icon {
+                    background-image: url("/Content/Images/rcheck.png");
+                    ;
+                }
+
+                .u-checkbox .icon {
+                    background: url("/Content/Images/noSelect.png");
+                    -webkit-background-size: contain;
+                    background-size: contain;
+                }
+
+                .u-checkbox.z-checked .icon {
+                    background-image: url("/Content/Images/check_icon.png");
+                }
+</style>
+<script>
+
+
+    //$("#qian").attr('src', '~/Content/Images/钱 (1).png')
+    $(function ()
+    {
+        document.getElementById("qian").src = "../Content/Images/钱 (1).png";
+        $('.u-radio').jRadio();
+        $('.u-checkbox').jCheckbox();
+    })
+
+    var DisMan = $("#benrenId").val();
+    var companyid = $("#companyid").val();
+    //员工自动补全
+    $("#UserZidong").autocomplete({
+        open: function (event, ui)
+        {
+
+            $('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
+        },
+        source: "/SendBonus/GetPersons?EmpId=" + DisMan + "&companyId=" + companyid,
+        focus: function (event, ui)
+        {
+            $("#UserZidong").val(ui.item.label);
+            return false;
+        },
+        select: function (event, ui)
+        {
+            $("#UserZidong").val("");
+            //$("#UserZidong").val(ui.item.value);
+
+            var ghName = ui.item.label;
+            var gh = ui.item.value;
+            //查看被选中的人是不是这个奖金项的收益者
+            //选中的奖金项
+            var money = $("#money").val();
+            var SelectMoney = money.split(',');
+            //判断奖罚
+            var types = $("input:radio[name='myprice']:checked").val();
+            $.ajax({
+                type: "POST",
+                url: '/SendBonus/IsShouyi',
+                data: { BonusItemID: SelectMoney[0], companyId: companyid, userid: gh },
+                success: function (data)
+                {
+                    if (data !="no")
+                    {
+                        //alert("用户id:"+gh);
+                        var arrat = new Array();
+                        //找到下面的表格的工号
+                        var tds = $("#luckyPer tr").find("td");
+                        tds.each(function (index, elem)
+                        {
+                            var td = $(this);
+                            arrat[index] = td.text();
+                            //alert("aaa:"+arrat[index]);
+                        });
+                        var isok;
+                        var index2 = arrat.indexOf(gh);
+                        if (-index2 <= 0)
+                        {
+                            isok = -1;
+                        }
+                        else
+                        {
+                            isok = 0;
+                        }
+                        //alert("isok:" + isok);
+                        //判断是否有重复添加
+                        if (isok == -1)
+                        {
+                            layer.msg('人员有重复，请仔细检查', { time: 3000, icon: 5 });
+                            return false;
+                        }
+
+
+                        if (types == "奖")
+                        {
+                            //判断奖金是否够发  公式：选中的金额*表格里面的人数
+                            //表格里面的人数
+                            var tableId = document.getElementById("luckyPer");
+                            var tableLeng = tableId.rows.length - 1;//表格里的人数
+                            //选中的金额
+                            var je = $("input:radio[name='momey']:checked").val();
+                            if (je == "ok")
+                            {
+                                //是其他金额
+                                je = $("#qtmoney").val();
+
+                            }
+                            //alert("金额:" + je);
+                            //一共发放多少金额
+                            var totMoney = je * (1 + tableLeng);
+                            //选中的奖金项
+
+                            //算钱是否够发
+                            var isok2 = SelectMoney[1] - totMoney;
+                            if (isok2 < 0)
+                            {
+                                layer.msg('该奖金项余额不足', { time: 3000, icon: 5 });
+
+                                return false;
+                            }
+                            else
+                            {
+                                //余额够的话就可以把刚才选中的人加到下面表格中
+                                $(this).val("");
+                                //alert("234:"+$(this).val());
+                                var isEmp;
+                                if(data=="ok1"){
+                                    isEmp = 1;
+                                }
+                                else
+                                {
+                                    isEmp = 2;
+                                }
+                                $("#luckyPer").append("<tr><td class='selectUser'>" + gh + "</td><td>" + ghName + "</td><td><input type='hidden' value='"+isEmp+"' class='isEmp'/><img src='../Content/Images/del.png' class='delPerson' width='24' height='24' /></td>");
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            //alert("111");
+                            $(this).val("");
+                            //alert("234:" + $(this).val());
+                            $("#luckyPer").append("<tr><td class='selectUser'>" + gh + "</td><td>" + ghName + "</td><td><img src='../Content/Images/del.png' class='delPerson' width='24' height='24' /></td>");
+                        }
+                    }
+                    else
+                    {
+                        if (types == "罚")
+                        {
+                            var arrat = new Array();
+                            //找到下面的表格的工号
+                            var tds = $("#luckyPer tr").find("td");
+                            tds.each(function (index, elem)
+                            {
+                                var td = $(this);
+                                arrat[index] = td.text();
+                                //alert("aaa:"+arrat[index]);
+                            });
+                            var isok;
+                            var index2 = arrat.indexOf(gh);
+                            if (-index2 <= 0)
+                            {
+                                isok = -1;
+                            }
+                            else
+                            {
+                                isok = 0;
+                            }
+                            //alert("isok:" + isok);
+                            //判断是否有重复添加
+                            if (isok == -1)
+                            {
+                                layer.msg('人员有重复，请仔细检查', { time: 3000, icon: 5 });
+                                return false;
+                            }
+                            else
+                            {
+                                $(this).val("");
+                                //alert("234:" + $(this).val());
+                                $("#luckyPer").append("<tr><td class='selectUser'>" + gh + "</td><td>" + ghName + "</td><td><img src='../Content/Images/del.png' class='delPerson' width='24' height='24' /></td>");
+                            }
+                        }
+                        else
+                        {
+                            layer.msg('该奖金项不能给1' + ghName + '发奖金', { time: 3000, icon: 5 });
+                        }
+
+                    }
+                    layer.close(idfsss);
+                },
+                beforeSend: function ()
+                {
+
+
+                    //加载层-风格4
+                    idfsss = layer.msg('加载中', {
+                        icon: 16
+                      , shade: 0.01
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown)
+                {
+                    layer.msg('错误', { time: 3000, icon: 5 });
+                }
+            })
+
+
+            return false;
+        }
+
+
+
+    });
+    var images = {
+        localId: [],
+        serverId: []
+    };
+    wx.config({
+        beta: true,
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '@ViewBag.appid', // 必填，企业号的唯一标识，此处填写企业号corpid
+        timestamp: '@ViewBag.timestamp', // 必填，生成签名的时间戳
+        nonceStr: '@ViewBag.noncestr', // 必填，生成签名的随机串
+        signature: '@ViewBag.signature',// 必填，签名，见附录1
+        jsApiList: ['checkJsApi', 'scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.error(function (res)
+    {
+        alert("出错了:" + res.errMsg);
+    });
+    wx.ready(function ()
+    {
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        wx.checkJsApi({
+            //调用微信扫一扫功能
+            jsApiList: ['scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'],
+            success: function (res)
+            {
+
+            }
+        });
+    });
+    //选择人员取消
+    $("#btncancel").click(function ()
+    {
+        $("#ChooseEmp").hide();
+        $("#vv").show();
+    })
+
+    //删除图片
+    $("#content").on("click", ".imgDel", function ()
+    {
+        var del = $(this);
+        //alert(del);
+        var s = $(this).parent().remove();
+
+        var arr = new Array();
+        $("img").each(function ()
+        {
+            if ($(this).attr("class") == "img2")
+            {
+                arr.push($(this).attr("src"));
+            }
+        });
+        images.localId = arr;
+        //获取图片的localid
+
+        //alert("图片的src:" + images.localId);
+        //images.localId[id]
+        var a = $(".contentDel");
+        //alert("a:" + a.length);
+        var btnimg = document.getElementById("btnimg");
+        if (a.length >= 3)
+        {
+            alert("最多只能选3张！");
+            btnimg.style.display = "none";
+        }
+        else
+        {
+            btnimg.style.display = "block";
+        }
+    })
+
+    //选择人员确定
+    $("#btnok").click(function ()
+    {
+        //得到所有选中的复选框
+        var spCodesTemp = "";
+        var arr=new Array;
+        var arr2=new Array;
+        $.each($('input[type=checkbox]:checked'), function (i)
+        {
+            if (this.checked)
+            {
+                arr[i]=$(this).val();
+                arr2[i]=$(this).attr("isEmp");
+                if (0 == i)
+                {
+                    spCodesTemp = $(this).val();
+                } else
+                {
+                    spCodesTemp += ("," + $(this).val());
+                }
+                //spCodesTemp = $(this).val();
+            }
+        })
+        //$('input:checkbox[name=xzry]:checked').each(function (i)
+        //{
+        //    if (0 == i)
+        //    {
+        //        spCodesTemp = $(this).val();
+        //    } else
+        //    {
+        //        spCodesTemp += ("," + $(this).val());
+        //    }
+        //});
+        //alert(spCodesTemp);
+
+        $("#ChooseEmp").hide();
+        $("#vv").show();
+        $("#chooseUserId").val(spCodesTemp);
+        if (spCodesTemp == "")
+        {
+            $("#luckyPer").find("tr.tr").html("");
+            return false;
+        }
+        var chooseUs = $("#chooseUserId").val();
+        //alert("chooseUs:" + chooseUs);
+        var info = chooseUs.split(",");
+
+        //选中的奖金项
+        var money = $("#money").val();
+        var SelectMoney = money.split(',');
+        var CompanyId = $("#companyid").val();
+        var benrenId = $("#benrenId").val();
+
+
+
+        $.ajax({
+            type: "POST",
+            url: '/SendBonus/LuckPerson',//@Url.Action("SelectNoticeByXq", "TeachBuidsMain")
+            data: { uid: arr, companyId: CompanyId, BenrenID: benrenId, BonusItemID: SelectMoney[0], isEmp: arr2 },
+
+            success: function (data)
+            {
+                if (data.trim() == "" || data == null)
+                {
+
+                    $("#errorMsg").html("人员添加有误，请仔细核对");
+
+
+                    if ($toast_error.css('display') != 'none') return;
+
+                    $toast_error.fadeIn(100);
+                    setTimeout(function ()
+                    {
+                        $toast_error.fadeOut(100);
+                    }, 2000);
+                    return false;
+                }
+
+                var $loadingToast = $('#loadingToast');
+                $('#showLoadingToast').on('click', function ()
+                {
+                    if ($loadingToast.css('display') != 'none') return;
+
+                    $loadingToast.fadeIn(100);
+                    setTimeout(function ()
+                    {
+                        $loadingToast.fadeOut(100);
+                    }, 2000);
+                });
+                //添加到表格中
+                //alert("添加表格中");
+                //$("#UserId").val("");
+                $("#luckyPer").html(data);
+                layer.close(idfsss);
+            },
+            beforeSend: function ()
+            {
+
+
+                //加载层-风格4
+                idfsss = layer.msg('加载中', {
+                    icon: 16
+                  , shade: 0.01
+                });
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+                layer.msg('错误', { time: 3000, icon: 5 });
+            }
+
+        });
+        //var arrat = new Array();
+        ////找到下面的表格的工号
+        //var tds = $("#luckyPer tr").find("td");
+        //tds.each(function (index, elem)
+        //{
+        //    var td = $(this);
+        //    arrat[index] = td.text();
+        //    //alert(arrat[index]);
+        //});
+        //var isok = "-2";
+        //for (var i = 0; i < info.length; i++)
+        //{
+        //    var index = arrat.indexOf(info[i]);
+
+        //    if (-index <= 0)
+        //    {
+        //        isok = -1;//代表存在
+        //    }
+
+        //}
+
+        //if (chooseUs != "" && chooseUs != null)
+        //{
+
+        //    if (isok == -1)
+        //    {
+        //        alert("不能重复添加");
+        //    }
+        //    else
+        //    {
+        //        if (isok == "")
+        //        {
+
+        //        }
+        //        else
+        //        {
+
+        //        }
+
+        //    }
+        //}
+
+
+
+
+    });
+
+    //选择人员
+    $("#tianjia").click(function ()
+    {
+        $("#vv").hide();
+        var CompanyId = $("#companyid").val();
+        //选中的奖金项
+        var money = $("#money").val();
+        var SelectMoney = money.split(',');
+        $.ajax({
+            type: "POST",
+            url: '/SendBonus/LuckPersons',//@Url.Action("SelectNoticeByXq", "TeachBuidsMain")
+            data: { companyId: CompanyId, BenrenID: DisMan, BonusItemID: SelectMoney[0] },
+            success: function (data)
+            {
+                $("#a").html(data);
+                $("#ChooseEmp").show();
+                var one = document.getElementsByName('xzry');//获取到复选框的名称
+                //将所有获取到的复选框给取消选中
+                for (var j = 0; j < one.length; j++)
+                {
+                    one[j].checked = false;
+                    $(".aa").removeClass("z-checked");
+                }
+                //得到表格里userid的值
+                var tds = $("#luckyPer tr").find("td.selectUser");
+                var arrat = new Array();
+                tds.each(function (index, elem)
+                {
+                    var td = $(this);
+                    arrat[index] = td.text();
+                    //alert(arrat[index]);
+                    //$(":checkbox[name='xzry'][value='" + arrat[index] + "']").attr("checked", "true").parent().addClass("z-checked");
+                    $(":checkbox[name='xzry'][value='" + arrat[index] + "']").get(0).checked = true;
+                    $(":checkbox[name='xzry'][value='" + arrat[index] + "']").parent().addClass("z-checked");
+
+                });
+                layer.close(idfsss);
+            }
+            , beforeSend: function ()
+            {
+
+
+                //加载层-风格4
+                idfsss = layer.msg('加载中', {
+                    icon: 16
+                  , shade: 0.01
+                });
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+                layer.msg('错误', { time: 3000, icon: 5 });
+            }
+        })
+
+
+
+        //将对应的复选框赋值
+
+        //$('input:checkbox[name=xzry]:checked').each(function (i)
+        //{
+        //    $(this).checked = false;
+        //});
+    });
+    //var dialog;
+    //!function (win, $)
+    //{
+    //    dialog = win.YDUI.dialog;
+    //}(window, jQuery);
+
+
+
+    var $toast = $('#toast');//成功
+    var $toast_error = $("#toast_error");//错误
+    //扫码
+    function dj()
+    {
+        //alert("扫码");
+        wx.scanQRCode({
+            desc: 'scandesc',
+            needResult: 1,
+            scanType: ["qrCode", "barCode"],
+            success: function (res)
+            {
+                //选中的奖金项
+                var money = $("#money").val();
+                var SelectMoney = money.split(',');
+                //把扫码的东西放到下面表格中
+                //document.getElementById("btnsm").value = "loading";
+                //document.getElementById("btnsm").disabled = true;
+                var result = res.resultStr;
+                //发奖金的人
+                var DisMan = $("#benrenId").val();
+                //alert("DisMan:" + DisMan + ",result:" + result);
+                //看扫描的是否与数据库上对应
+                var CompanyId = $("#companyid").val();
+                $.post("/SendBonus/IsPeopes", { DisMan: DisMan, GetMan: result, compid: CompanyId, BonusItemId: SelectMoney[0] }, function (data)
+                {
+
+                    if (data == "nofind")
+                    {
+                        $("#errorMsg").html("人员扫描有误");
+                        if ($toast_error.css('display') != 'none') return;
+                        $toast_error.fadeIn(100);
+                        setTimeout(function ()
+                        {
+                            $toast_error.fadeOut(100);
+                        }, 2000);
+                        return false;
+                    }
+                    else
+                    {
+                        //将扫描出来的东西放到下面的表格中
+                        //找到下面的表格的工号
+
+                        var arrat = new Array();
+                        var tds = $("#luckyPer tr").find("td");
+                        tds.each(function (index, elem)
+                        {
+                            var td = $(this);
+                            arrat[index] = td.text();
+                            //alert("aaa:"+arrat[index]);
+                        });
+                        var isok;
+                        var index2 = arrat.indexOf(result);
+                        if (-index2 <= 0)
+                        {
+                            isok = -1;
+                        }
+                        else
+                        {
+                            isok = 0;
+                        }
+
+                        //判断是否有重复添加
+                        if (isok == -1)
+                        {
+
+                            $("#errorMsg").html("人员有重复，请仔细检查");
+
+
+                            if ($toast_error.css('display') != 'none') return;
+
+                            $toast_error.fadeIn(100);
+                            setTimeout(function ()
+                            {
+                                $toast_error.fadeOut(100);
+                            }, 2000);
+                            return false;
+                        }
+                        if (result == DisMan)
+                        {
+                            //不能给自己发奖金
+                            $("#errorMsg").html("不能给自己发奖金");
+
+
+                            if ($toast_error.css('display') != 'none') return;
+
+                            $toast_error.fadeIn(100);
+                            setTimeout(function ()
+                            {
+                                $toast_error.fadeOut(100);
+                            }, 2000);
+                            return false;
+                        }
+                        
+                        $("#luckyPer").append("<tr><td class='selectUser'>" + result + "</td><td>" + data.UserName + "</td><td><input type='hidden' value='" + data.isEmp + "' class='isEmp'/><img src='../Content/Images/del.png' class='delPerson' width='24' height='24' /></td>");
+
+                        if ($toast.css('display') != 'none') return;
+
+                        $toast.fadeIn(100);
+                        setTimeout(function ()
+                        {
+                            $toast.fadeOut(100);
+                        }, 2000);
+                        return false;
+
+                    }
+                })
+            }
+        });
+    }
+
+    //选择图片
+    function xztp()
+    {
+        wx.chooseImage({
+            count: 3, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res)
+            {
+                //alert("成功选择图片");
+                images.localId = res.localIds;
+                // alert("images.localId:" + images.localId);
+                for (var i = 0; i < images.localId.length; i++)
+                {
+                    //alert(images.localId[i]);
+                    //$("#content").append("<li class='contentDel' style = 'position:relative;width:33%;float:left;padding-right:10px;'><img width='100%'  height='90' dataSrc='" + images.localId[i] + "' src='../Content/Images/del2.png' class='img2' /><img class='imgDel' src='../Content/Images/del2.png' style='position:absolute;top:0px;right:0px;border:1px soild white;' /></li>");
+                    $("#content").append("<li class='contentDel' style = 'position:relative;width:33%;float:left;padding-right:10px;'><img width='100%'  height='90' background-size:'100% 100%' dataSrc='" + images.localId[i] + "' src=" + images.localId[i] + " class='img2' /><img class='imgDel' src='../Content/Images/del2.png' style='position:absolute;top:0px;right:0px;border:1px soild white;' /></li>");
+                    //alert($("#content").html());
+                    var a = $(".contentDel");
+                    var btnimg = document.getElementById("btnimg");
+                    if (a.length > 3)
+                    {
+                        alert("最多只能选3张！请删除多余照片");
+                        //btnimg.disabled = true;//超过照片数量选择图片按钮就禁用
+                        btnimg.style.display = "none";
+                    }
+                    else if (a.length == 3)
+                    {
+                        //btnimg.disabled = true;
+                        btnimg.style.display = "none";
+                    }
+                    else
+                    {
+                        //btnimg.disabled = false;
+                        btnimg.style.display = "block";
+                    }
+                }
+            }
+        });
+    }
+    var index_ids = 0;
+    var num = 0;
+    //上传图片
+    var img = "";
+    function uploadImg(localIds2, imgLength, BonusOut)
+    {
+        //alert("上传图片jjj" + BonusOut.BonusItemId);
+        wx.uploadImage({
+            localId: localIds2[index_ids],
+            isShowProgressTips: 1,
+            success: function (res)
+            {
+                //alert("res.serverId：" + res.serverId);
+                ////alert("success");
+                var serverId2 = res.serverId;//图片下载后的本地id
+                //alert("serverId:" + serverId2);
+                var companyid = $("#companyid").val();
+                //alert("companyid:" + companyid);
+                $.post("/SendBonus/UploadImge", { serverId: serverId2, companyid: companyid }, function (data)
+                {
+                    //alert("data:"+data);//得到img图片
+                    img = img + data + ",";
+                    //alert("img:" + img);
+                    $("#UpLoadImg").val(img);
+                    //alert(img);
+                    //alert("ccc");
+                    num++;
+
+                    //alert("num:" + num);
+                    //alert("imgLength:" + imgLength);
+                    if (num == imgLength)
+                    {
+                        //alert("发放奖金2：");
+                        //发放奖金
+                        var BonusOut2 = {
+                            BonusItemId: BonusOut.BonusItemId,
+                            DisMan: BonusOut.DisMan,
+                            EarMan: BonusOut.EarMan,
+                            EarMoney: BonusOut.EarMoney,
+                            BonusType: BonusOut.BonusType,
+                            IsGet: BonusOut.IsGet,
+                            PersonCount: BonusOut.PersonCount,
+                            ResonContent: BonusOut.ResonContent,
+                            ResonContentImg: img,
+                            companyid: BonusOut.companyid
+                        };
+                        $.post("/SendBonus/SendOutput", { BonusOut: BonusOut2 }, function (data)
+                        {
+                            if (data == "ok")
+                            {
+                                layer.msg('发放奖金成功', { time: 3000, icon: 1 });
+                                document.location.reload();
+                            }
+                            else
+                            {
+                                layer.msg(data, { time: 3000, icon: 5 });
+                                return false;
+                            }
+
+                        });
+                    }
+                });
+                index_ids++;
+                //alert(index_ids);
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg(localIds2, imgLength, BonusOut);
+
+                }
+
+            },
+            fail: function (error)
+            {
+                document.getElementById("btnBonus").disabled = false;
+                alert("上传图片失败");
+                $('.imgDel').show();
+                index_ids++;
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg(localIds2, imgLength, BonusOut);
+
+                }
+
+            }
+        })
+    }
+
+    function uploadImg2(localIds2, imgLength, BonusOut)
+    {
+        //alert("上传图片jjj" + BonusOut.BonusItemId);
+
+        wx.uploadImage({
+            localId: localIds2[index_ids],
+            isShowProgressTips: 1,
+            success: function (res)
+            {
+                //alert("res.serverId：" + res.serverId);
+                ////alert("success");
+                var serverId2 = res.serverId;//图片下载后的本地id
+                //alert("serverId:" + serverId2);
+                var companyid = $("#companyid").val();
+                $.post("/SendBonus/UploadImge", { serverId: serverId2, companyid: companyid }, function (data)
+                {
+                    //alert("data:"+data);//得到img图片
+                    img = img + data + ",";
+                    //alert("img:" + img);
+                    $("#UpLoadImg").val(img);
+                    //alert(img);
+                    //alert("ccc");
+                    num++;
+
+                    //alert("num:" + num);
+                    //alert("imgLength:" + imgLength);
+                    if (num == imgLength)
+                    {
+
+                        //alert("发放奖金2：");
+                        //发放奖金
+
+                        var BonusOut2 = {
+                            BonusItemId: BonusOut.BonusItemId,
+                            DisMan: BonusOut.DisMan,
+                            EarMan: BonusOut.EarMan,
+                            EarMoney: BonusOut.EarMoney,
+                            BonusType: BonusOut.BonusType,
+                            IsGet: BonusOut.IsGet,
+                            PersonCount: BonusOut.PersonCount,
+                            ResonContent: BonusOut.ResonContent,
+                            ResonContentImg: img,
+                            companyid: BonusOut.companyid
+                        };
+                        //alert("33");
+                        $.post("/SendBonus/SendFa", { BonusOut: BonusOut2 }, function (data)
+                        {
+                            if (data == "ok")
+                            {
+                                layer.msg('发放奖金成功', { time: 3000, icon: 1 });
+                                document.location.reload();
+                            }
+                            else
+                            {
+                                layer.msg(data, { time: 3000, icon: 5 });
+                                return false;
+                            }
+
+                        });
+                    }
+                });
+                index_ids++;
+                //alert(index_ids);
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg2(localIds2, imgLength, BonusOut);
+
+                }
+
+            },
+            fail: function (error)
+            {
+                document.getElementById("btnBonus").disabled = false;
+                alert("上传图片失败");
+                $('.imgDel').show();
+                index_ids++;
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg2(localIds2, imgLength, BonusOut);
+
+                }
+
+            }
+        })
+    }
+
+    //发放奖金
+    $("#btnSend").click(function (data)
+    {
+        //是否输入原因
+        var ResonBonus = $("input:radio[name='res']:checked").val();
+        var cyReson = "";//常用原因
+        var qtReson = "";//其他原因
+        var ImgReson = "";//图片原因
+        var Resons = "";
+        if (ResonBonus == "0")
+        {
+
+            //常用原因
+            cyReson = $("#Select1").val();
+            Resons = cyReson;
+        }
+        else
+        {
+            //其他原因
+            qtReson = $("#TextArea1").val();
+            Resons = qtReson;
+        }
+        //alert("原因：" + Resons);
+        if (Resons == "" || typeof (Resons) == "undefined")
+        {
+            layer.msg('原因不能为空', { time: 3000, icon: 5 });
+
+            return false;
+        }
+        //图片原因
+        var a = $(".contentDel");
+        //alert("imgs" + images.localId);
+        //alert("a.length:" + a.length);
+
+        //发奖金的人
+        var DisMan = $("#benrenId").val();
+        //判断奖罚
+        var types = $("input:radio[name='myprice']:checked").val();
+        //选中的奖金项
+        var money = $("#money").val();
+        var SelectMoney = money.split(',');
+
+
+        var xzfs = $("#xzfs").val();
+        var money2;
+        if (xzfs == "a")
+        {
+            money2 = $(".ChooseMoney").find("input[type=hidden]").val();
+        }
+        else
+        {
+            money2 = "qt";
+        }
+        if (types == "奖")
+        {
+            //表格里面的人数
+            var tableId = document.getElementById("luckyPer");
+            var tableLeng = tableId.rows.length;//表格里的人数
+            if (parseInt(tableLeng) < 1)
+            {
+                layer.msg('未选择发放的人', { time: 3000, icon: 5 });
+
+                return false;
+            }
+            //选中的金额
+            var je = "";
+            if (money2 == "qt")
+            {
+                //其他金额，不能超过200
+                je = $("#qtje").val().trim();
+                if (parseInt(je) > 200)
+                {
+                    layer.msg('金额最大不能超过200', { time: 3000, icon: 5 });
+
+                    return false;
+                }
+            }
+            else
+            {
+                je = money2;
+            }
+
+            if (je == "")
+            {
+                layer.msg('金额未选中', { time: 3000, icon: 5 });
+
+                return false;
+            }
+            //判断奖金项是否够发
+            var totMoney = je * tableLeng;
+
+            //算钱是否够发
+            var isok2 = SelectMoney[1] - totMoney;
+            if (isok2 < 0)
+            {
+                layer.msg('该奖金项余额不足', { time: 3000, icon: 5 });
+                return false;
+            }
+            else
+            {
+
+                var str = "";
+                var str2 = "";
+                for (var i = 0; i < tableId.rows.length; i++)
+                {
+                    // console.log($("tr td:eq(2)").html());
+                    //debugger;
+
+                    if (i + 1 < tableId.rows.length)
+                    {
+
+                        console.log($(tableId.rows[i].cells[2]).find("input").val());
+                        str += tableId.rows[i].cells[0].innerHTML + ",";
+                     //   console.log($("tr td:eq(2) input").val());
+
+                        str2 += $(tableId.rows[i].cells[2]).find("input").val() + ",";
+                    }
+                    else
+                    {
+                        str += tableId.rows[i].cells[0].innerHTML;
+                        console.log($(tableId.rows[i].cells[2]).find("input").val());
+                        str2 += $(tableId.rows[i].cells[2]).find("input").val();
+                    }
+                    //alert(tableId.rows[i].cells[0].innerHTML);
+                }
+                //alert(str2);
+                //当为奖的时候判断这个奖金项是否是给这个人发奖金的
+                $.ajax({
+                    type: "POST",
+                    url: '/SendBonus/panduan',
+                    data: { str: str, str2: str2, BItemId: SelectMoney[0], CompId: companyid, benrenId: DisMan },
+                    success: function (data)
+                    {
+                        layer.close(idfsss);
+                        if (data == "")
+                        {
+                            layer.msg('成功校验', { time: 3000, icon: 1 });
+                            var BonusOut = {
+                                BonusItemId: SelectMoney[0],
+                                DisMan: DisMan,
+                                EarMan: str,
+                                EarMoney: je,
+                                BonusType: 0,
+                                IsGet: 0,
+                                PersonCount: tableLeng,
+                                ResonContent: Resons,
+                                ResonContentImg: "",
+                                BonusTypes: SelectMoney[2],
+                                companyid: companyid
+
+                            };
+                            //alert("奖金项：" + BonusOut.BonusItemId + "发放人:" + BonusOut.DisMan + "接收人：" + BonusOut.EarMan);
+                            //alert("奖金项：" + BonusOut.BonusType + "发放人:" + BonusOut.IsGet + "接收人：" + BonusOut.PersonCount);
+                            //alert("奖金项：" + BonusOut.ResonContent + "发放人:" + BonusOut.ResonContentImg);
+                            //有图片的奖金发放
+                            //如果图片数量小于4并且大于0，就上传图片
+                            if (a.length > 0 && a.length < 4)
+                            {
+                                //获取上面图片的地址
+                                var arr = new Array();
+                                $("img").each(function ()
+                                {
+                                    if ($(this).attr("class") == "img2")
+                                    {
+                                        //alert("src:" + $(this).attr("src"));
+                                        arr.push($(this).attr("dataSrc"));
+                                        //alert($(this).attr("dataSrc"));
+                                    }
+                                });
+                                images.localId = arr;
+                                //alert("imgs" + images.localId);
+
+                                $('.imgDel').hide();
+
+                                uploadImg(images.localId, a.length, BonusOut);
+                            }
+                            else if (a.length >= 4)
+                            {
+                                layer.msg('所选图片最多3张', { time: 3000, icon: 5 });
+                                return false;
+                            }
+                            else
+                            {
+                                //没有图片的奖金发放
+                                $.ajax({
+                                    type: "POST",
+                                    url: '/SendBonus/SendOutput',
+                                    data: { BonusOut: BonusOut },
+                                    success: function (data)
+                                    {
+                                        layer.close(idfsss);
+                                        if (data == "ok")
+                                        {
+                                            layer.msg('发放奖金成功', { time: 3000, icon: 1 });
+                                            document.location.reload();
+                                        }
+                                        else
+                                        {
+                                            layer.msg(data, { time: 3000, icon: 5 });
+                                            return false;
+                                        }
+                                    },
+                                    beforeSend: function ()
+                                    {
+                                        idfsss = layer.msg('加载中', {
+                                            icon: 16
+                                          , shade: 0.01
+                                        });
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                                    {
+                                        layer.msg('错误', { time: 3000, icon: 5 });
+                                    }
+                                });
+
+
+
+                                //$.post("/SendBonus/SendOutput", { BonusOut: BonusOut }, function (data)
+                                //{
+                                //    if (data == "ok")
+                                //    {
+                                //        layer.msg('发放奖金成功', { time: 3000, icon: 1 });
+                                //        document.location.reload();
+                                //    }
+                                //    else
+                                //    {
+                                //        layer.msg(data, { time: 3000, icon: 5 });
+                                //        return false;
+                                //    }
+
+                                //});
+                            }
+                        }
+                        else
+                        {
+                            alert(data);
+                            return false;
+                        }
+                    },
+                    beforeSend: function ()
+                    {
+                        idfsss = layer.msg('校验中', {
+                            icon: 16
+                          , shade: 0.01
+                        });
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+                        layer.msg('错误', { time: 3000, icon: 5 });
+                    }
+                });
+
+              
+
+                
+                ////选择的图片
+                //var ResonImg = $("#UpLoadImg").val();
+
+
+            }
+
+        }
+        else
+        {
+            //罚
+            //表格里面的人数
+            //alert("罚");
+            var tableId = document.getElementById("luckyPer");
+            var tableLeng = tableId.rows.length;//表格里的人数
+            if (parseInt(tableLeng) < 1)
+            {
+                layer.msg('未选择罚的人', { time: 3000, icon: 5 });
+
+                return false;
+            }
+            //选中的金额
+            var je = "";
+            if (money2 == "qt")
+            {
+                //其他金额，不能超过200
+                je = $("#qtje").val().trim();
+                if (parseInt(je) > 200)
+                {
+                    layer.msg('金额最大不能超过200', { time: 3000, icon: 5 });
+
+                    return false;
+                }
+            }
+            else
+            {
+                je = money2;
+            }
+
+            if (je == "")
+            {
+                layer.msg('金额未选中', { time: 3000, icon: 5 });
+
+                return false;
+            }
+            je = "-" + je;
+            var str = "";
+            for (var i = 1; i < tableId.rows.length; i++)
+            {
+                if (i + 1 < tableId.rows.length)
+                {
+                    str += tableId.rows[i].cells[0].innerHTML + ",";
+                }
+                else
+                {
+                    str += tableId.rows[i].cells[0].innerHTML;
+                }
+                //alert(tableId.rows[i].cells[0].innerHTML);
+            }
+            var BonusOut = {
+                BonusItemId: SelectMoney[0],
+                DisMan: DisMan,
+                EarMan: str,
+                EarMoney: je,
+                BonusType: 0,
+                IsGet: 0,
+                PersonCount: tableLeng,
+                ResonContent: Resons,
+                ResonContentImg: "",
+                BonusTypes: SelectMoney[2],
+                companyid: companyid
+            };
+            //有图片的奖金罚
+            //如果图片数量小于4并且大于0，就上传图片
+            if (a.length > 0 && a.length < 4)
+            {
+                //获取上面图片的地址
+                var arr = new Array();
+                $("img").each(function ()
+                {
+                    if ($(this).attr("class") == "img2")
+                    {
+                        //alert("src:" + $(this).attr("src"));
+                        arr.push($(this).attr("dataSrc"));
+                        //alert($(this).attr("dataSrc"));
+                    }
+                });
+                images.localId = arr;
+                //alert("imgs" + images.localId);
+
+                $('.imgDel').hide();
+
+                uploadImg2(images.localId, a.length, BonusOut);
+            }
+            else if (a.length >= 4)
+            {
+                layer.msg('所选图片最多3张', { time: 3000, icon: 5 });
+                return false;
+            }
+            else
+            {
+                //没有图片的奖金发放
+                $.post("/SendBonus/SendFa", { BonusOut: BonusOut }, function (data)
+                {
+                    if (data == "ok")
+                    {
+                        layer.msg('罚奖金成功', { time: 3000, icon: 1 });
+                        document.location.reload();
+                    }
+                    else
+                    {
+                        layer.msg(data, { time: 3000, icon: 5 });
+                        return false;
+                    }
+
+                });
+            }
+        }
+    });
+
+</script>
+

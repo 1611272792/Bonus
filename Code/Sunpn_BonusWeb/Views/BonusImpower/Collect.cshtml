@@ -1,0 +1,128 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@using System.Data;
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>被授权信息</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <style>
+        .delete-swipeout {
+            background-color: #1bad1a;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @*<div class="weui-cells__title">被授权人列表</div>*@
+    <div class="weui-cells">
+        @if (ViewBag.ds != null)
+        {
+            DataTable ds = ViewBag.ds;
+            for (int j = 0; j < ds.Rows.Count; j++)
+            {
+
+                @*<a href="/BonusImpower/Detail?BonusItemID=@ds.Rows[j]["BonusItemID"]&EmpID=@ds.Rows[j]["EmpID"]&CompanyID=@ViewBag.CompanyId" id="@ds.Rows[j]["EmpID"]" hidden="hidden"></a>*@
+                <a class="weui-cell weui-cell_access" href="/BonusImpower/Detail?BonusItemID=@ds.Rows[j]["BonusItemID"]&EmpID=@ds.Rows[j]["EmpID"]&CompanyID=@ViewBag.CompanyId" style="height:27px;">
+                    <div class="weui-cell__hd" style="margin-right:20px;margin-top:8px;">
+                        @if (ds.Rows[j]["EmpPhotos"].ToString() == null || ds.Rows[j]["EmpPhotos"].ToString() == "")
+                        {
+                            <div style="border-radius: 50%;background-color:#319ee3;display:flex;align-items:center;justify-content:center;width:150%;border:1px solid #DFDFDF;color:white;">@ds.Rows[j]["Name"].ToString().Substring(0, 1)</div>
+                        }
+                        else
+                        {
+                            <img src="@ds.Rows[j]["EmpPhotos"].ToString()" style="border-radius: 50%;width:25px;border:1px solid #DFDFDF;height:25px;margin:0px auto;margin-right:-12px;">                           
+                        }
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>@ds.Rows[j]["Name"].ToString()</p>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+    </div>
+    <div id="dialogs">
+        @*注入金额*@
+        <div class="js_dialog" id="js_dialog" style="display:none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">增加金额</strong></div>
+                <div class="weui-dialog__bd">
+                    @*<input type="text" id="AddMoney" name="name" placeholder="请输入注入金额(￥)" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" style="text-align:center;" class="weui-input" />*@
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
+                            <div class="weui-cell__hd">
+                                <input class="weui-input" value="af" readonly="" />
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">模式</label></div>
+                            <div class="weui-cell__hd">
+                                <input class="weui-input" value="af" readonly="" />
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+                            <div class="weui-cell__hd">
+                                <input class="weui-input" value="af" readonly="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="sure()">确定</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/scripts/jquery-weui.js"></script>
+
+    <script>
+
+        function zhuru() {
+            $("#js_dialog").fadeIn(200);
+        }
+
+        ////增加授权
+        //function sure() {
+        //    var BonusItemID = $("#BonusItemID").val();
+        //    var BIPID = $("#BIPID").val();
+        //    var EmpID = $("#EmpID").val();
+        //    if (AddMoney == "" || AddMoney == null) {
+        //        alert("请输入注入奖金");
+        //    } else {
+        //        $.post("/BonusItemRule/AddSureGD", { BonusItemID: BonusItemID, AddMoney: AddMoney }, function (data) {
+        //            if (data == "ok") {
+        //                alert("注入成功！")
+        //            } else {
+        //                alert("注入失败！")
+        //            }
+        //        });
+        //    }
+        //}
+
+        $(function () {
+            $('#dialogs').on('click', '.weui-dialog__btn', function () {
+                $(this).parents('.js_dialog').fadeOut(200);
+                location.reload();
+            });
+        });
+    </script>
+</body>
+</html>

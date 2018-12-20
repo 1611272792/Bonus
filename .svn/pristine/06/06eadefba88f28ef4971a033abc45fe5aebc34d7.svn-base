@@ -1,0 +1,465 @@
+﻿@using System.Data;
+@*@{
+        Layout = null;
+    }*@
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutFooter.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我</title>
+    
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    @*<link href="~/Content/jquery-weui.css" rel="stylesheet" />*@
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+   
+    <style>
+        /*父级div相对定位,子级div绝对定位,设置bottom为0把子div放在父div下方*/
+        #wod {
+            width: 100%;
+            height: 160px;
+            background-color: #319ee3;
+            position: relative; /*相对定位*/
+        }
+
+        #woinfo {
+            position: absolute; /*绝对定位*/
+            right: 0;
+            bottom: 0;
+            /*border:1px solid red;*/
+            width: 100%;
+            height: 25px;
+            background-color: #2193dc;
+        }
+
+        .userinfo {
+            width: 33%;
+            display: block;
+            float: left;
+            text-align: center;
+            font-size: 12px;
+            vertical-align: middle;
+            padding-top: 3px;
+        }
+
+        .weui-cell_swiped {
+            font-size: 16px;
+        }
+
+        .g-view:before {
+            height: 0rem;
+        }
+        .upload {
+            position:relative;
+        }
+        .upload form{width:100%;position:absolute; left:0; top:0;opacity:0; filter:alpha(opacity=0);height:80px;} 
+        .upload form input{width: 100%;height:80px;} 
+
+        .demo-icons-me:before {
+            color: #4599d5;
+        }
+
+        #wo .tabbar-txt {
+            color: #4599d5;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div id="wod">
+
+        @if (ViewBag.info != null)
+        {
+
+            DataTable info = ViewBag.info;
+            <table style="margin:auto;">
+                <tr>
+                    <td height="80px" width="100px;">
+                        <div class="upload" id="updPhoto" style="margin-top:20px;">
+
+                            <input type="hidden" id="comId" value="@ViewBag.userID" />@*用户id*@
+                            <input type="hidden" value="@ViewBag.CompanyID" id="compid" />@*公司id*@
+                            @if (info.Rows[0]["EmpPhotos"].ToString() == null || info.Rows[0]["EmpPhotos"].ToString() == "")
+                            {
+                                <div style="border:1px solid black;border-radius: 50%;width:85%;height:80px;margin:0px auto;display:flex;align-items:center;justify-content:center;font-size:20px;">@info.Rows[0]["Name"].ToString().Substring(0, 1)</div>
+                            }
+                            else
+                            {
+
+                                <img src="@info.Rows[0]["EmpPhotos"].ToString()" style="border-radius: 50%;width:85%;height:80px;margin:0px auto;" />
+                            }
+
+                            @*<form id="uploadForm" enctype="multipart/form-data" method="post" action="Wo/Index">
+                                    <input type="file" name="imageFile" id="imageFile"/>
+                                </form>*@
+
+                            <input type="text" id="aa" name="name" value="@ViewBag.mess" hidden="hidden" />
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:center;">@info.Rows[0]["Name"].ToString()</td>
+                </tr>
+            </table>
+            <div id="woinfo">
+                <label class="userinfo">工号：@ViewBag.SuserId</label>
+                @if (info.Rows[0]["DepartName"].ToString() != "" && info.Rows[0]["DepartName"].ToString() != null)
+                {                <label class="userinfo">部门：@info.Rows[0]["DepartName"].ToString()</label> }
+                else
+                {
+                    <label class="userinfo">部门：无</label>
+                }
+
+                @if (info.Rows[0]["PositionName"].ToString() != "" && info.Rows[0]["PositionName"].ToString() != null)
+                {
+                    <label class="userinfo">职位：@info.Rows[0]["PositionName"].ToString()</label>
+                }
+                else
+                {
+                    <label class="userinfo">职位：无</label>
+                }
+            </div>
+        }
+        else
+        {
+            <p style="text-align:center;padding-top:20%;font-size:24px;color:red;">请先到功能里同步部门与员工</p>
+        }
+    </div>
+    @*个人收益信息*@
+    <div class="weui-cells" style="margin-top:0">
+        <div class="weui-cell__bd">
+            <div class="weui-cell" style="height: 45px">
+                <div class="weui-cell__bd">
+                    <p>个人奖金</p>
+                </div>
+                <div class="weui-cell__ft" style="color:red;margin-right:2%;"><a href="/EmployeeBouns/index?userID=@ViewBag.userID&CompanyID=@ViewBag.CompanyID"> <span id="sumMoney">@ViewBag.SumMoney</span>  ¥</a></div>
+                @*<input type="button" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-right:5px;" value="交易" />*@
+                <a href="/Tradding/Index?userId=@ViewBag.userID&Yue=@ViewBag.SumMoney&companyId=@ViewBag.CompanyID" class="weui-btn weui-btn_mini weui-btn_primary" style="margin-right:5px;">交易</a>
+                <a href="javascript::" class="weui-btn weui-btn_mini weui-btn_primary" style="margin:-1px;" @*value="提现"*@ onclick="tixian_Sure('@ViewBag.userID','@ViewBag.CompanyID')">提现</a>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.depSumMoney != null)
+    {
+        <div class="weui-cells__title">部门奖金</div>
+    }
+
+
+    @if (ViewBag.depSumMoney != null)
+    {
+        DataTable ds = ViewBag.depSumMoney;
+        <div class="weui-cells">
+            @for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                <div class="weui-cell" style="height: 45px">
+                    <div class="weui-cell__bd">
+                        <p>@ds.Rows[i]["DepartName"]</p>
+                    </div>
+                    <div class="weui-cell__ft" style="color:red;margin-right:2%;"><a href="/Wo/MyDepartBonus?DepartID=@ds.Rows[i]["DepartID"]+&compId=@ViewBag.CompanyID"> <span id="@ds.Rows[i]["DepartID"]">@ds.Rows[i]["Earmoney"]</span> ¥</a></div>
+                    <a href="javascript::" class="weui-btn weui-btn_mini weui-btn_primary" style="margin:-1px;" onclick="Deptixian_Sure('@ds.Rows[i]["DepartID"]','@ViewBag.CompanyID')">提现</a>
+
+                </div>
+            }
+        </div>
+    }
+
+
+    @*所负责奖金项收入信息*@
+    @if (ViewBag.itp != null || ViewBag.item != null)
+    {
+        DataTable itp = ViewBag.itp;
+        if ((itp != null && itp.Rows[0]["IM"].ToString() != null && itp.Rows[0]["IM"].ToString() != "") || ViewBag.item != null)
+        {
+            <div class="weui-cells__title">奖金项</div>
+        }
+        <div class="weui-cells">
+            @*本月被授权的结余*@
+            @if (itp != null)
+            {
+                for (int i = 0; i < itp.Rows.Count; i++)
+                {
+                    if (itp.Rows[i]["IM"].ToString() != null && itp.Rows[i]["IM"].ToString() != "")
+                    {
+                        <a class="weui-cell weui-cell_access" href="/Wo/BonusItemsPay?userID=@ViewBag.userID&itemsID=@itp.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.CompanyID">
+                            <div class="weui-cell__bd">
+                                <p>@itp.Rows[i]["BIName"]</p>
+                            </div>
+                            @if (double.Parse(itp.Rows[i]["RM"].ToString()) >= double.Parse(itp.Rows[i]["IM"].ToString()))
+                            {
+                                <div style="color:red;">@itp.Rows[i]["IM"]￥</div>
+                            }
+                            else if (double.Parse(itp.Rows[i]["RM"].ToString()) < double.Parse(itp.Rows[i]["IM"].ToString()))
+                            {
+                                <div style="color:red;">@itp.Rows[i]["RM"]￥</div>
+                            }                          
+                        </a>
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            else
+            {
+
+            }
+
+            @*直接负责的奖金项的结余*@
+            @if (ViewBag.item != null)
+            {
+                DataTable ds = ViewBag.item;
+                //DataTable dd = null;
+                for (int i = 0; i < ds.Rows.Count; i++)
+                {
+                    //dd = (DataTable)Session["shit" + i];
+                    <a class="weui-cell weui-cell_access" href="/Wo/BonusItemsPay?userID=@ViewBag.userID&itemsID=@ds.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.CompanyID">
+                        <div class="weui-cell__bd">
+                            <p>@ds.Rows[i]["BIName"]</p>
+                        </div>
+                        <div style="color:red;">@ds.Rows[i]["AllMoney"]￥</div>
+                    </a>
+                }
+            }
+            else
+            {
+
+            }
+
+        </div>
+    }
+    else
+    {
+
+    }
+
+
+    @*其他*@
+    <div class="weui-cells__title">&nbsp;</div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="/Wo/About">
+            <div class="weui-cell__bd">
+                <p>关于我们</p>
+            </div>
+            <div class="weui-cell__ft" style="color:red;"> </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="/Wo/FAQ">
+            <div class="weui-cell__bd">
+                <p>常见问题</p>
+            </div>
+            <div class="weui-cell__ft" style="color:red;"> </div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="/Wo/SuggestionCommit?UserId=@ViewBag.userID&CompanyId=@ViewBag.CompanyID">
+            <div class="weui-cell__bd">
+                <p>
+                    意见与反馈
+                </p>
+            </div>
+            <div class="weui-cell__ft" style="color:red;"> </div>
+        </a>
+        @*只要超级管理员才可以看到*@
+        @if (ViewBag.chaoji == 1)
+        {
+            <a class="weui-cell weui-cell_access" href="/Wo/ProblemData">
+                <div class="weui-cell__bd">
+                    <p>反馈记录</p>
+                </div>
+                <div class="weui-cell__ft" style="color:red;"> </div>
+            </a>
+        }
+        
+    </div>
+
+ 
+    <script src="~/Content/js/jjweixinIos.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <script>
+
+        ////当点击返回按钮的时候强制刷新页面
+        //$(function () {
+        //    if (window.name != "bencalie") {
+        //        //如果页面的 name 属性不是指定的名称就刷新它
+        //        location.reload();
+        //        window.name = "bencalie";
+        //    } else {
+        //        //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+        //        window.name = "";
+        //    }
+
+        //    var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+        //    if (browserRule.test(navigator.userAgent)) {
+        //        window.onpageshow = function (event) {
+        //            if (event.persisted) {
+        //                window.location.reload()
+        //            }
+        //        };
+        //    }
+        //});
+
+    </script>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+       
+        //个人提现
+        function tixian_Sure(userID, comID) {
+            var summoney = $("#sumMoney").text();
+            
+            if (parseInt(summoney) <=0)
+            {
+                $.toast("无余额", "forbidden");
+                //location.reload();
+
+            } else {
+                $.confirm("确认提现？", function () {
+                    $.post("/Wo/Deposit", { userID: userID, companyID: comID, Summoney: summoney }, function (data) {
+                        if (data == "提现成功，正在审核") {
+                            $.toast("成功！审核中..", "success");
+                            location.reload();
+
+                        } else {
+                            alert(data);
+                            location.reload();
+                        }
+                    })
+                }, function () {
+                    //点击取消后的回调函数
+                    location.reload();
+                });
+            }
+        }
+
+        //部门提现
+        function Deptixian_Sure(departID, comID) {
+            var summoney = $("#" + departID).text();
+            if (summoney == "0.00") {
+                $.toast("无余额", "forbidden", function () {
+                    location.reload();
+                });
+            } else {
+                $.confirm("确认提现？", function () {
+                    $.post("/Wo/depDeposit", { departID: departID, companyID: comID }, function (data) {
+                        if (data == "提现成功，正在审核") {
+                            $.toast("成功！审核中..", "success");
+                            location.reload();
+
+                        } else {
+                            $.toast(data, "forbidden");
+                            location.reload();
+                        }
+                    })
+                }, function () {
+                    //点击取消后的回调函数
+                    location.reload();
+                });
+            }
+        }
+    </script>
+
+    <script>
+        var images = {
+            localId: [],
+            serverId: []
+        };
+        wx.config({
+            beta: true,
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '@ViewBag.appid', // 必填，企业号的唯一标识，此处填写企业号corpid
+            timestamp: '@ViewBag.timestamp', // 必填，生成签名的时间戳
+            nonceStr: '@ViewBag.noncestr', // 必填，生成签名的随机串
+            signature: '@ViewBag.signature',// 必填，签名，见附录1
+            jsApiList: ['checkJsApi', 'scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.error(function (res) {
+            //alert("出错了:" + res.errMsg);
+        });
+        wx.ready(function () {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+            wx.checkJsApi({
+                //调用微信扫一扫功能
+                jsApiList: ['scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'],
+                success: function (res) {
+
+                }
+            });
+        });
+        //更换头像
+        var index_ids = 0;
+        var num = 0;
+        $("#updPhoto").click(function () {
+            
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    //alert("成功选择图片");
+                    images.localId = res.localIds;
+                    wx.uploadImage({
+                        localId: images.localId[index_ids],
+                        isShowProgressTips: 1,
+                        success: function (res) {
+                            //alert("res.serverId：" + res.serverId);
+                            ////alert("success");
+                            var serverId2 = res.serverId;//图片下载后的本地id
+                            var compid = $("#compid").val();
+                            $.post("/Wo/UploadImge", { serverId: serverId2, compid: compid }, function (data) {
+                                var img = data;
+                                var comId = $("#comId").val();
+                                $.post("/Wo/UpdateImg", { img: img, userID: comId }, function (data) {
+                                    if (data == "ok") {
+                                        $.toast('更换头像成功', "success", function () {
+                                            document.location.reload();
+                                        });
+                                        document.location.reload();
+                                    }
+                                    else {
+                                        $.toast(data, "forbidden", function () {
+                                            document.location.reload();
+                                        });
+
+                                    }
+                                })
+                            });
+                        },
+                        fail: function (error) {
+
+                            alert("上传图片失败");
+
+
+                        }
+                    })
+                }
+            });
+        });
+
+        if (window.name != "bencalie") {
+            //如果页面的 name 属性不是指定的名称就刷新它
+            location.reload();
+            window.name = "bencalie";
+        } else {
+            //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+            window.name = "";
+        }
+
+        var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+        if (browserRule.test(navigator.userAgent)) {
+            window.onpageshow = function (event) {
+                if (event.persisted) {
+                    window.location.reload()
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

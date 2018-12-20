@@ -1,0 +1,303 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <title>新增授权</title>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <link href="~/Content/css/JCheck.css" rel="stylesheet" />
+    <script src="~/Content/js/JCheck.js"></script>
+    <style>
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        .addsend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+        }
+
+        .ChooseMoney {
+            border: 1px solid #319ee3;
+            background-color: #8dd2fc;
+            color: red;
+        }
+
+        .layui-colla-content {
+            background-color: white;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [class*="radio-group-"],
+        [class*="checkbox-group-"] {
+            padding-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+            [class*="radio-group-"] > h3,
+            [class*="checkbox-group-"] > h3 {
+                margin-bottom: 10px;
+            }
+
+        .u-radio,
+        .u-checkbox {
+            line-height: 24px;
+        }
+
+            .u-radio .icon,
+            .u-checkbox .icon {
+                display: inline-block;
+                *zoom: 1;
+                *display: inline;
+                position: relative;
+                top: -2px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+
+            .u-radio .icon {
+                background: url("/Content/Images/rnocheck.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-radio.z-checked .icon {
+                background-image: url("/Content/Images/rcheck.png");
+            }
+
+            .u-checkbox .icon {
+                background: url("/Content/Images/noSelect.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-checkbox.z-checked .icon {
+                background-image: url("/Content/Images/check_icon.png");
+            }
+    </style>
+</head>
+<body>
+    @if (ViewBag.dt!=null)
+    {
+        DataTable dt = ViewBag.dt;
+    @*<div class="weui-cells__title">添加奖金授权</div>*@
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">奖金项</label></div>
+            <select class="weui-select" name="select" id="add_BIID" disabled="disabled">
+                @*<option value="">请选择</option>
+                @for (int i = 0; i < dt.Rows.Count; i++)
+                {*@
+                    <option value="@dt.Rows[0]["BonusItemID"]" child="@dt.Rows[0]["BIPrincipal"]">@dt.Rows[0]["BIName"]</option>
+                @*}*@
+            </select>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">被授权人</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="add_BIName" name="" placeholder="请选择授权人" required="required"/>
+                <input type="text" name="name" hidden="hidden" id="EmpID"/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">授权金额</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="add_Impowermoney" type="number" placeholder="请填写授权金额" required="required" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">授权模式</label></div>
+            @*<div class="weui-cell__bd">
+                <select class="weui-select" name="select2" id="add_ImpowerType">
+                    <option>请选择授权模式</option>
+                    <option value="0">长期有效</option>
+                    <option value="1">本月有效</option>
+                </select>
+            </div>*@
+            @*<div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_ImpowerType" value="0" />
+                    <i class="weui-icon-checked"></i><span id="cq">长期有效</span>
+                </label>
+            </div>
+            <div class="weui-cells_checkbox">
+                <label>
+                    <input type="radio" class="weui-check" name="add_ImpowerType" value="1" />
+                    <i class="weui-icon-checked"></i><span id="by">本月有效</span>
+                </label>
+            </div>*@
+            <label class="u-radio" data-name="radio1" style="float:right;margin-right:2%;">
+                <input name="add_ImpowerType" type="radio" value="0" checked="checked">
+                <i class="icon"></i>
+                <span class="text">长期有效</span>
+            </label>
+            <label class="u-radio" data-name="radio1" style="float:right">
+                <input name="add_ImpowerType" value="1" type="radio">
+                <i class="icon"></i>
+                <span class="text">本月有效</span>
+            </label>
+        </div>
+        <div class="weui-cells__title"><span style="font-size:18px;color:black">备注</span></div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入备注" rows="3" id="add_remark" maxlength="50"></textarea>
+                    <div class="weui-textarea-counter"><span class="textareaInput">0</span>/<span class="textareaTotal">50</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="addSure()">确认</a>
+        <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+    </div>
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+
+    <script>
+        $('.u-radio').jRadio();
+        $('.u-checkbox').jCheckbox();
+        //$(function () {
+        //    $("#add_BIID").change(function () {
+        //        var sel = $("#add_BIID option:selected").val();
+        //        var name = $("#add_BIID option:selected").text();
+        //        var child = $("#add_BIID option:selected").attr("child");
+        //        alert("下拉框的值：" + sel + "\n" + "下拉框的内容：" + name + "\n" + "下拉框属性值child：" + child);
+        //    });
+        //});
+
+        $(function () {
+            var CompanyID = GetQueryString("CompanyID");
+            var kw = $("#add_BIName").val();
+            $("#add_BIName").bigAutocomplete({
+                url: "/BonusImpower/GetEmp?keyword=" + kw + "&CompanyID=" + CompanyID,
+                callback: function (data) {
+                    if (data != "" && data != null) {
+                        $("#EmpID").val(data.EmpID);
+                    }
+                }
+            });
+        })
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        //添加确认按钮
+        function addSure() {
+            if ($("#EmpID").val() == "" || $("#EmpID").val() == null) {
+                $.toptip('请选择有效的被授权人姓名', 'warning');
+            } else if ($("#add_BIID").val() == "" || $("#add_BIID").val() == null ) {
+                $.toptip('请填写完整信息', 'warning');
+            } else if ($("#add_Impowermoney").val() == "" || $("#add_Impowermoney").val() == null) {
+                $.toptip('请填写授权金额', 'warning');
+            }
+            else {
+                var name = $("#add_BIName").val();
+                $.post("/BonusImpower/getval", { name: name }, function (data) {
+                    if (data == "no") {
+                        $.toptip('请输入本公司有效的人员名称', 'warning');
+                        $("#add_BIName").val("");
+                    } else {
+                        var BonusItemID = $("#add_BIID").val();
+                        var child = $("#add_BIID option:selected").attr("child");
+                        var EmpID = $("#EmpID").val();
+                        var Impowermoney = $("#add_Impowermoney").val().trim().replace(/\s|\xA0/g, "");
+                        var ImpowerType = $(":radio[name='add_ImpowerType']:checked").val();
+                        var Remark = $("#add_remark").val();
+                        var UserID = GetQueryString("UserID");
+                        $.confirm("确认添加该授权？", function () {
+                            $.post("/BonusImpower/AddSure", { BonusItemID: BonusItemID, BIPrincipal: child, EmpID: EmpID, Impowermoney: Impowermoney, ImpowerType: ImpowerType, Remark: Remark, UserID: UserID }, function (data) {
+                                if (data == "ok") {
+                                    $.toast("授权成功");
+                                    location.reload();
+                                }
+                                else if (data == "no") {
+                                    $.toast("授权失败", "cancel");
+                                }
+                                else if (data == "big") {
+                                    $.toast("被授权金额不能大于奖金项可用金额", "cancel");
+                                } else if (data == "not") {
+                                    $.toast("此奖金项暂无剩余金额", "cancel");
+                                } else if (data == "nome") {
+                                    $.toast("您不能给自己授权", "cancel");
+                                } else {
+                                    $.toast("授权失败", "cancel");
+                                }
+                            });
+                        }, function () {
+                            location.reload();
+                        });
+
+                    }
+                });
+            }
+        }
+
+        //输入框计数
+        $(function () {
+            var max = 50;
+            $('.weui-textarea').on('input', function () {
+                var text = $(this).val();
+                var len = text.length;
+                $('.textareaInput').text(len);
+                if (len > max) {
+                    $(this).closest('.weui_cell').addClass('weui_cell_warn');
+                }
+                else {
+                    $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

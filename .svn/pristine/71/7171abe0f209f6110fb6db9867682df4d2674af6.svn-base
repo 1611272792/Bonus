@@ -1,0 +1,182 @@
+﻿@using Sunpn_BonusWeb.Models;
+@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加角色</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weixin/css/ydui.css" rel="stylesheet" />
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>
+    <style>
+        .btn-primary{
+            background-color:#319ee3;
+        }
+        .btn-primary:active { background-color: #319ee3; }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="hidden" value="@ViewBag.CompanyID" id="companyId"/>
+        @{
+            if (ViewBag.authorlist2 == null)
+            {
+
+            }
+            else
+            {
+                <div class="m-cell demo-small-pitch">
+                    <div class="cell-item">
+                        <div class="cell-left">角色名：</div>
+                        <div class="cell-right">
+                            <input type="text" class="cell-input" placeholder="请输入角色名" autocomplete="off" id="AuthorName" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="m-cell demo-small-pitch">
+                    <div class="cell-item">
+                        <div class="cell-left">是否有效：</div>
+                        <div class="cell-right">
+                            @*<label class="cell-item">
+                                <span class="cell-left">有效</span>
+                                <label class="cell-right">
+                                    <input type="radio" value="0" name="radiobox" checked />
+                                    <i class="cell-checkbox-icon"></i>
+                                </label>
+                            </label>
+                            <label class="cell-item">
+                                <span class="cell-left">无效</span>
+                                <label class="cell-right">
+                                    <input type="radio" value="1" name="radiobox" />
+                                    <i class="cell-checkbox-icon"></i>
+                                </label>
+                            </label>*@
+                            <input type="checkbox" checked class="m-switch" name="radiobox" value="0" />
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="m-cell demo-small-pitch">
+
+                    @{
+                        List<AuthorModellist> authsList = ViewBag.authorlist2;
+                        for (int i = 0; i < authsList.Count(); i++)
+                        {
+                            <div class="m-celltitle">@authsList[i].Name</div>
+                            <div class="m-cell">
+                                @for (int ii = 0; ii < authsList[i].listAuthor.Count; ii++)
+                                {
+                                    <label class="cell-item" style="padding-left:40px;">
+                                        <span class="cell-left">@authsList[i].listAuthor[ii].AuthorName.ToString()</span>
+                                        <label class="cell-right">
+                                            <input type="checkbox" class="m-switch" name="AuthorCheck" value="@authsList[i].listAuthor[ii].AuthorId.ToString()" />
+                                        </label>
+                                    </label>
+                                }
+
+
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <button type="button" class="btn-block btn-primary" id="btn_AddRole">保存</button>
+                        }
+        }
+
+    </div>
+
+    <script src="~/Content/weixin/js/ydui.js"></script>
+    <script>
+        !function (win, $)
+        {
+            var dialog = win.YDUI.dialog;
+            //添加角色
+            $("#btn_AddRole").click(function ()
+            {
+                //公司id
+                var companyId = $("#companyId").val();
+                if (companyId == null || companyId == "")
+                {
+                    dialog.notify('网络错误，请稍后重试！', 3000, function ()
+                    {
+
+                    });
+                    return false;
+                }
+                //得到角色名
+                var AuthorName = $("#AuthorName").val();
+                if (AuthorName == "")
+                {
+                    dialog.notify('角色名必填！', 3000, function ()
+                    {
+
+                    });
+                    return false;
+                }
+                //得到选中的权限
+                var AuthorCheck = document.getElementsByName("AuthorCheck");
+                var cheValue = "";//获取选中的id
+                for (var i = 0; i < AuthorCheck.length; i++)
+                {
+                    //alert(che[i].checked);
+                    if (AuthorCheck[i].checked)
+                    {
+                        cheValue += AuthorCheck[i].value + ",";
+                    }
+                }
+                if (cheValue == "")
+                {
+                    dialog.notify('权限必选！', 3000, function ()
+                    {
+
+                    });
+                    return false;
+                }
+                var radioboxValue = document.getElementsByName("radiobox");
+                var radValue = "";
+                for (var i = 0; i < radioboxValue.length; i++)
+                {
+                    if (radioboxValue[i].checked)
+                    {
+                       
+                        radValue = "0";
+                    }
+                    else
+                    {
+                        radValue = "1";
+                    }
+                }
+                //验证全部通过添加
+                $.post("/Role/AddRole2", { AuthorName: AuthorName, cheValue: cheValue, companyId: companyId, radValue: radValue }, function (data)
+                {
+                    if (data == "ok")
+                    {
+                        document.location.reload();
+                    }
+                    else
+                    {
+                        dialog.toast(data, 'error', 3000, function ()
+                        {
+
+                        });
+                    }
+                })
+
+            })
+        }(window, jQuery);
+
+        
+    </script>
+</body>
+</html>

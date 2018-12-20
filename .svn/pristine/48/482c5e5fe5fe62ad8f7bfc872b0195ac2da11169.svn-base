@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_LayoutFooter.cshtml";
+}
+<link href="~/Content/css/ssCss.css" rel="stylesheet" />
+<link href="~/Content/css/JCheck.css" rel="stylesheet" />
+
+<p>
+    <span style="color:#ff0000;">取消</span>
+    @*<input type="button" value="确定" id="btnok" />*@
+    <span id="btnok" style="float:right;color:#0094ff">保存</span>
+</p>
+<!--显示点击的是哪一个字母-->
+<div id="showLetter" class="showLetter"><span>A</span></div>
+<!--城市索引查询-->
+<div class="letter">
+    <ul>
+        <li><a href="javascript:;">A</a></li>
+        <li><a href="javascript:;">B</a></li>
+        <li><a href="javascript:;">C</a></li>
+        <li><a href="javascript:;">D</a></li>
+        <li><a href="javascript:;">E</a></li>
+        <li><a href="javascript:;">F</a></li>
+        <li><a href="javascript:;">G</a></li>
+        <li><a href="javascript:;">H</a></li>
+        <li><a href="javascript:;">J</a></li>
+        <li><a href="javascript:;">K</a></li>
+        <li><a href="javascript:;">L</a></li>
+        <li><a href="javascript:;">M</a></li>
+        <li><a href="javascript:;">N</a></li>
+        <li><a href="javascript:;">P</a></li>
+        <li><a href="javascript:;">Q</a></li>
+        <li><a href="javascript:;">R</a></li>
+        <li><a href="javascript:;">S</a></li>
+        <li><a href="javascript:;">T</a></li>
+        <li><a href="javascript:;">W</a></li>
+        <li><a href="javascript:;">X</a></li>
+        <li><a href="javascript:;">Y</a></li>
+        <li><a href="javascript:;">Z</a></li>
+    </ul>
+</div>
+<!--城市列表-->
+<div class="container">
+    <div class="city">
+        @if (ViewBag.userList == null)
+            {
+
+            }
+            else
+            {
+                List<Users> userList = ViewBag.userList;
+                foreach (var item in userList)
+                {
+                <div class="city-list">
+                    <span class="city-letter" id="@item.Shou">@item.Shou</span>
+                    @foreach (var items in item.user)
+                    {
+                        <label class="u-checkbox" data-name="radio3" style="float:right;margin-top:10px;">
+                            <input name="xzry" type="checkbox" value="@items.userid">
+                            <i class="icon"></i>
+                            <span class="text"></span>
+                        </label>
+                                <p data-id="@items.userid">
+                                    <img src="~/Content/Images/del.png" />
+                                    @items.name
+
+                                </p>
+
+                    }
+
+
+                </div>
+            }
+
+
+        }
+
+
+
+
+    </div>
+
+</div>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="~/Content/js/JCheck.js"></script>
+<script src="~/Content/js/zepto.js"></script>
+<script src="~/Content/js/city.js"></script>
+<script>
+        $('.u-radio').jRadio();
+        $('.u-checkbox').jCheckbox();
+        $("#btnok").click(function ()
+        {
+            //得到所有选中的复选框
+            var spCodesTemp = "";
+            $('input:checkbox[name=xzry]:checked').each(function (i)
+            {
+                if (0 == i)
+                {
+                    spCodesTemp = $(this).val();
+                } else
+                {
+                    spCodesTemp += ("," + $(this).val());
+                }
+            });
+            document.location.href = "/SendBonus/Index/" + spCodesTemp;
+        })
+</script>
+

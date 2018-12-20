@@ -1,0 +1,257 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <meta http-equiv="Expires" CONTENT="0">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache"> 
+    <title>审核页面</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <script src="~/Scripts/datePicker.js"></script>
+    <link href="~/Content/css/JCheck.css" rel="stylesheet" />
+    <script src="~/Content/js/JCheck.js"></script>
+    <style>
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        .addsend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+        }
+
+        .ChooseMoney {
+            border: 1px solid #319ee3;
+            background-color: #8dd2fc;
+            color: red;
+        }
+
+        .layui-colla-content {
+            background-color: white;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+        .weui-label{
+            width:200px;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [class*="radio-group-"],
+        [class*="checkbox-group-"] {
+            padding-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+            [class*="radio-group-"] > h3,
+            [class*="checkbox-group-"] > h3 {
+                margin-bottom: 10px;
+            }
+
+        .u-radio,
+        .u-checkbox {
+            line-height: 24px;
+        }
+
+            .u-radio .icon,
+            .u-checkbox .icon {
+                display: inline-block;
+                *zoom: 1;
+                *display: inline;
+                position: relative;
+                top: -2px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+
+            .u-radio .icon {
+                background: url("/Content/Images/rnocheck.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-radio.z-checked .icon {
+                background-image: url("/Content/Images/rcheck.png");
+            }
+
+            .u-checkbox .icon {
+                background: url("/Content/Images/noSelect.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-checkbox.z-checked .icon {
+                background-image: url("/Content/Images/check_icon.png");
+            }
+    </style>
+</head>
+
+<body>
+    @if (ViewBag.comp != null)
+        {
+            DataTable dt = ViewBag.comp;
+            <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">公司名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="edit_name" value="@dt.Rows[0]["CompanyName"]" disabled/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">负责人姓名</label></div>
+                <input class="weui-input" id="edit_name" value="@dt.Rows[0]["Name"]" disabled />
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">负责人联系方式</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" id="edit_name" value="@dt.Rows[0]["CompanyPhone"]" disabled />
+                                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">注册时间</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" id="beginDate" disabled name="" value="@(DateTime.Parse(dt.Rows[0]["beginDate"].ToString()).ToString("yyyy-MM-dd"))" placeholder="" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">结束时间</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" readonly id="endDate" name="" value="@(DateTime.Parse(dt.Rows[0]["endDate"].ToString()).ToString("yyyy-MM-dd"))" placeholder="" />
+
+                </div>
+            </div>
+           
+            @*<div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">是否审核</label></div>
+                <input class="weui-input" id="IsTongguo" value="@dt.Rows[0]["IsTongguo"]" hidden="hidden" />
+               
+                <label class="u-radio" data-name="radio2" style="float:right;margin-right:2%;">
+                    <input name="IsTongguo" value="1" type="radio">
+                    <i class="icon"></i>
+                    <span class="text">未审核</span>
+                </label>
+                <label class="u-radio" data-name="radio2" style="float:right;">
+                    <input name="IsTongguo" value="0" type="radio">
+                    <i class="icon"></i>
+                    <span class="text">已审核</span>
+                </label>
+            </div>*@
+          
+        </div>
+            <div class="page__bd page__bd_spacing" style="margin-top:20px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="editSure(@dt.Rows[0]["CompanyID"].ToString())">保存</a>
+            @*<a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>*@
+            @*<a href="javascript:;" class="weui-btn weui-btn_warn" onclick="del()">删除</a>*@
+        </div>
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+    <script>
+	var starttime = new datePicker();
+	starttime.init({
+	    'trigger': '#beginDate', /*按钮选择器，用于触发弹出插件*/
+	'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+	'minDate':'1900-1-1',/*最小日期*/
+	'maxDate': (new Date().getFullYear()) + '-' + 12 + '-' + 31,/*最大日期*/
+	'onSubmit':function(){/*确认时触发事件*/
+	    var theSelectData = starttime.value;
+	    $("#beginDate").blur();
+	},
+	'onClose': function () {/*取消时触发事件*/
+	    $("#beginDate").blur();
+	}
+});
+var endtime = new datePicker();
+endtime.init({
+    'trigger': '#endDate', /*按钮选择器，用于触发弹出插件*/
+    'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+    'minDate': '1900-1-1',/*最小日期*/
+    'maxDate': '2100-12-31',/*最大日期*/
+    'onSubmit': function () {/*确认时触发事件*/
+        var theSelectData = endtime.value;
+        $("#endDate").blur();
+    },
+    'onClose': function () {/*取消时触发事件*/
+        $("#endDate").blur();
+    }
+});
+
+$('.u-radio').jRadio();
+$('.u-checkbox').jCheckbox();
+var IsTongguo = $("#IsTongguo").val();
+$(":radio[name='IsTongguo'][value='" + IsTongguo + "']").attr("checked", "true").parent().addClass("z-checked");
+$("#edit_role").val(role);
+
+function editSure(cid)
+{
+    var endDate=$("#endDate").val();//结束日期
+    var isout = $(":radio[name='IsTongguo']:checked").val()//是否审核
+    var beginDate = $("#beginDate").val();//开始日期
+    //结束日期不能小于开始日期
+
+    //alert("日期："+endDate+",是否审核:"+isout);
+    if(endDate==""||endDate==null){
+        $.toast("有效期不能为空", "cancel");
+        return false;
+    }
+    if(isout==""){
+        $.toast("不能为空", "cancel");
+        return false;
+    }
+    $.post("/KeHuManager/Sheng", { endDate: endDate, isout: isout, cid: cid, beginDate: beginDate }, function (data)
+    {
+        if(data=="ok"){
+            $.toast("审核成功");
+           
+        }
+        else{
+            $.toast(data, "cancel");
+            return false;
+        }
+    })
+}
+    </script>
+
+</body>
+</html>

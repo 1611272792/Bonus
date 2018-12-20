@@ -1,0 +1,264 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Expires" CONTENT="0">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>用户列表</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <span id="CompanyId" hidden="hidden">@ViewBag.CompanyId</span>
+    <div style="height:50px;width:100%;margin-bottom:6px;">
+        <a href="javascript:;" id="btn_TongbuUser" style="background-image: url('../../Content/weixin/images/同步zzz.png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 38px; float: left; margin-top: 2.7%; margin-left: 3%;margin-bottom:0.8%;background-size:38px;"></a>
+        <div id="search" style="width:80%;margin-top:3.2%;float:left;margin-bottom:-10px;margin-left:3%;">
+            <div class="weui-search-bar__form" style="width:84%;float:left;padding-top: 2px;padding-bottom: 2px;margin-left:-5px;margin-right:5px;">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="text" class="weui-search-bar__input" id="qq" placeholder="搜索员工" />
+                </div>
+            </div>
+            <input type="button" name="name" onclick="search()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索 (2).png'); background-repeat: no-repeat;background-size:contain;background-position: center;width:40px;height:31px;" />
+        </div>
+        <input type="hidden" value="@ViewBag.CompanyId" id="compid" />
+    </div>
+    @*<div class="weui-cells__title">员工信息</div>*@
+    <div class="weui-cells" id="emp" style="float:left;width:100%;margin-top:0px;">
+        @if (ViewBag.einfo != null && ViewBag.dname != null)
+        {
+            DataTable dn = ViewBag.dname;
+            DataTable ei = ViewBag.einfo;
+            for (int j = 0; j < dn.Rows.Count; j++)
+            {
+                <a class="weui-cell weui-cell_access" href="/UserManager/Detail?DepartID=@dn.Rows[j]["DepartID"]&CompanyID=@ViewBag.CompanyId">
+                    <div class="weui-cell__hd"><img src="~/Content/weixin/images/depart.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                    <div class="weui-cell__bd">
+                        <p>@dn.Rows[j]["DepartName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft" style="padding-right:25px;">
+                        @Session["Num" + j]
+                    </div>
+                    @*<div>
+                            <span class="weui-badge" style="min-width: 14px;line-height: 1.8;background-color:#319ee3"> @Session["Num" + j]</span>
+                        </div>*@
+                </a>
+            }
+            for (int i = 0; i < ei.Rows.Count; i++)
+            {
+                <a href="/UserManager/Info?EmpID=@ei.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId" id="@ei.Rows[i]["EmpID"]" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell" onclick="javascript: document.getElementById('@ei.Rows[i]["EmpID"]').click();">
+                            <div class="weui-cell__hd" style="margin-right:20px;">
+                                @if (ei.Rows[i]["EmpPhotos"].ToString() == null || ei.Rows[i]["EmpPhotos"].ToString() == "")
+                                {
+                                    <div style="border-radius: 50%;background-color:#319ee3;display:flex;align-items:center;justify-content:center;width:150%;border:1px solid #DFDFDF;color:white;">@ei.Rows[i]["Name"].ToString().Substring(0, 1)</div>
+                                }
+                                else
+                                {
+                                    <img src="@ei.Rows[i]["EmpPhotos"].ToString()" style="border-radius: 50%;width:25px;border:1px solid #DFDFDF;height:25px;margin:0px auto;margin-right:-12px;">
+                                }
+                            </div>
+                            <div class="weui-cell__bd">
+                                <input type="text" name="name" value="@ei.Rows[i]["Name"].ToString()" hidden="hidden" id="name" />
+                                <p>@ei.Rows[i]["Name"].ToString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/UserManager/Info?EmpID=@ei.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId">编辑</a>
+                        @*<a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure('@ei.Rows[i]["EmpID"]')">删除</a>*@
+                    </div>
+                </div>
+            }
+        }
+        else if (ViewBag.einfo != null && ViewBag.dname == null)
+        {
+            DataTable ei = ViewBag.einfo;
+            for (int i = 0; i < ei.Rows.Count; i++)
+            {
+                <a href="/UserManager/Info?EmpID=@ei.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId" id="@ei.Rows[i]["EmpID"]" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell" onclick="javascript: document.getElementById('@ei.Rows[i]["EmpID"]').click();">
+                            <div class="weui-cell__hd" style="margin-right:20px;">
+                                @if (ei.Rows[i]["EmpPhotos"].ToString() == null || ei.Rows[i]["EmpPhotos"].ToString() == "")
+                                {
+                                    <div style="border-radius: 50%;background-color:#319ee3;display:flex;align-items:center;justify-content:center;width:150%;border:1px solid #DFDFDF;color:white;">@ei.Rows[i]["Name"].ToString().Substring(0, 1)</div>
+                                }
+                                else
+                                {
+                                    <img src="@ei.Rows[i]["EmpPhotos"].ToString()" style="border-radius: 50%;width:25px;border:1px solid #DFDFDF;height:25px;margin:0px auto;margin-right:-12px;">
+                                }
+                            </div>
+                            <div class="weui-cell__bd">
+                                <p>@ei.Rows[i]["Name"].ToString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/UserManager/Info?EmpID=@ei.Rows[i]["EmpID"]&CompanyID=@ViewBag.CompanyId">编辑</a>
+                        <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure('@ei.Rows[i]["EmpID"]')">删除</a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+
+    </div>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+        //当点击返回按钮的时候强制刷新页面
+        $(function () {
+            if (window.name != "bencalie") {
+                //如果页面的 name 属性不是指定的名称就刷新它
+                location.reload();
+                window.name = "bencalie";
+            } else {
+                //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+                window.name = "";
+            }
+
+            var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+            if (browserRule.test(navigator.userAgent)) {
+                window.onpageshow = function (event) {
+                    if (event.persisted) {
+                        window.location.reload()
+                    }
+                };
+            }
+        });
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        function delete_Sure(EmpID) {
+            var CompanyID=$("#CompanyId").html();
+            $.confirm("确认删除该员工？", function () {
+                $.post("/UserManager/Delete", { EmpID: EmpID,CompanyID:CompanyID }, function (data) {
+                    if (data = "ok") {
+                        $.toast("删除成功");
+                        location.reload();
+                    }
+                    else {
+                        $.toast("删除失败", "cancel");
+                    }
+                })
+            }, function () {
+                location.reload();
+            });
+        }
+
+        //模糊查询
+        $(function () {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().trim();
+            var empName = "";
+            $("#qq").bigAutocomplete({
+                url: "/UserManager/GetInfo?keyword=" + kw + "&CompanyId=" + CompanyId,
+                 beforeSend: function ()
+                {
+                    $.showLoading("加载");
+                },
+                callback: function (data) {
+                    if (data != "" && data != null) {
+                        empName = data.title;
+                        //alert(empName);
+                        if (empName.length > 0) {
+                            $("#emp").load("/UserManager/SearchEmp?Name=" + empName + "&CompanyID=" + CompanyId)
+                        }
+                    }
+                }
+            });
+
+            //微信同步
+            $("#btn_TongbuUser").click(function ()
+            {
+                var compid = $("#CompanyId").html();
+                $.ajax({
+                    type: "POST",
+                    url: '/UserManager/SelectEmp',
+                    data: { compid: compid },
+                    success: function (data)
+                    {
+
+                        $.hideLoading();//移除loading
+                        if (data == "ok")
+                        {
+
+                            $.toast("同步成功");
+
+                        }
+                        else
+                        {
+                            $.toast(data, "cancel");
+                            return false;
+                        }
+                        document.location.reload();
+                    },
+                    beforeSend: function ()
+                    {
+
+                        $.showLoading("同步中");
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+                        $.toast("错误", "cancel");
+                        return false;
+                    }
+
+                });
+                //$.post("/DepartManger/SelectDep", { compid:compid}, function (data)
+                //{
+                //    alert(data);
+                //});
+            })
+        })
+
+        //搜索方法
+        function search() {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().trim();;
+            if (kw == "" || kw == null) {
+                location.reload();
+            }
+            else {
+                $("#emp").load("/UserManager/SearchEmp?Name=" + kw + "&CompanyID=" + CompanyId)
+            }
+        }
+
+        //回车键触发的搜索
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                search();
+            }
+        }
+    </script>
+</body>
+</html>

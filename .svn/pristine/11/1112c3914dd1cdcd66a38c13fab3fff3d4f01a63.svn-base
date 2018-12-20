@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index2</title>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+</head>
+<body>
+    <div> 
+        <input type="text" id="tags" />
+    </div>
+    <script>
+        
+        $("#tags").autocomplete({
+            minLength: 0,
+            source: "/Tradding/GetPersons?EmpId=" + "zy",
+            focus: function (event, ui)
+            {
+                $("#tags").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui)
+            {
+                $("#tags").val(ui.item.label);
+                //$("#tags").val(ui.item.value);
+                $("#tags").html(ui.item.desc);
+                
+
+                return false;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>原因</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/swiper-4.3.3.min.css" rel="stylesheet" />
+    <style>
+        html, body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 70%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="weui-cells__title">原因</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-textarea" placeholder="" rows="3" id="remark" readonly onselectstart="return false;" style="height:50px">
+                    @if (ViewBag.Detail2 != null)
+                    {
+                        DataTable ds = ViewBag.Detail2;
+                        @ds.Rows[0][0].ToString();
+                    }
+                    else
+                    {
+                      
+                    }
+                </div>
+                <div class="weui-textarea-counter">
+            </div>
+        </div>
+    </div>
+</div>
+    @*<div>
+         <h3>原因：</h3><br />
+    @if (ViewBag.Detail2 != null)
+    {
+        DataTable ds = ViewBag.Detail2;
+      <span>@ds.Rows[0][0].ToString()</span>  
+    }
+    else
+    {
+        <center><span style="color:gray">暂未填写</span></center> 
+    }
+    </div>*@  <!-- Swiper -->
+@if (ViewBag.ImagesDetail != null)
+{
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @if (ViewBag.ImagesDetail != null)
+        {
+            DataTable imageUrl = ViewBag.ImagesDetail;
+            for (int i = 0; i < imageUrl.Rows.Count; i++)
+            {
+                <div class="swiper-slide" style="width:100%;height:100%">
+                    <img src="@imageUrl.Rows[i]["ResonContent"]" style="width:100%;height:100%" />
+                </div>
+            }
+        }
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+</div>
+}
+    <script src="~/Scripts/swiper-4.3.3.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+
+    </script>
+</body>
+</html>

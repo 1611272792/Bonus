@@ -1,0 +1,505 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <meta http-equiv="Expires" CONTENT="0">
+    <meta http-equiv="Cache-Control" CONTENT="no-cache">
+    <meta http-equiv="Pragma" CONTENT="no-cache"> 
+    <title>用户详细信息</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <script src="~/Scripts/datePicker.js"></script>
+    <link href="~/Content/css/JCheck.css" rel="stylesheet" />
+    <script src="~/Content/js/JCheck.js"></script>
+    <style>
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        .addsend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+        }
+
+        .ChooseMoney {
+            border: 1px solid #319ee3;
+            background-color: #8dd2fc;
+            color: red;
+        }
+
+        .layui-colla-content {
+            background-color: white;
+        }
+
+        .text {
+            font-size: 16px;
+        }
+
+        .selera {
+            color: #5bb1e8;
+        }
+
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [class*="radio-group-"],
+        [class*="checkbox-group-"] {
+            padding-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+            [class*="radio-group-"] > h3,
+            [class*="checkbox-group-"] > h3 {
+                margin-bottom: 10px;
+            }
+
+        .u-radio,
+        .u-checkbox {
+            line-height: 24px;
+        }
+
+            .u-radio .icon,
+            .u-checkbox .icon {
+                display: inline-block;
+                *zoom: 1;
+                *display: inline;
+                position: relative;
+                top: -2px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+
+            .u-radio .icon {
+                background: url("/Content/Images/rnocheck.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-radio.z-checked .icon {
+                background-image: url("/Content/Images/rcheck.png");
+            }
+
+            .u-checkbox .icon {
+                background: url("/Content/Images/noSelect.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-checkbox.z-checked .icon {
+                background-image: url("/Content/Images/check_icon.png");
+            }
+    </style>
+
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @if (ViewBag.empinfo != null)
+    {
+        DataTable ei = ViewBag.empinfo;
+        @*<div class="weui-cells__title">用户详细信息</div>*@
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input textonly" id="edit_name"  value="@ei.Rows[0]["Name"]"  required="required" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+                @*<div class="weui-cell__bd">
+                    <select class="weui-select" id="edit_sex">
+                        <option value="0">女</option>
+                        <option value="1">男</option
+                    </select>
+                </div>*@
+                <input class="weui-input" id="sex" value="@ei.Rows[0]["Sex"]" hidden="hidden" />
+                @*<div class="weui-cells_checkbox">
+                    <label>
+                        <input type="radio" class="weui-check"  name="sex" value="1" />
+                        <i class="weui-icon-checked"></i><span id="nan">男</span>
+                    </label>
+                </div>
+                <div class="weui-cells_checkbox">
+                    <label>
+                        <input type="radio" class="weui-check" name="sex" value="0" />
+                        <i class="weui-icon-checked"></i><span id="nv">女</span>
+                    </label>
+                </div>*@
+                <label class="u-radio aa" data-name="radio1" style="float:right;margin-right:2%;" >
+                    <input name="sex" type="radio" value="1">
+                    <i class="icon"></i>
+                    <span class="text">男</span>
+                </label>
+                <label class="u-radio aa" data-name="radio1" style="float:right" >
+                    <input name="sex" type="radio" value="2" >
+                    <i class="icon"></i>
+                    <span class="text">女</span>
+                </label>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">生日</label></div>
+                <div class="weui-cell__hd">
+                    @if (ei.Rows[0]["Birth"].ToString() == "")
+                    {
+                        <input readonly class="weui-input" id="edit_bir" name="" value="" placeholder="年/月/日" />
+
+                    }
+                    else
+                    {
+                        <input readonly class="weui-input" id="edit_bir" name="" value="@(DateTime.Parse(ei.Rows[0]["Birth"].ToString()).ToString("yyyy-MM-dd"))" placeholder="年/月/日" />
+
+                    }
+                </div>
+            </div>
+
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">部门</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="depart" name="" value="@ei.Rows[0]["DepartID"]" hidden="hidden" />
+                    <select class="weui-select" id="edit_depart" onchange="changeDep()" disabled="disabled">
+                        @if (ViewBag.dname != null)
+                        {
+                            DataTable dn = ViewBag.dname;
+                            <option value="0">请选择部门</option>
+                            for (int i = 0; i < dn.Rows.Count; i++)
+                            {
+                                <option value="@dn.Rows[i]["DepartID"]">@dn.Rows[i]["DepartName"]</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="null">暂无部门</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">职位</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="posi" name="" value="@ei.Rows[0]["PositionID"]" hidden="hidden" />
+                    <select class="weui-select" id="edit_posi">
+                        @if (ViewBag.pname != null)
+                        {
+                            DataTable pn = ViewBag.pname;
+                            for (int i = 0; i < pn.Rows.Count; i++)
+                            {
+                                <option value="@pn.Rows[i]["PositionID"]">@pn.Rows[i]["PositionName"]</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="null">暂无职位</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">权限</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="role" value="@ei.Rows[0]["RoleID"].ToString()" hidden="hidden" />
+                    <select class="weui-select" name="select" id="edit_role">
+                        @if (ViewBag.role != null)
+                        {
+                            DataTable ro = ViewBag.role;
+                            <option value="0">请选择权限</option>
+                            for (int i = 0; i < ro.Rows.Count; i++)
+                            {
+                                <option value="@ro.Rows[i]["RoleID"]">@ro.Rows[i]["RoleName"]</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="null">暂无权限</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="edit_password" type="password" name="" value="@ei.Rows[0]["EmpPassword"]" placeholder="" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">入职时间</label></div>
+                <div class="weui-cell__hd">
+                    @if (ei.Rows[0]["JoinDate"].ToString() == "")
+                    {
+                        <input class="weui-input" id="edit_joindate" name="" value="" placeholder="年/月/日" readonly="readonly"/>
+
+                    }
+                    else
+                    {
+                        <input class="weui-input" readonly="readonly" id="edit_joindate" name="" value="@(DateTime.Parse(ei.Rows[0]["JoinDate"].ToString()).ToString("yyyy-MM-dd"))" placeholder="年/月/日" />
+                    }
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">联系电话</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input textonly" id="edit_tel" value="@ei.Rows[0]["EmpTel"]" onblur="prmecNoteOnBlur()" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">电子邮箱</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input textonly" id="edit_email" value="@ei.Rows[0]["EmpEmail"]" onblur="prmecNoteOnBlur()" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">离职状态</label></div>                
+                    <input class="weui-input" id="isout" value="@ei.Rows[0]["IsOut"]" hidden="hidden" />
+                    @*<select class="weui-select" name="select" id="edit_isout">
+                        <option value="0">未离职</option>
+                        <option value="1">已离职</option>
+                    </select>*@
+                    @*<div class="weui-cells_checkbox">
+                        <label>
+                            <input type="radio" class="weui-check" name="isout" value="0" />
+                            <i class="weui-icon-checked"></i><span id="wei">未离职</span>
+                        </label>
+                    </div>
+                    <div class="weui-cells_checkbox">
+                        <label>
+                            <input type="radio" class="weui-check" name="isout" value="1" />
+                            <i class="weui-icon-checked"></i><span id="yi">已离职</span>
+                        </label>
+                    </div>*@
+                <label class="u-radio" data-name="radio2" style="float:right;margin-right:2%;">
+                    <input name="isout" value="0" type="radio">
+                    <i class="icon"></i>
+                    <span class="text">未离职</span>
+                </label>
+                <label class="u-radio" data-name="radio2" style="float:right;">
+                    <input name="isout" value="1" type="radio" >
+                    <i class="icon"></i>
+                    <span class="text">已离职</span>
+                </label>
+            </div>
+
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="editSure()">保存</a>
+            @*<a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>*@
+            @*<a href="javascript:;" class="weui-btn weui-btn_warn" onclick="del()">删除</a>*@
+        </div>
+
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+    <script>
+	var starttime = new datePicker();
+	starttime.init({
+	'trigger': '#edit_bir', /*按钮选择器，用于触发弹出插件*/
+	'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+	'minDate':'1900-1-1',/*最小日期*/
+	'maxDate': (new Date().getFullYear()) + '-' + 12 + '-' + 31,/*最大日期*/
+	'onSubmit':function(){/*确认时触发事件*/
+	    var theSelectData = starttime.value;
+	    $("#edit_bir").blur();
+	},
+	'onClose': function () {/*取消时触发事件*/
+	    $("#edit_bir").blur();
+	}
+});
+var endtime = new datePicker();
+endtime.init({
+    'trigger': '#edit_joindate', /*按钮选择器，用于触发弹出插件*/
+    'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+    'minDate': '1900-1-1',/*最小日期*/
+    'maxDate': '2100-12-31',/*最大日期*/
+    'onSubmit': function () {/*确认时触发事件*/
+        var theSelectData = endtime.value;
+        $("#edit_joindate").blur();
+    },
+    'onClose': function () {/*取消时触发事件*/
+        $("#edit_joindate").blur();
+    }
+});
+    </script>
+            <script>
+                
+                $('.u-radio').jRadio();
+                $('.u-checkbox').jCheckbox();
+               
+                
+                //加载页面的时候为文本框赋值
+                $(function () {
+                    var sex = $("#sex").val();
+                    var depart = $("#depart").val();
+                    var posi = $("#posi").val();
+                    var isout = $("#isout").val();
+                    var role = $("#role").val();
+                    //jquery 给一组单选赋值或取值
+                    $(":radio[name='sex'][value='" + sex + "']").attr("checked", "true").parent().addClass("z-checked");                  
+                    $("#edit_depart").val(depart);
+                    $("#edit_posi").val(posi);
+                    changeDep();
+                    $(":radio[name='isout'][value='" + isout + "']").attr("checked", "true").parent().addClass("z-checked");
+                    $("#edit_role").val(role);
+                })
+
+                function GetQueryString(name) {
+                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                    var r = window.location.search.substr(1).match(reg);
+                    if (r != null) return unescape(r[2]); return null;
+                }
+
+                //根据不同的部门选择对应的职位
+                function changeDep() {
+                    var DepartID = $("#edit_depart").val();
+                    $.post("/UserManager/SelectPosition", { DepartID: DepartID }, function (data) {
+                        var str = '';
+                        if (data != "" && data != null) {
+                            var json = eval('(' + data + ')');
+                            for (var o in json) {
+                                str += '<option value="' + json[o].PositionID + '">' + json[o].PositionName + '</option>';
+                            }
+                            $("#edit_posi").find("option").remove();
+                            $("#edit_posi").append(str);
+                        }
+                        else {
+                            str = '<option value="0">暂无职位</option>';
+                            $("#edit_posi").find("option").remove();
+                            $("#edit_posi").append(str);
+                        }
+                    });
+                }
+
+                //获取需要编辑的内容
+                function getEdit() {
+                    var EmpID = GetQueryString("EmpID");
+                    $.post("/UserManager/GetEmp", { EmpID: EmpID, CompanyID: GetQueryString("CompanyID") }, function (data) {
+                        if (data != "no")
+                        {
+                            var info = data.split(",");
+                            $("#edit_name").val(info[0]);
+                            $("#edit_sex").val(info[1]);
+                            $("#edit_bir").val(info[2]);
+                            $("#edit_joindate").val(info[3]);
+                            $("#edit_tel").val(info[4]);
+                            $("#edit_email").val(info[5]);
+                            $("#edit_isout").val(info[6]);
+                            $("#edit_password").val(info[7]);
+                            $("#edit_depart").val(info[8]);
+                            //var str = '<option value="' + info[9] + '">' + info[10] + '</option>'
+                            //$("#edit_posi").append(str);
+                            $("#edit_posi").val(info[9]);               
+                        }
+                    })
+                }
+
+                //取消编辑后清空职位下拉框数据
+                function edit_close() {
+                    $("#edit_posi").find("option").remove();
+                    document.location.reload();
+                }
+
+                //function prmecNoteOnBlur() {
+                //    var telreg = new RegExp(/^[1][3,4,5,7,8][0-9]{9}$/);
+                //    var tel = document.getElementById("edit_tel");
+
+                //    var emailreg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+                //    var email = document.getElementById("edit_email"); //要验证的对象
+                //    if (tel.value == "") {
+                //        $.toptip('联系电话不能为空', 'warning');
+                //        return false;
+                //    } else if (!telreg.test(tel.value)) {
+                //        $.toptip('联系电话验证失败', 'error');
+                //        $("#edit_tel").focus();
+                //        return false;
+                //    } else if (email.value == "") { //输入不能为空
+                //        $.toptip('电子邮箱不能为空', 'warning');
+                //        return false;
+                //    } else if (!emailreg.test(email.value)) { //正则验证不通过，格式不对
+                //        $.toptip('电子邮箱验证失败', 'error');
+                //        $("#edit_email").focus();
+                //        return false;
+                //    } else {
+                //        return true;
+                //    }
+                //}
+
+                //编辑确认按钮
+                function editSure() {
+                    var EmpID = GetQueryString("EmpID");
+                    //if ($("#edit_bir").val() == "" || $("#edit_bir").val() == null || $("#edit_joindate").val() == "" || $("#edit_joindate").val() == null) {
+                    //    $.toptip('请填写完整信息', 'warning');
+                    //    return false;
+                    //}
+                    //else {
+                        //var a = prmecNoteOnBlur();
+                        //if (a == true) {
+                            var depart = $("#edit_depart").val();
+                            var name = $("#edit_name").val();
+                            var sex = $(":radio[name='sex']:checked").val();
+                            if (sex == "" || sex == null) {
+                                sex = 0;
+                            }
+                            var bir = $("#edit_bir").val();
+                            var joindate = $("#edit_joindate").val();
+                            var posi = $("#edit_posi").val();
+                            var tel = $("#edit_tel").val();
+                            var email = $("#edit_email").val();
+                            var isout = $(":radio[name='isout']:checked").val();
+                            var password = $("#edit_password").val();
+                            var Role = $("#edit_role").val();
+                            var CompanyID = GetQueryString("CompanyID");
+
+                            $.confirm("确认修改该员工？", function () {
+                                $.post("/UserManager/editSure", { name: name, sex: sex, bir: bir, joindate: joindate, posi: posi, tel: tel, email: email, isout: isout, password: password, depart: depart, EmpID: EmpID, Role: Role, CompanyID: CompanyID }, function (data) {
+                                    if (data == "ok") {
+                                        $.toast("修改成功", "success");
+                                        //self.location = document.referrer;
+                                        location.reload();   
+                                        //window.history.back(-1);
+                                    } else if (data == "no") {
+                                        $.toast("修改失败", "cancel");
+                                        location.reload();
+                                    } else {
+                                        $.toast("修改失败", "cancel");
+                                        location.reload();
+                                    }
+                                });
+                            }, function () {
+                                location.reload();
+                            });
+                        }
+                    //}
+                //}
+
+            </script>
+</body>
+</html>

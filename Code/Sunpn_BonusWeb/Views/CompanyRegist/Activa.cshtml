@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>公司注册</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <script src="~/Scripts/bootstrap.js"></script>*@
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/example.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <input type="text" name="name" id="zc" value="@Session["zc"]" hidden="hidden" />
+    <form method="post" action="/CompanyRegist/Activation" enctype="multipart/form-data" id="form2">
+        <div class="weui-cells__title">激活</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">公司名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="name2" name="name2" placeholder="请输入公司名称" required="required" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">邀请码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="keycode2" name="keycode2" placeholder="请输入邀请码" required="required" />
+                </div>
+            </div>
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+            @*<a href="javascript:;" onclick="Regist()" class="weui-btn weui-btn_primary">注册</a>*@
+            <input type="submit" id="baoa" class="weui-btn weui-btn_primary" value="激活" />
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+            <a href="/CompanyRegist/Index" onclick="gor()">去注册</a>
+        </div>
+    </form>
+
+    @*<div id="dialogs">
+            <div class="js_dialog" id="iosDialog2" style="display: none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog">
+                    <div class="weui-dialog__bd">电话和邮箱请您必填一个！</div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" onclick="close()" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+    @*微信上传*@
+    <script type="text/javascript">
+        $(function () {
+            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+                $uploaderInput = $("#uploaderInput"),
+                $uploaderFiles = $("#uploaderFiles")
+            ;
+
+            $uploaderInput.on("change", function (e) {
+                if ($("ul").find("li").length >= 0) {
+                    $("#uploaderInput").attr("disabled", "disabled");
+                }
+                var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+                for (var i = 0, len = files.length; i < len; ++i) {
+                    var file = files[i];
+
+                    if (url) {
+                        src = url.createObjectURL(file);
+                    } else {
+                        src = e.target.result;
+                    }
+
+                    $uploaderFiles.append($(tmpl.replace('#url#', src)));
+                }
+            });
+            $uploaderFiles.on("click", "li", function () {
+                $galleryImg.attr("style", this.getAttribute("style"));
+                $gallery.fadeIn(100);
+            });
+            $gallery.on("click", function () {
+                $gallery.fadeOut(100);
+            });
+        });
+    </script>
+
+
+
+    <script>
+            @*激活超链接*@
+        function goa() {
+            $("#form1").fadeOut(50);
+            $("#form2").fadeIn(400);
+            document.getElementById("form2").style.visibility = "visible";
+            $("#name2").val($("#name").val())
+        }
+
+        function gor() {
+            document.getElementById("form2").style.visibility = "hidden";
+            $("#form1").fadeIn();
+        }
+
+        $(function () {
+            $('#dialogs').on('click', '.weui-dialog__btn', function () {
+                $(this).parents('.js_dialog').fadeOut(200);
+            });
+        })
+
+    </script>
+</body>
+</html>

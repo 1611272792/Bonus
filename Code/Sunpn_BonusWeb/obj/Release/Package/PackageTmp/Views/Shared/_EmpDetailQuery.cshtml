@@ -1,0 +1,52 @@
+﻿@using System.Data;
+
+<div id="EmpDetail">
+    @if (ViewBag.Emp == null)
+    {
+        <br />
+            <br />
+            <center><span style="color:gray">暂无数据</span></center>
+    }
+    else
+    {
+    <div id="right_div">
+        <div id="right_div1">
+            <div id="right_divx">
+                <table id="right_table1" class="table table-bordered">
+                    <tr>
+                        <th>来源</th>
+                        <th>金额</th>
+                        <th>日期</th>
+                        <th>状态</th>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="right_div2">
+            <table id="right_table2" class="table table-bordered">
+                @if (ViewBag.Emp != null)
+                {
+                    DataTable dsEmp = ViewBag.Emp;
+                    for (int i = 0; i < dsEmp.Rows.Count; i++)
+                    {
+                        <tr>
+                            <td>@dsEmp.Rows[i]["Bonusform"]</td>
+                            <td>@dsEmp.Rows[i]["EarMoney"]</td>
+                            <td>@dsEmp.Rows[i]["EarDate"]</td>
+                            <td>@dsEmp.Rows[i]["isget"]</td>
+                            
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                }
+
+            </table>
+        </div>
+    </div>
+    }
+</div>
+

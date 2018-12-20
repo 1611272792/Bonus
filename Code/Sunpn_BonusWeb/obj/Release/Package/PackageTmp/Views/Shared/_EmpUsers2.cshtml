@@ -1,0 +1,113 @@
+﻿@using System.Data;
+
+<script src="~/scripts/jquery-weui.js"></script>
+<link href="~/Content/css/JCheck.css" rel="stylesheet" />
+<script src="~/Content/js/JCheck.js"></script>
+<div class="weui-cells" id="emp">
+    @if (ViewBag.dname != null)
+    {
+        DataTable dt = ViewBag.dname;
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            <div class="weui-cell weui-cell_swiped">
+                <div class="weui-cell__bd">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><img src="~/Content/Images/GreenSelect.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui-cell__bd">
+                            <input type="text" name="name" value="张三" hidden="hidden" id="name" />
+                            <p>@dt.Rows[i]["Name"].ToString()</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                            
+                            <label class="u-checkbox" data-name="radio3" style="float:right">
+                                <input name="xzry" type="checkbox" value="@dt.Rows[i]["EmpID"].ToString()">
+                                <i class="icon"></i>
+                                <span class="text"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+    }
+
+</div>
+<style>
+    *,
+    *:before,
+    *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    [class*="radio-group-"],
+    [class*="checkbox-group-"] {
+        padding-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+        [class*="radio-group-"] > h3,
+        [class*="checkbox-group-"] > h3 {
+            margin-bottom: 10px;
+        }
+
+    .u-radio,
+    .u-checkbox {
+        line-height: 24px;
+    }
+
+        .u-radio .icon,
+        .u-checkbox .icon {
+            display: inline-block;
+            *zoom: 1;
+            *display: inline;
+            position: relative;
+            top: -2px;
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        .u-radio .icon {
+            background: url("/Content/Images/rnocheck.png");
+            -webkit-background-size: contain;
+            background-size: contain;
+        }
+
+        .u-radio.z-checked .icon {
+            background-image: url("/Content/Images/rcheck.png");
+            ;
+        }
+
+        .u-checkbox .icon {
+            background: url("/Content/Images/noSelect.png");
+            -webkit-background-size: contain;
+            background-size: contain;
+        }
+
+        .u-checkbox.z-checked .icon {
+            background-image: url("/Content/Images/check_icon.png");
+        }
+</style>
+<script>
+    $('.u-radio').jRadio();
+    $('.u-checkbox').jCheckbox();
+</script>
+
+

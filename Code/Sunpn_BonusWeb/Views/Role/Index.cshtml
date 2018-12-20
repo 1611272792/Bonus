@@ -1,0 +1,185 @@
+﻿@using Sunpn_BonusWeb.Models;
+@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色管理</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div style="overflow:hidden;height:50px;width:100%;margin-bottom:6px;">
+        <a href="/Role/AddRole?CompanyID=@ViewBag.Companyid" @*class="weui-btn weui-btn_mini weui-btn_primary"*@ style="background-image: url('../../Content/weixin/images/添加 (1).png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 35px; float: left; margin-top: 2.8%; margin-left: 3%;margin-bottom:0.8%;background-size:35px;"></a>
+        <div id="search" style="width:80%;margin-top:3.2%;float:left;margin-bottom:-10px;margin-left:3%;">
+                <div class="weui-search-bar__form" style="width:84%;float:left;padding-top: 2px;padding-bottom: 2px;margin-left:-5px;margin-right:5px;">
+                    <div class="weui-search-bar__box">
+                        <i class="weui-icon-search"></i>
+                        <input type="text" class="weui-search-bar__input" id="SearchRole" placeholder="搜索角色" />
+                    </div>
+                </div>
+                <input type="button" name="name" onclick="search()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索 (2).png'); background-repeat: no-repeat;background-size:contain;background-position: center;width:40px; height:31px;" />
+            </div>
+        @*<a href="javascript:;" class="btn btn-primary" id="Add_Role">添加角色</a>*@
+    </div>
+    <div id="RoleHidd">
+        
+      
+        @*<a href="/Role/AddRole?CompanyID=@ViewBag.Companyid" class="weui-btn weui-btn_mini weui-btn_primary" id="showAndroidDialog1">添加角色</a>*@
+        
+        @{
+            if (ViewBag.Rolelist == null)
+            {
+                <div class="weui-loadmore weui-loadmore_line">
+                    <span class="weui-loadmore__tips">暂无数据</span>
+                </div>
+                <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                    <span class="weui-loadmore__tips"></span>
+                </div>
+            }
+            else
+            {
+                DataTable dtRole = ViewBag.Rolelist;
+                for (int i = 0; i < dtRole.Rows.Count; i++)
+                {
+                    if (dtRole.Rows[i]["RoleName"].ToString() == "管理员")
+                    {
+                        <a href="/Role/Detial?RoleId=@dtRole.Rows[i]["RoleID"].ToString()" id="@dtRole.Rows[i]["RoleID"].ToString()" hidden="hidden"></a>
+                        <div class="weui-cell weui-cell_swiped">
+                            <div class="weui-cell__bd">
+                                <div class="weui-cell" onclick="javascript: document.getElementById('@dtRole.Rows[i]["RoleID"]').click();">
+                                    <div class="weui-cell__hd"></div>
+                                    <div class="weui-cell__bd">
+                                        <p>@dtRole.Rows[i]["RoleName"].ToString()</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/Role/Detial?RoleId=@dtRole.Rows[i]["RoleID"].ToString()">编辑</a>
+                                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure('@dtRole.Rows[i]["RoleName"].ToString()')">删除</a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="/Role/Detial?RoleId=@dtRole.Rows[i]["RoleID"].ToString()"  id="@dtRole.Rows[i]["RoleID"].ToString()" hidden="hidden"></a>
+                        <div class="weui-cell weui-cell_swiped">
+                            <div class="weui-cell__bd">
+                                <div class="weui-cell"  onclick="javascript: document.getElementById('@dtRole.Rows[i]["RoleID"]').click();">
+                                    <div class="weui-cell__hd"></div>
+                                    <div class="weui-cell__bd">
+                                        <p>@dtRole.Rows[i]["RoleName"].ToString()</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/Role/Detial?RoleId=@dtRole.Rows[i]["RoleID"].ToString()">编辑</a>
+                                <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure('@dtRole.Rows[i]["RoleID"].ToString()')">删除</a>
+                            </div>
+                        </div>
+                    }
+
+
+
+                }
+            }
+        }
+       
+
+
+    </div>
+
+    @*添加角色*@
+    <div  style="display:none">
+        @{
+            if (ViewBag.authorlist2 == null)
+            {
+
+            }
+            else
+            {
+                <div class="m-cell demo-small-pitch">
+                    <div class="cell-item">
+                        <div class="cell-left">角色名：</div>
+                        <div class="cell-right">
+                            <input type="text" class="cell-input" placeholder="请输入角色名" autocomplete="off" id="AuthorName" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="m-cell demo-small-pitch">
+
+                    @{
+                        List<AuthorModellist> authsList = ViewBag.authorlist2;
+                        for (int i = 0; i < authsList.Count(); i++)
+                        {
+                            <div class="m-celltitle">@authsList[i].Name</div>
+                            <div class="m-cell">
+                                @for (int ii = 0; ii < authsList[i].listAuthor.Count; ii++)
+                                {
+                                    <label class="cell-item">
+                                        <span class="cell-left">@authsList[i].listAuthor[ii].AuthorName.ToString()</span>
+                                        <label class="cell-right">
+                                            <input type="checkbox" class="m-switch" name="AuthorCheck" value="@authsList[i].listAuthor[ii].AuthorId.ToString()" />
+                                        </label>
+                                    </label>
+                                }
+
+
+                            </div>
+                        }
+                    }
+
+                </div>
+
+                <button type="button" class="btn-block btn-primary" id="btn_AddRole">保存</button>
+                        }
+        }
+
+    </div>
+
+    
+
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script src="~/Content/js/rolejs.js"></script>
+    <script>
+        if (window.name != "bencalie")
+        {
+            //如果页面的 name 属性不是指定的名称就刷新它
+            location.reload();
+            window.name = "bencalie";
+        } else
+        {
+            //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+            window.name = "";
+        }
+
+        var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+        if (browserRule.test(navigator.userAgent))
+        {
+            window.onpageshow = function (event)
+            {
+                if (event.persisted)
+                {
+                    window.location.reload()
+                }
+            };
+        }
+    </script>
+</body>
+</html>

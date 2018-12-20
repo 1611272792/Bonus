@@ -1,0 +1,54 @@
+﻿@using System.Data;
+<script src="~/scripts/jquery-1.10.2.min.js"></script>
+<script src="~/scripts/jquery-weui.js"></script>
+<div id="emp" style="float:left;width:100%;margin-top:0px;">
+    @*<div class="weui-cells__title">奖金项信息</div>*@
+    @if (ViewBag.ds != null)
+    {
+        DataTable ds = ViewBag.ds;
+        for (int i = 0; i < ds.Rows.Count; i++)
+        {
+            @*<a class="weui-cell weui-cell_access" href="/BonusItem/Info?BonusItemID=@ds.Rows[i]["BonusItemID"]">
+                    <div class="weui-cell__hd"><img src="~/wexin/src/example/images/icon_nav_cell.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                    <div class="weui-cell__bd">
+                        <p>@ds.Rows[i]["BIName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>*@
+
+            <a href="/BonusItem/Info?BonusItemID=@ds.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.companyid" id="@ds.Rows[i]["BonusItemID"]" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell" onclick="javascript: document.getElementById('@ds.Rows[i]["BonusItemID"]').click();">
+                            <div class="weui-cell__hd"><img src="~/Content/weixin/images/jiangjinxiang.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>@ds.Rows[i]["BIName"].ToString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="text" name="name" value="@ds.Rows[i]["InDate"]" hidden="hidden" id="InDate" />
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" onclick="zhuru('@ds.Rows[i]["BonusItemID"]')">注入金额</a>
+                        @if (ds.Rows[i]["BonusItemIDs"] == null || ds.Rows[i]["BonusItemIDs"].ToString() == "")
+                        {
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="/BonusItemRule/AddRule?BonusItemID=@ds.Rows[i]["BonusItemID"]&BIType=@ds.Rows[i]["BIType"]&CompanyID=@ViewBag.companyid">添加规则</a>
+                        }
+                        else
+                        {
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="/BonusItemRule/EditRule?BonusItemID=@ds.Rows[i]["BonusItemIDs"]&BIType=@ds.Rows[i]["BIType"]">设置规则</a>
+                        }
+                    </div>
+                </div>
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+</div>

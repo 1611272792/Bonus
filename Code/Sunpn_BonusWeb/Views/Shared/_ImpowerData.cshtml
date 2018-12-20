@@ -1,0 +1,49 @@
+﻿@using System.Data;
+
+<div id="doubleDiv">
+    <table id="right_table2" class="table table-bordered">
+        @if (ViewBag.detail != null)
+        {
+            DataTable detail = ViewBag.detail;
+            DateTime dtn = DateTime.Now; //当前时间
+            DateTime startMonth = dtn.AddDays(1 - dtn.Day).Date;//当月第一天
+            for (int i = 0; i < detail.Rows.Count; i++)
+            {
+                <tr>
+                    @*<td>@detail.Rows[i]["BIName"]</td>*@
+                    <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">@detail.Rows[i]["AddMoney"]</td>
+                    <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">
+                        @if (detail.Rows[i]["Model"].ToString() == "0")
+                        {
+                            <span>长期有效</span>
+                        }
+                        else
+                        {
+                            <span>当月有效</span>
+                        }
+                    </td>
+                    <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">@detail.Rows[i]["ImpowerDate"]</td>
+                    <td id="bonusID" hidden="hidden"><a href="/BonusImpower/Reason?ImpowerID=@detail.Rows[i]["ImpowerID"]" id="@detail.Rows[i]["ImpowerID"]"></a></td>
+                    <td>
+                        @if ((DateTime)detail.Rows[i]["ImpowerDate"] >= startMonth && detail.Rows[i]["IsValid"].ToString() == "0")
+                        {
+                            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="back('@detail.Rows[i]["ImpowerID"]')">收回</a>
+                        }
+                        else
+                        {
+                            <a href="javascript:;" class="weui-btn weui-btn_warn" onkeypress="false" style="background-color:#808080;font-size:10px;width:80%;">失效</a>
+                        }
+                    </td>
+                    
+                </tr>
+            }
+        }
+        else
+        {
+
+        }
+
+    </table>
+</div>
+
+

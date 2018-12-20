@@ -1,0 +1,64 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DataInfo</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="weui-cells__title">奖金数据</div>
+    @if (ViewBag.dt != null)
+    {
+        DataTable dt = ViewBag.dt;
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">奖金项名称</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" value="@dt.Rows[0]["BIName"]" readonly="readonly" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">授权人名称</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" value="@dt.Rows[0]["Name"]" readonly="readonly" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">累计授权</label></div>
+                <div class="weui-cell__hd">
+                    @if (dt.Rows[0]["AllMoney"].ToString() == "" || dt.Rows[0]["AllMoney"] == null)
+                {
+                        <input class="weui-input" value="0.00￥" readonly="readonly" />
+                    }
+                    else
+                    {
+                        <input class="weui-input" value="@dt.Rows[0]["AllMoney"]￥" readonly="readonly" />
+                    }
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">当前结余</label></div>
+                <div class="weui-cell__hd">
+                    @if (dt.Rows[0]["RemainMoney"].ToString() == "" || dt.Rows[0]["RemainMoney"] == null)
+                {
+                        <input class="weui-input" value="0.00￥" readonly="readonly" />
+                    }
+                    else
+                    {
+                        <input class="weui-input" value="@dt.Rows[0]["RemainMoney"]￥" readonly="readonly" />
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

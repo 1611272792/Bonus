@@ -1,0 +1,252 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>公司管理</title>
+    <script src="~/Content/js/jjweixinIos.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <script src="~/Content/js/jjweixinIos.js"></script>
+</head>
+<body>
+    <div> 
+      @if (ViewBag.info != null)
+      {
+          DataTable info = ViewBag.info;
+        <div id="updPhoto">
+            <div style="margin:0px auto;width:150px;height:150px;display:flex;align-items:center;margin-top:20px;">
+                @if (info.Rows[0]["CompanyLogo"].ToString() == null || info.Rows[0]["CompanyLogo"].ToString() == "")
+                {
+                    <img src="~/Content/Images/奖金项管理.png" style="border-radius: 50%;width:100%;height:100%;margin:0px auto;" />
+                }
+                else
+                {
+                    <img src="@info.Rows[0]["CompanyLogo"].ToString()" style="border-radius: 50%;width:100%;height:100%;margin:0px auto;" />
+                }
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">公司名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="CompanyName" value="@info.Rows[0]["CompanyName"].ToString()" required="required" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
+                <div class="weui-cell__bd">
+                    <input type="text" name="name" id="YEmpID" value="@info.Rows[0]["EmpID"].ToString()" hidden="hidden"/>
+                    <input class="weui-input" id="add_PrName" value="@info.Rows[0]["Name"].ToString()" required="required" />
+                    <input type="text" name="name" hidden="hidden" id="EmpID" />
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">联系电话</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="CompanyPhone" value="@info.Rows[0]["CompanyPhone"].ToString()" required="required" onblur="prmecNoteOnBlur()"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">电子邮箱</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" id="Email" name="" value="@info.Rows[0]["CompanyEmail"].ToString()" placeholder="" onblur="prmecNoteOnBlur()"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">注册时间</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" id="beginDate" readonly value="@info.Rows[0]["beginDate"].ToString()" placeholder="" />
+                </div>
+            </div>    
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">有效期限</label></div>
+                <div class="weui-cell__hd">
+                    <input class="weui-input" id="endDate" readonly value="@info.Rows[0]["endDate"].ToString()" placeholder="" />
+                </div>
+            </div>    
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="editSure()">确认</a>
+            <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+        </div>
+      }
+    </div>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        $(function () {
+            var CompanyID = GetQueryString("CompanyId");
+            var kw = $("#add_PrName").val();
+            $("#add_PrName").bigAutocomplete({
+                url: "/BonusImpower/GetEmp?keyword=" + kw + "&CompanyID=" + CompanyID,
+                callback: function (data) {
+                    if (data != "" && data != null) {
+                        $("#EmpID").val(data.EmpID);
+                    }
+                }
+            });
+        })
+
+        function prmecNoteOnBlur() {
+            var telreg = new RegExp(/^[1][3,4,5,7,8][0-9]{9}$/);
+            var tel = document.getElementById("CompanyPhone");
+
+            var emailreg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+            var email = document.getElementById("Email"); //要验证的对象
+            if (tel.value == "") {
+                $.toptip('联系电话不能为空', 'warning');
+                return false;
+            } else if (!telreg.test(tel.value)) {
+                $.toptip('联系电话验证失败', 'error');
+                $("#CompanyPhone").focus();
+                return false;
+            } else if (email.value == "") { //输入不能为空
+                $.toptip('电子邮箱不能为空', 'warning');
+                return false;
+            } else if (!emailreg.test(email.value)) { //正则验证不通过，格式不对
+                $.toptip('电子邮箱验证失败', 'error');
+                $("#Email").focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        //编辑确认按钮
+        function editSure()
+        {
+            var a = prmecNoteOnBlur();
+            if (a == true) {
+                if ($("#CompanyName").val() != null && $("#CompanyName").val() != "" && $("#add_PrName").val() != null && $("#add_PrName").val() != "" && $("#CompanyPhone").val() != null && $("#CompanyPhone").val() != "" && $("#Email").val() != null && $("#Email").val() != "" ) {
+                    $.confirm("确认编辑公司信息？", function () {
+                        $.post("/CompanyRegist/editSure", { CompanyID: GetQueryString("CompanyId"), CompanyName: $("#CompanyName").val(), CompanyPrincipal: $("#EmpID").val() ? null : $("#YEmpID").val(), CompanyPhone: $("#CompanyPhone").val(), CompanyEmail: $("#Email").val() }, function (data) {
+                            if (data == "ok") {
+                                $.toast("编辑成功");
+                                location.reload();
+                            } else if (data == "no") {
+                                $.toast("编辑失败", "cancel");
+                            } else {
+                                $.toast("编辑失败", "cancel");
+                            }
+                        });
+                    }, function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    $.toptip('请填写完整信息', 'warning');
+                }
+            }
+        }
+    </script>
+
+    <script>
+        var images = {
+            localId: [],
+            serverId: []
+        };
+        wx.config({
+            beta: true,
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '@ViewBag.appid', // 必填，企业号的唯一标识，此处填写企业号corpid
+            timestamp: '@ViewBag.timestamp', // 必填，生成签名的时间戳
+            nonceStr: '@ViewBag.noncestr', // 必填，生成签名的随机串
+            signature: '@ViewBag.signature',// 必填，签名，见附录1
+            jsApiList: ['checkJsApi', 'scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.error(function (res)
+        {
+            alert("出错了:" + res.errMsg);
+        });
+        wx.ready(function ()
+        {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+            wx.checkJsApi({
+                //调用微信扫一扫功能
+                jsApiList: ['scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'],
+                success: function (res)
+                {
+
+                }
+            });
+        });
+        //更换头像
+        var index_ids = 0;
+        var num = 0;
+        $("#updPhoto").click(function ()
+        {
+            //alert("选中");
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res)
+                {
+                    //alert("成功选择图片");
+                    images.localId = res.localIds;
+                    wx.uploadImage({
+                        localId: images.localId[index_ids],
+                        isShowProgressTips: 1,
+                        success: function (res)
+                        {
+                            //alert("res.serverId：" + res.serverId);
+                            ////alert("success");
+                            var serverId2 = res.serverId;//图片下载后的本地id
+                            var comId = GetQueryString("CompanyId");
+                            $.post("/CompanyRegist/UploadImge", { serverId: serverId2, compid: comId }, function (data)
+                            {
+                                var img = data;
+                                
+                                $.post("/CompanyRegist/UpdateImg", { img: img, CompanyID: GetQueryString("CompanyId") }, function (data)
+                                {
+                                    if (data == "ok")
+                                    {
+                                        $.toast('更换头像成功', "success", function ()
+                                        {
+                                            document.location.reload();
+                                        });
+                                        document.location.reload();
+                                    }
+                                    else
+                                    {
+                                        $.toast(data, "forbidden", function ()
+                                        {
+                                            document.location.reload();
+                                        });
+
+                                    }
+
+
+                                })
+                            });
+                        },
+                        fail: function (error)
+                        {
+
+                            alert("上传图片失败");
+
+
+                        }
+                    })
+                }
+            });
+        });
+    </script>
+</body>
+</html>

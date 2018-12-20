@@ -1,0 +1,27 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>备注</title>
+</head>
+<body>
+    <div>
+        <h3>原因：</h3><br />
+        @if (ViewBag.Reason != null)
+        {
+            DataTable Reason = ViewBag.Reason;
+            @Reason.Rows[0][0].ToString();
+        }
+        else
+        {
+            <center><span style="color:gray">暂未填写</span></center>
+        }
+    </div>
+</body>
+</html>

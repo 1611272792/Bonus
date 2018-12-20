@@ -1,0 +1,256 @@
+﻿@using System.Data
+@{
+  
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>奖金数据查询</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+
+<body>
+    <span id="CompanyId" hidden="hidden">@ViewBag.CompanyId</span>
+    @*<div class="weui-loadmore" id="jiazai" hidden="hidden">
+        <i class="weui-loading"></i>
+        <span class="weui-loadmore__tips">正在加载</span>
+    </div>*@
+    <div class="weui-cell" style="float:left">
+         
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="empOrDep" value="1" checked="checked" />
+                <i class="weui-icon-checked"></i><span id="emp">个人</span>
+            </label>
+        </div>
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="empOrDep" value="0" />
+                <i class="weui-icon-checked"></i><span id="dep">部门</span>
+            </label>
+        </div>
+    </div>
+ 
+    <div id="search"  style="width:45%;float:right;margin-top:10px;margin-right:15px">
+    <div class="weui-search-bar__form">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="text" class="weui-search-bar__input" id="qq" placeholder="员工搜索" required />
+        </div>
+
+    </div>
+</div>
+ 
+    @*部门明细*@
+    <div id="DepDetail" hidden="hidden">
+        @if (ViewBag.Dep == null)
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>名称</th>
+                                <th>当月收入(¥)</th>
+                                <th>未领取(¥)</th>                   
+                                <th>累计(¥)</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.Dep != null)
+                        {
+                            DataTable dsDep = ViewBag.Dep;
+                            for (int i = 0; i < dsDep.Rows.Count; i++)
+                            {
+                                <tr onclick="javascript: document.getElementById('@dsDep.Rows[i]["DepartID"]').click();">
+                                    <td><div class="award-name"> @dsDep.Rows[i]["DepartName"]</div></td>
+                                    <td><div class="award-name">@dsDep.Rows[i]["SumMonth"]</div></td>
+                                    <td><div class="award-name">@dsDep.Rows[i]["NoGet"]</div></td>
+                                    <td><div class="award-name">@dsDep.Rows[i]["sumBonus"]</div></td>
+                                    <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/DepGain?depBounsID=@dsDep.Rows[i]["DepartID"]&compid=@ViewBag.CompanyId" id="@dsDep.Rows[i]["DepartID"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+    @*个人明细*@
+    <div id="EmpDetail">
+      
+        @if (ViewBag.Emp == null)
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>工号</th>
+                                <th>名称</th>
+                                <th>当月奖金(¥)</th>
+                                <th>总获奖金(¥)</th>
+                               
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-striped table-bordered table-hover"  cellpadding="0" cellspacing="0">
+                        @if (ViewBag.Emp != null)
+                        {
+                            DataTable dsEmp = ViewBag.Emp;
+                            for (int i = 0; i < dsEmp.Rows.Count; i++)
+                            {
+                                <tr onclick="javascript: document.getElementById('@dsEmp.Rows[i]["EmpID"]').click();">
+                                    <td><div class="award-name">@dsEmp.Rows[i]["EmpID"]</div></td>
+                                    <td><div class="award-name">@dsEmp.Rows[i]["Name"]</div></td>
+                                    <td><div class="award-name">@dsEmp.Rows[i]["SumMonth"]</div></td>
+                                    <td><div class="award-name">@dsEmp.Rows[i]["SumBonus"]</div></td>
+                                    <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/EmpGain?empBounsID=@dsEmp.Rows[i]["EmpID"]&compid=@ViewBag.CompanyId" id="@dsEmp.Rows[i]["EmpID"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                       
+                    </table>
+                 
+                </div>
+            </div>
+        }
+    </div>
+    <!--脚本-->
+  
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //是否离职单选框
+        $(":radio[name='empOrDep']").click(function () {           
+            if ($(this).val() == "1") {
+                $("#emp").addClass("ziticolor");
+                $("#dep").removeClass("ziticolor");
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+              
+            } else {
+                $("#dep").addClass("ziticolor");
+                $("#emp").removeClass("ziticolor");
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            }
+        });
+
+        $(function () {
+            //选择字体颜色变化
+            if ($(":radio[name='empOrDep']:checked").val() == "1") {
+                $("#emp").addClass("ziticolor");
+                $("#dep").removeClass("ziticolor");
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            } else if ($(":radio[name='empOrDep']:checked").val() == "0") {
+                $("#dep").addClass("ziticolor");
+                $("#emp").removeClass("ziticolor");
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            } 
+        })
+
+        //function jiazai() {
+        //    $("#jiazai").show();
+        //}
+    
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        if (right_div2="") {
+
+        } else {
+            right_div2.onscroll = function () {
+                var right_div2_top = this.scrollTop;
+                var right_div2_left = this.scrollLeft;
+                document.getElementById("right_div1").scrollLeft = right_div2_left;
+            }
+        }
+          //模糊查询
+        $(function () {
+            var kw = $("#qq").val();
+            var CompanyId=$("#CompanyId").html();
+            var empName="";
+            $("#qq").bigAutocomplete({
+                url: "/BonusDataQuery/GetInfo?keyword=" + kw+"&CompanyId="+CompanyId,
+                callback: function (data) {
+                    empName = data.title;
+                    //alert(empName);
+                    if (empName.length > 0) {
+                        $("#jiazai").show();
+                        $("#EmpDetail").load("/BonusDataQuery/SearchInfo?EmpName=" + empName + "&CompanyId=" + CompanyId)
+                        $("#jiazai").hide();
+                    }
+                }
+            });
+        })
+
+
+        //搜索方法
+        function search() {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().replace(/\s|\xA0/g, "");
+            if (kw==""||kw==null) {
+                location.reload();
+            }else {
+                $("#EmpDetail").load("/BonusDataQuery/SearchInfo?EmpName=" + kw + "&CompanyId=" + CompanyId)
+            }
+        }
+
+        //回车键触发的搜索
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                search();
+            }
+        }
+    </script>
+</body>
+</html>

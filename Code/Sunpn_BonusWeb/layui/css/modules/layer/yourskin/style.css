@@ -1,0 +1,43 @@
+﻿/*扩展弹出框皮肤*/
+body .layer-ext-yourskin[type=dialog] {
+    min-width: 280px;
+}
+
+body .layer-ext-yourskin .layui-layer-title {
+    background: #0A98EA;
+    color: #fff;
+    border: none;
+}
+
+body .layer-ext-yourskin .layui-layer-btn {
+    padding: 5px 10px 10px;
+    text-align: right;
+    border-top: 1px solid #E9E7E7;    
+}
+
+    body .layer-ext-yourskin .layui-layer-btn a {
+        background: #fff;
+        border-color: #E9E7E7;
+        color: #fff;
+    }
+
+   body .layer-ext-yourskin .layui-layer-btn .layui-layer-btn1 {
+         border: 1px solid #C9C9C9;
+    background-color: #fff;
+    border-radius: 100px;
+    color: #555;
+        width:79px;
+        height:38px;
+        line-height:38px;
+        text-align:center;
+    }
+    body .layer-ext-yourskin .layui-layer-btn .layui-layer-btn0 {
+        background: #0A98EA;
+        border: 1px solid #0A98EA;
+        border-radius: 100px;
+        width: 79px;
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+    }
+

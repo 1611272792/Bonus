@@ -1,0 +1,280 @@
+﻿@using Sunpn_BonusWeb.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色编辑/详情</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="~/Content/weixin/css/ydui.css" rel="stylesheet" />
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>
+    <style>
+        .m-notify {
+            background-color: #fb0000;
+        }
+        .btn-primary{
+            background-color:#319ee3;
+        }
+        .btn-primary:active { background-color: #319ee3; }
+        .btn-primary:disabled{
+            opacity:0.5;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @{
+            if (ViewBag.detialRole == null)
+            {
+
+            }
+            else
+            {
+                if (ViewBag.authorlist2 != null)
+                {
+
+
+                    List<AuthorModellist> authsList = ViewBag.authorlist2;
+                    @*<div class="m-cell demo-small-pitch">*@
+                    <div class="m-celltitle">角色名</div>
+                    <div class="m-cell">
+                        <input type="text" class="cell-input" style="padding-left:30px" value="@authsList[0].AuthName.ToString()" placeholder="请输入角色名" autocomplete="off" id="AuthorName_Edit" />
+                        <input type="hidden" class="cell-input" value="@authsList[0].AuthName.ToString()" id="AuthorName_Old" />
+                        <input type="hidden" value="@authsList[0].IsActive.ToString()" id="Author_IsActiveOld" />
+                    </div>
+                    @*<div class="cell-item">
+                                            <div class="cell-left"></div>
+                                            <div class="cell-right">
+                                                    <input type="text" class="cell-input" value="@authsList[0].AuthName.ToString()" placeholder="请输入角色名" autocomplete="off" id="AuthorName_Edit" />
+                                                <input type="hidden" class="cell-input" value="@authsList[0].AuthName.ToString()" id="AuthorName_Old" />
+                        <input type="hidden" value="@authsList[0].IsActive.ToString()" id="Author_IsActiveOld"/>
+                        @*<input type="hidden" value="@authsList[0].AuthId.ToString()" id="AuthId_Edit"/>*@
+                    @*</div>
+                        </div>*@
+                    <div class="m-celltitle"></div>
+                    <div class="m-cell">
+                        <label class="cell-item">
+                            <span class="cell-left">是否有效</span>
+                            <label class="cell-right">
+                               @if (authsList[0].IsActive.ToString() == "0")
+                               {
+
+                                   //有效
+                                <input type="checkbox" checked class="m-switch" name="radiobox" value="0" />
+                                @*
+                                    <label class="cell-item">
+                                        <span class="cell-left">有效</span>
+                                        <label class="cell-right">
+                                            <input type="radio" value="0" name="radiobox" checked />
+                                            <i class="cell-checkbox-icon"></i>
+                                        </label>
+                                    </label>
+                                    <label class="cell-item">
+                                        <span class="cell-left">无效</span>
+                                        <label class="cell-right">
+                                            <input type="radio" value="1" name="radiobox" />
+                                            <i class="cell-checkbox-icon"></i>
+                                        </label>
+                                    </label>*@
+                               }
+                               else
+                               {
+                                   //无效
+                                <input type="checkbox" class="m-switch" name="radiobox" value="1" />
+
+                                @*<label class="cell-item">
+                                        <span class="cell-left">有效</span>
+                                        <label class="cell-right">
+                                            <input type="radio" value="0" name="radiobox" />
+                                            <i class="cell-checkbox-icon"></i>
+                                        </label>
+                                    </label>
+                                    <label class="cell-item">
+                                        <span class="cell-left">无效</span>
+                                        <label class="cell-right">
+                                            <input type="radio" value="1" name="radiobox" checked />
+                                            <i class="cell-checkbox-icon"></i>
+                                        </label>
+                                    </label>*@
+
+                               }
+
+                            </label>
+                        </label>
+                        
+                    </div>
+
+
+
+
+                        @*</div>*@
+
+        for (int i = 0; i < authsList.Count(); i++)
+        {
+            <div class="m-celltitle">@authsList[i].Name</div>
+            <div class="m-cell">
+                @for (int ii = 0; ii < authsList[i].listAuthor.Count; ii++)
+                        {
+                    <label class="cell-item" style="padding-left:40px;">
+                        <span class="cell-left">@authsList[i].listAuthor[ii].AuthorName.ToString()</span>
+                        <label class="cell-right">
+                            @if (authsList[i].listAuthor[ii].AuthorContian == "0")
+                            {
+                                <input type="checkbox" checked class="m-switch" name="AuthorCheck" value="@authsList[i].listAuthor[ii].AuthorId.ToString()" />
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="m-switch" name="AuthorCheck" value="@authsList[i].listAuthor[ii].AuthorId.ToString()" />
+                            }
+
+                        </label>
+                    </label>
+                }
+
+
+            </div>
+        }
+        if (authsList[0].AuthName.ToString() == "管理员")
+        {
+
+            <button type="button" class="btn-block btn-primary" id="btn_AddRole_Edit" disabled onclick="RoleEdit(@authsList[0].AuthId.ToString())">管理员权限不能修改</button>
+            @*<button type="button" class="btn-block btn-danger" id="btn_AddRole_Dele" disabled onclick="RoleDele(@authsList[0].AuthId.ToString())">管理员权限不能删除</button>*@
+                    }
+                    else
+                    {
+                        <button type="button" class="btn-block btn-primary" id="btn_AddRole_Edit" onclick="RoleEdit('@authsList[0].AuthId.ToString()')">保存</button>
+                        @*<button type="button" class="btn-block btn-danger" id="btn_AddRole_Dele" onclick="RoleDele(@authsList[0].AuthId.ToString())">删除</button>*@
+                    }
+
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/weixin/js/ydui.js"></script>
+    <script>
+        
+        var dialog;
+        $(function ()
+        {
+            !function (win, $)
+            {
+                dialog = win.YDUI.dialog;
+
+            }(window, jQuery);
+        })
+
+        //编辑功能
+        function RoleEdit(RoleId)
+        {
+            //角色名
+            var AuthorName_Edit = $("#AuthorName_Edit").val();
+            //权限
+            var AuthorCheck = document.getElementsByName("AuthorCheck");
+            var cheValue = "";//获取选中的id
+            for (var i = 0; i < AuthorCheck.length; i++)
+            {
+                //alert(che[i].checked);
+                if (AuthorCheck[i].checked)
+                {
+                    cheValue += AuthorCheck[i].value + ",";
+                }
+            }
+            //是否有效
+
+            var radioboxValue = document.getElementsByName("radiobox");
+            var radValue = "";
+            for (var i = 0; i < radioboxValue.length; i++)
+            {
+                if (radioboxValue[i].checked)
+                {
+                    
+                    radValue = "0";
+                }
+                else
+                {
+                    radValue = "1";
+                }
+            }
+            if (AuthorName_Edit == "")
+            {
+                dialog.notify('角色名必填！', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+            else if (cheValue == "")
+            {
+                dialog.notify('权限必选！', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+            else if (radValue == "")
+            {
+                dialog.notify('是否有效必选！', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+            else
+            {
+                var AuthorName_Old = $("#AuthorName_Old").val();//老数据
+                $.post("/Role/EditRole", { AuthorName_Edit: AuthorName_Edit, cheValue: cheValue, radValue: radValue, RoleId: RoleId }, function (data)
+                {
+                    dialog.toast(data, 'none', 1000);
+                })
+            }
+        }
+
+        //删除
+        function RoleDele(RoleId)
+        {
+            $.confirm("确认删除该员工？", function ()
+            {
+                $.post("/UserManager/Delete", { EmpID: EmpID, CompanyID: CompanyID }, function (data)
+                {
+                    if (data = "ok")
+                    {
+                        $.toast("删除成功");
+                        location.reload();
+                    }
+                    else
+                    {
+                        $.toast("删除失败", "cancel");
+                    }
+                })
+            }, function ()
+            {
+                location.reload();
+            });
+            //dialog.confirm('', '您确定真的要删除吗？', function ()
+            //{
+            //    $.post("/Role/DelRole", { RoleId: RoleId }, function (data)
+            //    {
+            //        dialog.toast(data, 'none', 1000);
+            //        document.location.href = "/Role/Index";
+            //    })
+
+            //});
+        }
+    </script>
+</body>
+</html>

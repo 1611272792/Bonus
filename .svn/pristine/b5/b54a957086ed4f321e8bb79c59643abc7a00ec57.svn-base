@@ -1,0 +1,114 @@
+﻿@using System.Data;
+@using Sunpn_BonusWeb.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>子部门</title>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <style>
+        .weui-badge {
+            background-color: #319EE3;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="page__bd">
+        @*<div class="weui-cells__title">选择子部门</div>*@
+
+        @if (ViewBag.dname != null)
+        {
+            List<Dep> dn = ViewBag.dname;
+            foreach (var item in dn)
+            {
+                <a href="/DepartManger/sonView?depID=@item.depId&CompanyId=@ViewBag.CompanyId" id="@item.depId" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell weui-cell_access" onclick="javascript: document.getElementById('@item.depId').click();">
+                            <div class="weui-cell__hd">
+                                <img src="/Content/weixin/images/depart.png" style="width:20px;height:20px;" />
+                            </div>
+
+                            <div class="weui-cell__bd">
+                                <p>@item.depName </p>
+                            </div>
+                            @*<div class="weui-cell__ft"><span class="weui-badge">@dn.Rows[i]["SonNum"]</span>   </div>*@
+                            <div class="weui-cell__ft" style="padding-right:25px;">
+                                            @item.sonCount
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="weui-cell__ft">
+                                    <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/DepartManger/EditView?depID=@item.depId&CompanyId=@ViewBag.CompanyId">编辑</a>
+                                    @*<a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure(@dn.Rows[i]["DepartID"])">删除</a>*@
+                            </div>
+                                </div>
+                                    }
+                                   
+
+                            }
+                            else
+                            {
+                            <div class="weui-loadmore weui-loadmore_line">
+                                <span class="weui-loadmore__tips">暂无子部门</span>
+                            </div>
+                            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                                <span class="weui-loadmore__tips"></span>
+                            </div>
+                            }
+
+                        </div>
+                        <script src="~/scripts/jquery-1.10.2.min.js"></script>
+                        <script src="~/scripts/jquery-weui.js"></script>
+                        <script>
+
+                            //删除
+                            function delete_Sure(depID)
+                            {
+                                //var deleteDepID = $("#se_depID").val();
+                                //var deleteDepID = $("#se_depID").val();
+
+                                $.confirm("确认删除该部门？", function ()
+                                {
+                                    $.post("/DepartManger/DelDep", { DepID: depID }, function (data)
+                                    {
+                                        if (data = "删除成功")
+                                        {
+                                            $.toast("删除成功");
+                                            location.reload();
+                                        }
+                                        else
+                                        {
+                                            $.toast("删除失败", "cancel");
+                                        }
+                                    })
+                                }, function ()
+                                {
+                                    //点击取消后的回调函数
+                                });
+
+
+                            }
+
+                            $(function ()
+                            {
+                                if (window.name != "bencalie")
+                                {
+                                    location.reload();
+                                    window.name = "bencalie";
+                                } else
+                                {
+                                    window.name = "";
+                                }
+                            });
+                        </script>
+</body>
+</html>

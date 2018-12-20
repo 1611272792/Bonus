@@ -1,0 +1,204 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>职位详情</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+</head>
+<body>
+     @*显示职位*@
+        <div class="page">
+            <div class="page__hd">
+                <h1 class="page__title">职位信息</h1>
+
+            </div>
+            <div class="page__bd">
+                <div class="weui-form-preview">
+                    @if (ViewBag.pd != null)
+                    {
+                        DataTable pds = ViewBag.pd;
+
+
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">职位名称</label>
+                            <em class="weui-form-preview__value" id="PosName">@pds.Rows[0]["PositionName"]</em>
+                        </div>
+                    </div>
+
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">所属部门</label>
+                            <em class="weui-form-preview__value" id="depName">@pds.Rows[0]["DepartName"]</em>
+                        </div>
+                    </div>
+
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">备注</label>
+                            <em class="weui-form-preview__value" id="PosRemark">@pds.Rows[0]["Remark"]</em>
+                        </div>
+
+                    </div>
+
+                    <div class="weui-form-preview__hd" hidden="hidden">
+                        <div class="weui-form-preview__item">
+
+                            <label class="weui-form-preview__label">职位ID</label>
+
+                            <input class="weui-input" type="text" placeholder="存职位专用" value="@pds.Rows[0]["PositionID"]" id="se_PosID" />
+                        </div>
+                    </div>
+                    }
+                    <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+                        @*<div class="weui-form-preview__ft" id="OpearDep">*@
+                            <a class="weui-btn weui-btn_primary" href="javascript:" id="EditPos" onclick="getEdit()">编辑</a>
+                            <a class="weui-btn weui-btn_warn" href="javascript:" id="DeletePos" >删除</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+ 
+    @*编辑职位弹框*@
+    <div id="dialogs">
+        <div class="js_dialog" id="androidDialog2" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog weui-skin_android">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">编辑职位</strong></div>
+                <div class="weui-dialog__bd" style="height:auto;">
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" placeholder="请输入职位名称" id="edit_pos" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">所属部门</label></div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="select2" id="edit_dep">
+                                    @if (ViewBag.MainDep != null)
+                                    {
+                                        DataTable mainDep = ViewBag.MainDep;
+                                        for (int i = 0; i < mainDep.Rows.Count; i++)
+                                        {
+                                            <option value=@mainDep.Rows[i]["DepartName"]>@mainDep.Rows[i]["DepartName"]</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" placeholder="请输入备注" id="edit_remark" />
+                            </div>
+                            <div class="weui-cell__bd" hidden="hidden">
+                                <input class="weui-input" type="text" placeholder="存职位id专用" id="edit_PosID" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="quxiao()">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="add" onclick="edit_Sure()">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*删除职位弹框*@
+    <div id="dialogs">
+        <div class="js_dialog" id="androidDialog3" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog weui-skin_android">
+                确认删除？
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="quxiao()">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_Sure()">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script type="text/javascript">
+       //取消
+       function quxiao() {
+           $('#androidDialog2').fadeOut(200);
+           $('#androidDialog3').fadeOut(200);
+       }
+       //添加部门弹框
+       $(function () {
+           var $androidDialog3 = $('#androidDialog3');
+           $('#dialogs').on('click', '.weui-dialog__btn', function () {
+               $(this).parents('.js_dialog').fadeOut(200);
+           });
+         
+           $('#DeletePos').on('click', function () {
+               $androidDialog3.fadeIn(200);
+           });
+
+
+       });
+       //编辑
+       function getEdit() {
+           var posiID = $("#se_PosID").val();
+           $.post("/PositionManage/getEdit", { posID: posiID }, function (data) {
+               if (data != "no") {
+                   var info = data.split(".");
+                   $("#edit_dep").val(info[0]);//所属部门
+                   $("#edit_PosID").val(info[1]);//职位id
+                   $("#edit_pos").val(info[2]);//职位名称
+                   $("#edit_remark").val(info[3]);//备注
+                   $('#androidDialog2').fadeIn(200);
+               }
+
+           });
+       }
+       //编辑确认
+       function edit_Sure() {
+           if ($("#edit_dep").val() == "" || $("#edit_dep").val() == null || $("#edit_pos").val() == "" || $("#edit_pos").val() == null) {
+               alert("不能为空，请输入合适的值！");
+           } else {
+               var editDep = $("#edit_dep").val();
+               var editPosID = $("#edit_PosID").val();
+               var editPosName = $("#edit_pos").val();
+               var editRemark = $("#edit_remark").val();
+          
+               $.post("/PositionManage/eidtPos", { DepartName: editDep, PosID: editPosID, PosName: editPosName, Remark: editRemark }, function (data) {
+                   if (data="编辑成功") {
+                       alert(data);
+                       location.reload();
+                   }
+                   else {
+                       alert("编辑失败");
+                   }
+               })
+           }
+       }
+       //删除
+       function delete_Sure() {
+           //var deleteDepID = $("#se_depID").val();
+        
+           var deletePosID = $("#se_PosID").val();
+           $.post("/PositionManage/delPosID", { PosID: deletePosID }, function (data) {
+               if (data = "删除成功") {
+                   alert(data);
+                   //window.history.go(-1);
+                   window.location.href = "/PositionManage/Index";
+               }
+               else {
+                   alert(data);
+               }
+           })
+
+       }
+   </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>奖金项列表</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <style>
+        .delete-swipeout {
+                background-color: #319ee3;
+        }
+
+        .weui-dialog__btn_default {
+    color: #353535!important;
+}
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+
+    @*<a href="/BonusItem/AddBonusItem?CompanyID=@ViewBag.companyid" class="weui-btn weui-btn_mini weui-btn_primary">添加奖金项</a>*@
+
+    <span id="CompanyId" hidden="hidden">@ViewBag.Companyid</span>
+    <div style="height:50px;width:100%;margin-bottom:6px;">
+        <a href="/BonusItem/AddBonusItem?CompanyID=@ViewBag.Companyid" @*class="weui-btn weui-btn_mini weui-btn_primary"*@ style="background-image: url('../../Content/weixin/images/添加 (1).png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 35px; float: left; margin-top: 2.8%; margin-left: 3%;margin-bottom:0.8%;background-size:35px;"></a>
+        <div id="search" style="width:80%;margin-top:3.2%;float:left;margin-bottom:-10px;margin-left:3%;">
+            <div class="weui-search-bar__form" style="width:84%;float:left;padding-top: 2px;padding-bottom: 2px;margin-left:-5px;margin-right:5px;">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="text" class="weui-search-bar__input" id="qq" placeholder="搜索奖金项" />
+                </div>
+            </div>
+            <input type="button" name="name" onclick="search()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索 (2).png'); background-repeat: no-repeat;background-size:contain;background-position: center;width:40px; height:31px;" />
+        </div>
+    </div>
+    <div id="emp" style="float:left;width:100%;margin-top:0px;">
+        @*<div class="weui-cells__title">奖金项信息</div>*@
+        @if (ViewBag.ds != null)
+        {
+            DataTable ds = ViewBag.ds;
+            for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                @*<a class="weui-cell weui-cell_access" href="/BonusItem/Info?BonusItemID=@ds.Rows[i]["BonusItemID"]">
+                        <div class="weui-cell__hd"><img src="~/wexin/src/example/images/icon_nav_cell.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                        <div class="weui-cell__bd">
+                            <p>@ds.Rows[i]["BIName"].ToString()</p>
+                        </div>
+                        <div class="weui-cell__ft">
+                        </div>
+                    </a>*@
+
+                <a href="/BonusItem/Info?BonusItemID=@ds.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.companyid" id="@ds.Rows[i]["BonusItemID"]" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell" onclick="javascript: document.getElementById('@ds.Rows[i]["BonusItemID"]').click();">
+                            <div class="weui-cell__hd"><img src="~/Content/weixin/images/jiangjinxiang.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <p>@ds.Rows[i]["BIName"].ToString()</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <input type="text" name="name" value="@ds.Rows[i]["InDate"]" hidden="hidden" id="InDate" />
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" onclick="zhuru('@ds.Rows[i]["BonusItemID"]')">注入金额</a>
+                        @if (ds.Rows[i]["BonusItemIDs"] == null || ds.Rows[i]["BonusItemIDs"].ToString() == "")
+                        {
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="/BonusItemRule/AddRule?BonusItemID=@ds.Rows[i]["BonusItemID"]&BIType=@ds.Rows[i]["BIType"]&CompanyID=@ViewBag.companyid">添加规则</a>
+                        }
+                        else
+                        {
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="/BonusItemRule/EditRule?BonusItemID=@ds.Rows[i]["BonusItemIDs"]&BIType=@ds.Rows[i]["BIType"]">设置规则</a>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+    </div>
+
+        <div id="dialogs">
+            @*注入金额*@
+            <div class="js_dialog" id="iosDialog1" style="display:none;">
+                <div class="weui-mask"></div>
+                <div class="weui-dialog" style="background-color:#fafafc;">
+                    <div class="weui-dialog__hd"><strong class="weui-dialog__title">注入奖金</strong></div>
+                    <div class="weui-dialog__bd">
+                        <input type="text" value="" id="shitID" hidden="hidden" /> @*<input type="text" id="AddMoney" name="name" placeholder="请输入注入金额(￥)" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" style="text-align:center;" class="weui-input" />*@
+                        <div class="weui-jiaj-dialog-panel" style="background-color:#ffffff;">
+                            <div class="weui-cell">
+                                <div class="weui-cell__bd">
+                                    <input id="AddMoney" type="number" required class="weui-input" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " placeholder="请输入注入金额(￥)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-dialog__ft">
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                        <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="aa" onclick="sure()">确定</a>
+                        @*<a href="javascript:void(0);" class="weui-dialog__btn weui-dialog__btn_primary" id="aa" onclick="sure()">确定</a>*@
+                        @*<span class="weui-dialog__btn weui-dialog__btn_primary" id="aaa" onclick="sure()">
+                            确定
+                        </span>*@
+                        @*<input type="button"  class="weui-dialog__btn weui-dialog__btn_primary" id="aa" onclick="sure()" value="确定" />*@
+                        @* <button class="weui-dialog__btn weui-dialog__btn_primary" id="aa" onclick="sure()">确定</button>*@
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+   
+        <script src="~/scripts/jquery-weui.js"></script>
+
+        <script>
+            //当点击返回按钮的时候强制刷新页面
+            $(function () {
+                if (window.name != "bencalie") {
+                    //如果页面的 name 属性不是指定的名称就刷新它
+                    location.reload();
+                    window.name = "bencalie";
+                } else {
+                    //如果页面的 name 属性是指定的名称就什么都不做，避免不断的刷新
+                    window.name = "";
+                }
+
+                var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+                if (browserRule.test(navigator.userAgent)) {
+                    window.onpageshow = function (event) {
+                        if (event.persisted) {
+                            window.location.reload()
+                        }
+                    };
+                }
+            });
+
+
+
+            function zhuru(fuckID) {
+                $("#iosDialog1").fadeIn(200);
+                $("#shitID").val(fuckID);
+            }
+
+            //输入注入金额
+            function sure()
+            {
+                //$("#aa").attr({ "disabled": "disabled" });
+                var BonusItemID = $("#shitID").val();
+                var AddMoney = $("#AddMoney").val();
+                var InDate = $("#InDate").val();
+               
+                if (AddMoney == "" || AddMoney == null) {
+                    //$.toptip('请输入注入奖金', 'warning');
+                    alert("请输入注入奖金！");
+                    return false;
+                } else
+                {
+                    //alert("elses");
+                    
+                    $.post("/BonusItemRule/AddSureGD", { BonusItemID: BonusItemID, AddMoney: AddMoney,InDate:InDate }, function (data) {
+                        if (data == "ok") {
+                            $.toast("注入成功");
+                            window.location.reload()
+                            //$("#aa").attr({ "disabled": false });
+                        } else {
+                            $.toast("注入失败", "cancel");
+                            //$("#aa").attr({ "disabled": false });
+                            window.location.reload()
+                        }
+                    });
+                }
+            }
+
+            $(function () {
+                $('#dialogs').on('click', '.weui-dialog__btn', function () {
+                    $(this).parents('.js_dialog').fadeOut(200);
+                    //alert("111");
+                    //location.reload();
+                });
+            });
+        </script>
+    <script type="text/javascript">
+        //模糊查询
+        $(function () {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().trim().replace(/\s|\xA0/g, "");
+            var empName="";
+            $("#qq").bigAutocomplete({
+                url: "/BonusItem/GetInfo?keyword=" + kw + "&CompanyId=" + CompanyId,
+                callback: function (data) {
+                    if (data != "" && data != null) {
+                        empName = data.title;
+                        //alert(empName);
+                        if (empName.length > 0) {
+                            $("#emp").load("/BonusItem/SearchEmp?Name=" + empName + "&CompanyID=" + CompanyId)
+                        }
+                    }
+                }
+            });
+        })
+
+        //搜索方法
+        function search() {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val().trim().replace(/\s|\xA0/g, "");
+            if (kw == "" || kw == null) {
+                location.reload();
+            }
+            else {
+                $("#emp").load("/BonusItem/SearchEmp?Name=" + kw + "&CompanyID=" + CompanyId)
+            }
+        }
+
+        //回车键触发的搜索
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                search();
+            }
+        }
+    </script>
+</body>
+</html>

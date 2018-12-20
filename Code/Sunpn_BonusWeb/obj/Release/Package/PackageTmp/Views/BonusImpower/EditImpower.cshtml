@@ -1,0 +1,117 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditImpower</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+</head>
+<body>
+    @if (ViewBag.et != null)
+    {
+        DataTable et = ViewBag.et;
+        <div class="weui-cells__title">添加奖金授权</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">奖金项</label></div>
+                <input class="weui-input" id="edit_BIID" name="" readonly="readonly" value="@et.Rows[0]["BonusItemID"]" hidden="hidden"/>
+                <input class="weui-input" id="edit_BIName" name=""  readonly="readonly" value="@et.Rows[0]["BIName"]"/>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">被授权人</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="edit_Emp" name="" readonly="readonly" value="@et.Rows[0]["Name"]"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">授权金额</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="edit_Impowermoney" name="" value="@et.Rows[0]["AddMoney"]"/>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">授权模式</label></div>
+                <div class="weui-cell__bd">
+                    <input type="text" name="name" id="model" value="@et.Rows[0]["Model"]" hidden="hidden"/>
+                    <select class="weui-select" name="select2" id="edit_ImpowerType">
+                        <option>请选择授权模式</option>
+                        <option value="0">长期有效</option>
+                        <option value="1">本月有效</option>
+                    </select>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="edit_remark" name="" value="@et.Rows[0]["Remark"]"/>
+                </div>
+            </div>
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" id="add" onclick="editSure()">确认</a>
+            <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+        </div>
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+        $(function () {
+            $("#edit_ImpowerType").val($("#model").val());
+        })
+
+        function editSure() {
+            var BonusItemID = $("#edit_BIID").val();
+            var Impowermoney = $("#edit_Impowermoney").val();
+            var Model = $("#edit_ImpowerType").val();
+            var Remark = $("#edit_remark").val();
+            $.confirm("确认编辑该授权？", function () {
+                $.post("/BonusImpower/EditImpowerSure", { BonusItemID:BonusItemID,Impowermoney: Impowermoney, Model: Model, Remark: Remark }, function (data) {
+                    if (data = "ok") {
+                        $.toast("编辑成功");
+                        location.reload();
+                    }
+                    else {
+                        $.toast("编辑失败", "cancel");
+                    }
+                })
+            }, function () {
+                location.reload();
+            });
+        }
+
+
+        function delete_Sure(EmpID) {
+            $.confirm("确认删除该员工？", function () {
+                $.post("/UserManager/Delete", { EmpID: EmpID }, function (data) {
+                    if (data = "ok") {
+                        $.toast("删除成功");
+                        location.reload();
+                    }
+                    else {
+                        $.toast("删除失败", "cancel");
+                    }
+                })
+            }, function () {
+                location.reload();
+            });
+
+        }
+    </script>
+</body>
+</html>

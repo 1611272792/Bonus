@@ -1,0 +1,259 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/jquery-weui.js"></script>
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <script src="~/Scripts/datePicker.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <title>授权详情</title>
+    @*<style type="text/css">
+        #right_div {
+            float: left;
+        }
+
+        #right_div1 {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #right_divx {
+            width: 100%;
+        }
+
+        #right_div2 {
+            margin-top: -20px;
+            width: 100%;
+            height: 400px;
+            overflow: auto;
+        }
+
+        #right_table1 {
+            width: 100%;
+        }
+
+            #right_table1 th {
+                background: #E9F8FF;
+                text-align: center;
+                width: 25%;
+            }
+
+        #right_table2 td {
+            width: 25%;
+            text-align: center;
+        }
+    </style>*@
+    <style type="text/css">
+        body {
+            font-size: 14px !important;
+        }
+
+        #right_table1 th {
+    font-size:13px;
+}
+    </style>
+</head>
+<body>
+    @if (ViewBag.Detail == null || ViewBag.dt == null || ViewBag.cq == null)
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+    else
+    {
+        DataTable dt = ViewBag.dt;
+        DataTable cq = ViewBag.cq;
+        <div style="text-align:center;margin-top:2%;">
+            <label>本月累计：@dt.Rows[0]["AllMoney"] &nbsp;&nbsp;&nbsp;</label>
+            <label>本月结余：@dt.Rows[0]["RemainMoney"]</label>
+        </div>
+        @*<label>长期金额：@cq.Rows[0]["Allmoney"]</label>*@
+        @*<label>授权人：@dt.Rows[0]["Name"]</label>*@
+
+        <div class="weui-cell">
+            <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+                <input class="weui-input" value="" id="startTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+            </div> <span style="color:gray">&nbsp;到&nbsp;</span>
+            <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+                <input class="weui-input" value="" id="endTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+            </div>
+            <input type="button" name="name" onclick="selectData()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索 (2).png'); background-repeat: no-repeat;background-size:contain;background-position: center;width:40px; height:24px;" />
+            @*<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="selectData()">查询</a>*@
+        </div>
+        <div id="right_div">
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table table-bordered" style="margin-bottom:0px;">
+                        <tr>
+                            @*<th>奖金项</th>*@                            
+                            <th>授权金额(￥)</th>
+                            <th>有效期限</th>
+                            <th>授权日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div  id="doubleDiv">
+                <table id="right_table2" class="table table-bordered">
+                    @if (ViewBag.detail != null)
+                    {
+                        DataTable detail = ViewBag.detail;
+                        DateTime dtn = DateTime.Now; //当前时间
+                        DateTime startMonth = dtn.AddDays(1 - dtn.Day).Date;
+                        for (int i = 0; i < detail.Rows.Count; i++)
+                        {
+                            <tr>
+                                @*<td>@detail.Rows[i]["BIName"]</td>*@
+                                <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">@detail.Rows[i]["AddMoney"]</td>
+                                <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">
+                                    @if (detail.Rows[i]["Model"].ToString() == "0")
+                                    {
+                                        <span>长期有效</span>
+                                    }
+                                    else
+                                    {
+                                        <span>当月有效</span>
+                                    }
+                                </td>
+                                <td onclick="javascript: document.getElementById('@detail.Rows[i]["ImpowerID"]').click();">@detail.Rows[i]["ImpowerDate"]</td>  
+                                <td id="bonusID" hidden="hidden"><a href="/BonusImpower/Reason?ImpowerID=@detail.Rows[i]["ImpowerID"]" id="@detail.Rows[i]["ImpowerID"]"></a></td>
+                                <td>
+                                    @if ((DateTime)detail.Rows[i]["ImpowerDate"] >= startMonth)
+                                    {
+                                        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="back('@detail.Rows[i]["ImpowerID"]')">收回</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" disabled="disabled" onkeypress="false" style="background-color:#808080">已失效</a>
+                                    }
+                                </td>    
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                </table>
+            </div>
+        </div>
+    }
+    <!--脚本-->
+
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script>
+	var starttime = new datePicker();
+	starttime.init({
+	'trigger': '#startTime', /*按钮选择器，用于触发弹出插件*/
+	'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+	'minDate':'1900-1-1',/*最小日期*/
+	'maxDate': (new Date().getFullYear()) + '-' + 12 + '-' + 31,/*最大日期*/
+	'onSubmit':function(){/*确认时触发事件*/
+	    var theSelectData = starttime.value;
+	},
+	'onClose':function(){/*取消时触发事件*/
+	}
+});
+var endtime = new datePicker();
+endtime.init({
+    'trigger': '#endTime', /*按钮选择器，用于触发弹出插件*/
+    'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+    'minDate': '1900-1-1',/*最小日期*/
+    'maxDate': '2100-12-31',/*最大日期*/
+    'onSubmit': function () {/*确认时触发事件*/
+        var theSelectData = endtime.value;
+    },
+    'onClose': function () {/*取消时触发事件*/
+    }
+});
+    </script>
+    <script type="text/javascript">
+
+        //$(function () {
+        //    $("tr td").not("tr td:last-child").bind('click', function () {
+        //        var ImpowerID=$(".impower").val();
+        //        location.href="/BonusImpower/Reason?ImpowerID="+ImpowerID;
+        //    })
+        //})
+
+
+        //    //进入详情页面
+        //function inDetail() {
+        //    var depBounsID = $("#bonusID").html();
+        //    window.location.href = "/DepartBouns/Detail2?depBounsID=" + depBounsID;
+        //}
+
+        //固定和滚动
+        var right_div2 = document.getElementById("doubleDiv");
+        right_div2.onscroll = function () {
+            var right_div2_top = this.scrollTop;
+            var right_div2_left = this.scrollLeft;
+            document.getElementById("right_div1").scrollLeft = right_div2_left;
+        }
+
+            function GetQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+
+            //判断开始日期是否大于结束日期
+            function selectData() {
+                var startTime = $("#startTime").val();
+                var endTime = $("#endTime").val();
+                var EmpID = GetQueryString("EmpID");
+                var BonusItemID = GetQueryString("BonusItemID");
+
+                if (startTime > endTime) {
+                    $.toptip('开始日期不能大于结束日期', 'warning');
+                    return false;
+                }
+                else if (startTime == "" || endTime == "" || startTime == null || endTime == null) {
+
+                } else {
+                    $("#doubleDiv").load("/BonusImpower/SelectImpowerData", { StartTime: startTime, EndTime: endTime, EmpID: EmpID, BonusItemID: BonusItemID });
+                }
+            }
+
+            function back(ImpowerID) {
+                $.confirm("确认收回该授权？", function () {
+                    $.post("/BonusImpower/BackSure", {ImpowerID:ImpowerID}, function (data) {
+                        if (data == "ok") {
+                            $.toast("收回成功");
+                            location.reload();
+                        }
+                        else if (data == "no") {
+                            $.toast("收回失败", "cancel");
+                        } else {
+                            $.toast("收回失败", "cancel");
+                        }
+                    });
+                }, function () {
+                    location.reload();
+                });
+            }
+    </script>
+</body>
+</html>

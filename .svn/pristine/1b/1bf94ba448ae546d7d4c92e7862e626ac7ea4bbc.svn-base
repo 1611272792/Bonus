@@ -1,0 +1,589 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>意见与反馈</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+
+    <link href="~/Content/weixin/css/ydui.css" rel="stylesheet" /> 
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>
+    <script src="~/Content/js/jjweixinIos.js"></script>
+    <style>
+        .m-celltitle{
+            color:black;
+        }
+        .btn-primary{
+            background-color:#319ee3;
+        }
+        .btn-primary:active { background-color: #319ee3; }
+        .cell-textarea { width: 100%; border: none; display: block; /* for old android */
+height: 2.5rem; padding: .2rem 0; }
+        .weui-textarea{
+            font-size:0.3rem;
+        }
+    </style>
+
+
+</head>
+<body>
+  <div style="margin:2%">
+      <input type="hidden" value="@ViewBag.userId" id="comId"/>
+      <input type="hidden" value="@ViewBag.compid" id="compid" />
+      
+      <div class="m-celltitle">
+          <span style="color:red">*</span>
+          问题描述与建议
+      </div>
+      <div class="m-cell">
+          <div class="cell-item">
+              
+                  @*<textarea class="cell-textarea" id="ResonContent" placeholder="请详细描述问题发送的场景和现象，或添加截图，这将有助于我们快速解决您的问题">
+
+                  </textarea>*@
+              <textarea class="weui-textarea" name="content" placeholder="请详细描述问题发送的场景和现象，或添加截图，这将有助于我们快速解决您的问题" rows="5" maxlength="200" id="ResonContent"></textarea>
+              <div class="weui-textarea-counter"><span class="textareaInput">0</span>/<span class="textareaTotal">200</span></div>
+              
+              
+          </div>
+      </div>
+      
+      @*width:100%;height:80px;*@
+      
+      <div class="m-celltitle" style="border:0px;"> 
+          
+          添加截图（最多3张）
+      </div>
+      <div style="height:80px;margin-bottom:10px;background-color:white">
+              <ul id="contentImg" class="Con1" style="list-style:none;"></ul>
+              <span class="weui-uploader__input-box" onclick="xztp()" id="btnimg">
+
+              </span>
+              @*<button type="button" id="btnimg" class="btn btn-info " onclick="xztp()"></button>*@
+
+          @*</p>*@
+      </div>
+          
+          
+     
+
+
+      <div class="m-celltitle">
+          <span style="color:red">*</span>
+          联系方式
+      </div>
+      <div class="m-cell">
+          <div class="cell-item">
+              <div class="cell-right">
+                  <input type="text" id="comType" class="cell-input" placeholder="请填写联系电话和邮箱" />
+              </div>
+          </div>
+      </div>
+      <button type="button" class="btn-block btn-primary" id="tijiao">提交反馈</button>
+
+  </div>
+    
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/weixin/js/ydui.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    $(function ()
+    {
+        var num = $("#ResonContent").text().length;
+        $('.textareaInput').text(num);
+        var max = 200;
+        $('.weui-textarea').on('input', function ()
+        {
+            var text = $(this).val();
+            var len = text.length;
+            $('.textareaInput').text(len);
+            if (len > max)
+            {
+                $(this).closest('.weui_cell').addClass('weui_cell_warn');
+            }
+            else
+            {
+                $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+            }
+        });
+    })
+    $("#ResonContent").val("");
+    var images = {
+        localId: [],
+        serverId: []
+    };
+    wx.config({
+        beta: true,
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '@ViewBag.appid', // 必填，企业号的唯一标识，此处填写企业号corpid
+        timestamp: '@ViewBag.timestamp', // 必填，生成签名的时间戳
+        nonceStr: '@ViewBag.noncestr', // 必填，生成签名的随机串
+        signature: '@ViewBag.signature',// 必填，签名，见附录1
+        jsApiList: ['checkJsApi', 'scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.error(function (res)
+    {
+        alert("出错了:" + res.errMsg);
+    });
+    wx.ready(function ()
+    {
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        wx.checkJsApi({
+            //调用微信扫一扫功能
+            jsApiList: ['scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'],
+            success: function (res)
+            {
+
+            }
+        });
+    });
+    var dialog ;
+    !function (win, $)
+    {
+        dialog = win.YDUI.dialog;
+        $("#tijiao").click(function ()
+        {
+            var a = $(".contentDel");
+            //alert("imgs" + images.localId);
+            //alert("a.length:" + a.length);
+            //文字反馈
+            var ResonContent = $("#ResonContent").val().trim();
+            //图片反馈
+            var ResonImg = "";
+            //联系方式
+            var comType = $("#comType").val().trim();
+            //进来人
+            var comId = $("#comId").val().trim();
+            
+            //验证
+            if (ResonContent == "")
+            {
+                dialog.toast('请输入文字信息，以便我们更好的帮您解答！', 'error', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+            if (comType == "")
+            {
+                dialog.toast('请输入联系方式，以便我们联系您！', 'error', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+            else
+            {
+                //验证联系方式
+                if (comType.length == 11 && comType.indexOf('@@') < 0)
+                {
+                    //手机号
+                    if (!checkMobile(comType))
+                    {
+                        dialog.toast('请输入正确的联系方式，以便我们联系您', 'error', 3000, function ()
+                        {
+
+                        });
+                        return false;
+                    }
+                }
+                else
+                {
+                    //邮箱
+                    if (comType.indexOf('@@') < 0)
+                    {
+                        dialog.toast('请输入正确的联系方式，以便我们联系您', 'error', 3000, function ()
+                        {
+
+                        });
+                        return false;
+                    }
+                   
+                }
+            }
+            if (comId == "")
+            {
+                dialog.toast('网络错误，请稍后重试', 'error', 3000, function ()
+                {
+
+                });
+                return false;
+            }
+
+            if (a.length > 0 && a.length < 4)
+            {
+                //获取上面图片的地址
+                var arr = new Array();
+                $("img").each(function ()
+                {
+                    if ($(this).attr("class") == "img2")
+                    {
+                        //alert("src:" + $(this).attr("src"));
+                        arr.push($(this).attr("dataSrc"));
+                        //alert($(this).attr("dataSrc"));
+                    }
+                });
+                images.localId = arr;
+                //alert("imgs" + images.localId);
+
+                $('.imgDel').hide();
+               
+                uploadImg(images.localId, a.length, ResonContent, ResonImg, comType, comId);
+            }
+            
+            
+            else
+            {
+                var compId = $("#compid").val();
+                $.ajax({
+                    type: "POST",
+                    url: '/Wo/CommSugg',
+                    data: { ResonContent: ResonContent, ResonImg: img, comType: comType, comId: comId, compId: compId },
+                    success: function (data)
+                    {
+                        dialog.loading.close();//移除loading
+                        if (data == "ok")
+                                {
+
+                                    dialog.toast('成功', 'success', 2000);
+                                    document.location.reload();
+                                }
+                                else
+                                {
+                                    dialog.toast(data, 'error', 3000, function ()
+                                    {
+
+                                    });
+                                    $('.imgDel').show();
+                                    return false;
+                                }
+                    },
+                    beforeSend: function ()
+                    {
+                       
+                        dialog.loading.open('提交中');
+                        
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                    {
+                        dialog.toast(错误, 'error', 3000, function ()
+                        {
+
+                        });
+                    }
+
+                });
+                //$.post("/Wo/CommSugg", { ResonContent: ResonContent, ResonImg: ResonImg, comType: comType, comId: comId, compId: compId }, function (data)
+                //{
+                //    if (data == "ok")
+                //    {
+
+                //        dialog.toast('成功', 'success', 2000);
+                //        document.location.reload();
+                //    }
+                //    else
+                //    {
+                //        dialog.toast(data, 'error', 3000, function ()
+                //        {
+
+                //        });
+                //        $('.imgDel').show();
+                //        return false;
+                //    }
+                //})
+
+            }
+        })
+    }(window, jQuery);
+
+    //手机号
+    function checkMobile(str)
+    {
+        var
+       re = /^1\d{10}$/
+        if (re.test(str))
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+    
+    //选择图片
+    function xztp()
+    {
+        wx.chooseImage({
+            count: 3, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res)
+            {
+                alert("成功选择图片");
+                images.localId = res.localIds;
+                // alert("images.localId:" + images.localId);
+                for (var i = 0; i < images.localId.length; i++)
+                {
+                    //alert(images.localId[i]);
+                    //$("#content").append("<li class='contentDel' style = 'position:relative;width:33%;float:left;padding-right:10px;'><img width='100%'  height='90' dataSrc='" + images.localId[i] + "' src='../Content/Images/del2.png' class='img2' /><img class='imgDel' src='../Content/Images/del2.png' style='position:absolute;top:0px;right:0px;border:1px soild white;' /></li>");
+                    $("#contentImg").append("<li class='contentDel' style = 'position:relative;width:33%;float:left;padding-right:10px;'><img width='100%' height='80'  background-size:'100% 50%' dataSrc='" + images.localId[i] + "' src=" + images.localId[i] + " class='img2' /><img class='imgDel' src='../Content/Images/del2.png' style='position:absolute;top:0px;right:0px;border:1px soild white;' /></li>");
+                    //alert($("#content").html());
+                    var a = $(".contentDel");
+                    var btnimg = document.getElementById("btnimg");
+                    if (a.length > 3)
+                    {
+                        alert("最多只能选3张！请删除多余照片");
+                        //btnimg.disabled = true;//超过照片数量选择图片按钮就禁用
+                        btnimg.style.display = "none";
+                    }
+                    else if (a.length == 3)
+                    {
+                        //btnimg.disabled = true;
+                        btnimg.style.display = "none";
+                    }
+                    else
+                    {
+                        //btnimg.disabled = false;
+                        btnimg.style.display = "block";
+                    }
+                }
+            }
+        });
+    }
+    var index_ids = 0;
+    var num = 0;
+    //上传图片
+    var img = "";
+    function uploadImg(localIds2, imgLength, ResonContent, ResonImg, comType, comId)
+    {
+        //alert("imgLength:" + imgLength);
+        wx.uploadImage({
+            localId: localIds2[index_ids],
+            isShowProgressTips: 1,
+            success: function (res)
+            {
+                //alert("res.serverId：" + res.serverId);
+                ////alert("success");
+                var serverId2 = res.serverId;//图片下载后的本地id
+                //alert("serverId:" + serverId2);
+                var compid = $("#compid").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Wo/UploadImge',
+                    data: { serverId: serverId2, compid: compid },
+                    success: function (data)
+                    {
+
+                        img = img + data + ",";
+                        //alert("img:" + img);
+                        //$("#UpLoadImg").val(img);
+
+                        //alert(img);
+                        //alert("ccc");
+                        num++;
+
+                        //alert("num:" + num);
+                        //alert("imgLength:" + imgLength);
+                        if (num == imgLength)
+                        {
+                            //dialog.loading.close();//移除loading
+                            //alert("发放奖金2：");
+                            var compId = $("#compid").val();
+                            $.ajax({
+                                type: "POST",
+                                url: '/Wo/CommSugg',
+                                data: { ResonContent: ResonContent, ResonImg: img, comType: comType, comId: comId, compId: compId },
+                                success: function (data)
+                                {
+
+                                    if (data == "ok")
+                                    {
+                                        dialog.loading.close();//移除loading
+                                        dialog.toast('成功', 'success', 2000);
+                                        document.location.reload();
+                                    }
+                                    else
+                                    {
+                                        dialog.toast(data, 'error', 3000, function ()
+                                        {
+
+                                        });
+                                        $('.imgDel').hide();
+                                        return false;
+                                    }
+                                },
+                                beforeSend: function ()
+                                {
+                                    dialog.loading.open('提交中');
+                                },
+                                error: function (XMLHttpRequest, textStatus, errorThrown)
+                                {
+                                    dialog.toast('错误', error, 3000, function ()
+                                    {
+                                        document.getElementById("tijiao").disabled = false;
+                                        document.getElementById("tijiao").innerHTML = "提交反馈";
+                                    });
+                                }
+
+                            });
+                            //$.post("/Wo/CommSugg", { ResonContent: ResonContent, ResonImg: img, comType: comType, comId: comId, compId: compId }, function (data)
+                            //{
+                            //    //alert(data);
+
+                            //})
+
+
+                        }
+                    },
+                    beforeSend: function ()
+                {
+                        //dialog.loading.open('提交中...'+num);
+                        
+                        document.getElementById("tijiao").disabled = true;
+                        document.getElementById("tijiao").innerHTML = "提交中,请不要重复点击";
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown)
+                {
+                    dialog.toast('错误', error, 3000, function ()
+                    {
+                        document.getElementById("tijiao").disabled = false;
+                        document.getElementById("tijiao").innerHTML = "提交反馈";
+                    });
+                }
+                })
+                //$.post("/Wo/UploadImge", { serverId: serverId2, compid: compid }, function (data)
+                //{
+                //    //alert("data:"+data);//得到img图片
+                //    img = img + data + ",";
+                //    //alert("img:" + img);
+                //    //$("#UpLoadImg").val(img);
+
+                //    //alert(img);
+                //    //alert("ccc");
+                //    num++;
+
+                //    //alert("num:" + num);
+                //    //alert("imgLength:" + imgLength);
+                //    if (num == imgLength)
+                //    {
+                //        //alert("发放奖金2：");
+                //        var compId = $("#compid").val();
+                //        $.ajax({
+                //            type: "POST",
+                //            url: '/Wo/CommSugg',
+                //            data: { ResonContent: ResonContent, ResonImg: img, comType: comType, comId: comId, compId: compId },
+                //            success: function (data)
+                //            {
+                                
+                //                if (data == "ok")
+                //                {
+                //                    dialog.loading.close();//移除loading
+                //                    dialog.toast('成功', 'success', 2000);
+                //                    document.location.reload();
+                //                }
+                //                else
+                //                {
+                //                    dialog.toast(data, 'error', 3000, function ()
+                //                    {
+
+                //                    });
+                //                    $('.imgDel').hide();
+                //                    return false;
+                //                }
+                //            },
+                //            beforeSend: function ()
+                //            {
+                //                dialog.loading.open('提交中');
+                //            },
+                //            error: function (XMLHttpRequest, textStatus, errorThrown)
+                //            {
+                //                dialog.toast(错误, 'error', 3000, function ()
+                //                {
+                                    
+                //                });
+                //            }
+
+                //        });
+                //        //$.post("/Wo/CommSugg", { ResonContent: ResonContent, ResonImg: img, comType: comType, comId: comId, compId: compId }, function (data)
+                //        //{
+                //        //    //alert(data);
+                            
+                //        //})
+                        
+                        
+                //    }
+                //});
+                index_ids++;
+                //alert(index_ids);
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg(localIds2, imgLength, ResonContent, ResonImg, comType, comId);
+
+                }
+
+            },
+            fail: function (error)
+            {
+                document.getElementById("btnBonus").disabled = false;
+                alert("上传图片失败");
+                $('.imgDel').show();
+                index_ids++;
+                if (index_ids < imgLength)
+                {
+
+                    uploadImg(localIds2, imgLength, ResonContent, ResonImg, comType, comId);
+
+                }
+
+            }
+        })
+    }
+
+    //删除图片
+    $("#contentImg").on("click", ".imgDel", function ()
+    {
+        
+        var del = $(this);
+       
+        var s = $(this).parent().remove();
+
+        var arr = new Array();
+        $("img").each(function ()
+        {
+            if ($(this).attr("class") == "img2")
+            {
+                arr.push($(this).attr("src"));
+            }
+        });
+        images.localId = arr;
+        //获取图片的localid
+
+        //alert("图片的src:" + images.localId);
+        //images.localId[id]
+        var a = $(".contentDel");
+        //alert("a:" + a.length);
+        var btnimg = document.getElementById("btnimg");
+        if (a.length >= 3)
+        {
+            alert("最多只能选3张！");
+            btnimg.style.display = "none";
+        }
+        else
+        {
+            btnimg.style.display = "block";
+        }
+    })
+</script>
+</body>
+</html>

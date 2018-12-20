@@ -1,0 +1,950 @@
+2018/8/14 10:11:39 我看看22
+2018/8/14 10:11:39 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:11:39 woIndex错误:用户 'sa' 登录失败。
+2018/8/14 10:13:20 我看看22
+2018/8/14 10:13:20 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:14:18 我看看22
+2018/8/14 10:14:18 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:14:19 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212861_4_6de477a1428ac44829a6e1ea86ba4cd8], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:14:19 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212861_4_6de477a1428ac44829a6e1ea86ba4cd8], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:14:19 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:14:19 companyIdwx512ad5972960e003
+2018/8/14 10:14:19 Request.RawUrl.ToString():/
+2018/8/14 10:14:19 GetJSAPI_Parameters
+2018/8/14 10:14:19 i:1
+2018/8/14 10:14:19 根据日期获取第三方应用凭证
+2018/8/14 10:14:19 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:14:19 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:14:19 获取第三方应用凭证失败
+2018/8/14 10:14:19 第三方授权失败
+2018/8/14 10:14:19 页面：
+2018/8/14 10:14:19 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:14:19 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:14:20 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212862_2_54c74dd897460cfb8e2831f7a076711a], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:20 GetJSAPI_Ticket2
+2018/8/14 10:14:20 abc
+2018/8/14 10:14:20 bc
+2018/8/14 10:14:20 c
+2018/8/14 10:14:20 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212862_2_54c74dd897460cfb8e2831f7a076711a], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:20 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:14:20 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:14:20 t.Item2 
+2018/8/14 10:14:20 rawstring:jsapi_ticket=&noncestr=f7cbb9cdd3514b789fab4fe1ffa2d221&timestamp=1534212860&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:14:20 signature:d3692717ab50702259837c097885c644073773ce
+2018/8/14 10:14:23 我看看22
+2018/8/14 10:14:23 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:14:23 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212865_7_9aa3bffb934bc73a6247f62a22839340], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:14:23 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212865_7_9aa3bffb934bc73a6247f62a22839340], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:14:23 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:14:23 companyIdwx512ad5972960e003
+2018/8/14 10:14:23 Request.RawUrl.ToString():/
+2018/8/14 10:14:23 GetJSAPI_Parameters
+2018/8/14 10:14:23 i:1
+2018/8/14 10:14:23 根据日期获取第三方应用凭证
+2018/8/14 10:14:23 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:14:23 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:14:23 获取第三方应用凭证失败
+2018/8/14 10:14:23 第三方授权失败
+2018/8/14 10:14:23 页面：
+2018/8/14 10:14:23 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:14:23 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:14:23 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212865_5_ab5d06cdb4b714885a51be9fbbe8974d], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:23 GetJSAPI_Ticket2
+2018/8/14 10:14:23 abc
+2018/8/14 10:14:23 bc
+2018/8/14 10:14:23 c
+2018/8/14 10:14:23 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212865_5_ab5d06cdb4b714885a51be9fbbe8974d], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:23 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:14:23 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:14:23 t.Item2 
+2018/8/14 10:14:23 rawstring:jsapi_ticket=&noncestr=bdf7ce8b40bd40b7974e7f4c83eb2ea5&timestamp=1534212863&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:14:23 signature:78112a4fa99f958efb1e760d14aedbaf488ecb35
+2018/8/14 10:14:35 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:14:35 companyIdwx512ad5972960e003
+2018/8/14 10:14:35 Request.RawUrl.ToString():/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:14:35 GetJSAPI_Parameters
+2018/8/14 10:14:35 i:1
+2018/8/14 10:14:35 根据日期获取第三方应用凭证
+2018/8/14 10:14:35 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:14:35 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:14:35 获取第三方应用凭证失败
+2018/8/14 10:14:35 第三方授权失败
+2018/8/14 10:14:35 页面：
+2018/8/14 10:14:35 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:14:35 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:14:36 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212878_5_7d8207d4fb18b9d16c7c7b53ab08a75e], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:36 GetJSAPI_Ticket2
+2018/8/14 10:14:36 abc
+2018/8/14 10:14:36 bc
+2018/8/14 10:14:36 c
+2018/8/14 10:14:36 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212878_5_7d8207d4fb18b9d16c7c7b53ab08a75e], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:14:36 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:14:36 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:14:36 t.Item2 
+2018/8/14 10:14:36 rawstring:jsapi_ticket=&noncestr=e2c993bf1772422d868b7cb18ef02104&timestamp=1534212876&url=http://ganwuhua009.iok.la:33735/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:14:36 signature:cb8568729bbf1a709b85ced5fbd39838f3e98c5c
+2018/8/14 10:16:33 我看看22
+2018/8/14 10:16:33 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:16:33 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212995_1_6226b830e7bf160d34cee5c451a098d0], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:16:33 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212995_1_6226b830e7bf160d34cee5c451a098d0], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:16:33 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:16:33 companyIdwx512ad5972960e003
+2018/8/14 10:16:33 Request.RawUrl.ToString():/
+2018/8/14 10:16:33 GetJSAPI_Parameters
+2018/8/14 10:16:33 i:1
+2018/8/14 10:16:33 根据日期获取第三方应用凭证
+2018/8/14 10:16:33 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:16:34 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:16:34 获取第三方应用凭证失败
+2018/8/14 10:16:34 第三方授权失败
+2018/8/14 10:16:34 页面：
+2018/8/14 10:16:34 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:16:34 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:16:34 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212996_1_964bbaf2f934d236ba8fe01cd31f91c3], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:34 GetJSAPI_Ticket2
+2018/8/14 10:16:34 abc
+2018/8/14 10:16:34 bc
+2018/8/14 10:16:34 c
+2018/8/14 10:16:34 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212996_1_964bbaf2f934d236ba8fe01cd31f91c3], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:34 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:16:34 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:16:34 t.Item2 
+2018/8/14 10:16:34 rawstring:jsapi_ticket=&noncestr=aac9611a6e07453781737e309f07d07d&timestamp=1534212994&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:16:34 signature:45f984d304faeb19bff48f8fa419cb80da063506
+2018/8/14 10:16:36 我看看22
+2018/8/14 10:16:36 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:16:36 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212998_1_831b47ceffbdd7b4ac4d1f8a42293907], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:16:36 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212998_1_831b47ceffbdd7b4ac4d1f8a42293907], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:16:36 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:16:36 companyIdwx512ad5972960e003
+2018/8/14 10:16:36 Request.RawUrl.ToString():/
+2018/8/14 10:16:36 GetJSAPI_Parameters
+2018/8/14 10:16:36 i:1
+2018/8/14 10:16:36 根据日期获取第三方应用凭证
+2018/8/14 10:16:36 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:16:36 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:16:36 获取第三方应用凭证失败
+2018/8/14 10:16:36 第三方授权失败
+2018/8/14 10:16:36 页面：
+2018/8/14 10:16:36 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:16:36 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:16:36 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212998_6_35bcb19209771e696683eecd965bcbbe], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:36 GetJSAPI_Ticket2
+2018/8/14 10:16:36 abc
+2018/8/14 10:16:36 bc
+2018/8/14 10:16:36 c
+2018/8/14 10:16:36 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534212998_6_35bcb19209771e696683eecd965bcbbe], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:36 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:16:36 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:16:36 t.Item2 
+2018/8/14 10:16:36 rawstring:jsapi_ticket=&noncestr=acbbaa05da624f1e9f640cce2224c38c&timestamp=1534212997&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:16:36 signature:39279fc1d85eba3b6d4d98588490bc8227be458b
+2018/8/14 10:16:42 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:16:42 companyIdwx512ad5972960e003
+2018/8/14 10:16:42 Request.RawUrl.ToString():/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:16:42 GetJSAPI_Parameters
+2018/8/14 10:16:42 i:1
+2018/8/14 10:16:42 根据日期获取第三方应用凭证
+2018/8/14 10:16:42 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:16:42 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:16:42 获取第三方应用凭证失败
+2018/8/14 10:16:42 第三方授权失败
+2018/8/14 10:16:42 页面：
+2018/8/14 10:16:42 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:16:42 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:16:42 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213004_7_58570d3b187a8be8b688827947551572], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:42 GetJSAPI_Ticket2
+2018/8/14 10:16:42 abc
+2018/8/14 10:16:42 bc
+2018/8/14 10:16:42 c
+2018/8/14 10:16:42 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213004_7_58570d3b187a8be8b688827947551572], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:16:42 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:16:42 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:16:42 t.Item2 
+2018/8/14 10:16:42 rawstring:jsapi_ticket=&noncestr=b5e20ca8beff4bbfa4fa443fe0a22dee&timestamp=1534213003&url=http://ganwuhua009.iok.la:33735/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:16:42 signature:4985c8cd4a8c201acdcf4f42e5626452d1cb7c42
+2018/8/14 10:17:18 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:17:18 companyIdwx512ad5972960e003
+2018/8/14 10:17:18 Request.RawUrl.ToString():/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:17:18 GetJSAPI_Parameters
+2018/8/14 10:17:18 i:1
+2018/8/14 10:17:18 根据日期获取第三方应用凭证
+2018/8/14 10:17:18 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:17:18 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:17:18 获取第三方应用凭证失败
+2018/8/14 10:17:18 第三方授权失败
+2018/8/14 10:17:18 页面：
+2018/8/14 10:17:18 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:17:18 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:17:18 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213040_7_0234502280336579cee6b67dfcf40882], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:17:18 GetJSAPI_Ticket2
+2018/8/14 10:17:18 abc
+2018/8/14 10:17:18 bc
+2018/8/14 10:17:18 c
+2018/8/14 10:17:18 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213040_7_0234502280336579cee6b67dfcf40882], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:17:18 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:17:18 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:17:18 t.Item2 
+2018/8/14 10:17:18 rawstring:jsapi_ticket=&noncestr=c9bae4321eac4d60a29a653aabf0b72c&timestamp=1534213038&url=http://ganwuhua009.iok.la:33735/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:17:18 signature:5508e2ee9a81f82820dc83b03d3773635375f34b
+2018/8/14 10:19:38 我看看22
+2018/8/14 10:19:38 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:19:39 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213181_1_c342f689d8e40f9263b524d6dd6b6857], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:19:39 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213181_1_c342f689d8e40f9263b524d6dd6b6857], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:19:39 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:19:39 companyIdwx512ad5972960e003
+2018/8/14 10:19:39 Request.RawUrl.ToString():/
+2018/8/14 10:19:39 GetJSAPI_Parameters
+2018/8/14 10:19:39 i:1
+2018/8/14 10:19:39 根据日期获取第三方应用凭证
+2018/8/14 10:19:39 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:19:39 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:19:39 获取第三方应用凭证失败
+2018/8/14 10:19:39 第三方授权失败
+2018/8/14 10:19:39 页面：
+2018/8/14 10:19:39 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:19:39 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:19:39 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213181_3_f8e650988a35ba81c49dc7a8ce87eec1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:19:39 GetJSAPI_Ticket2
+2018/8/14 10:19:39 abc
+2018/8/14 10:19:39 bc
+2018/8/14 10:19:39 c
+2018/8/14 10:19:39 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213181_3_f8e650988a35ba81c49dc7a8ce87eec1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:19:39 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:19:39 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:19:39 t.Item2 
+2018/8/14 10:19:39 rawstring:jsapi_ticket=&noncestr=29bb2152e23b46e4bea6bf9445ffe6b8&timestamp=1534213180&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:19:39 signature:facbc8ca8b32c7cffb812d793da43c3932e89fe5
+2018/8/14 10:19:41 我看看22
+2018/8/14 10:19:41 第三方得到用户信息：GetWechatUserInfo
+2018/8/14 10:19:41 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213183_2_78ebc4a67b81c23a715477c13d8f49b6], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:19:41 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213183_2_78ebc4a67b81c23a715477c13d8f49b6], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/14 10:19:41 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:19:41 companyIdwx512ad5972960e003
+2018/8/14 10:19:41 Request.RawUrl.ToString():/
+2018/8/14 10:19:41 GetJSAPI_Parameters
+2018/8/14 10:19:41 i:1
+2018/8/14 10:19:41 根据日期获取第三方应用凭证
+2018/8/14 10:19:41 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:19:42 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:19:42 获取第三方应用凭证失败
+2018/8/14 10:19:42 第三方授权失败
+2018/8/14 10:19:42 页面：
+2018/8/14 10:19:42 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:19:42 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:19:42 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213184_1_21ab9b97fc9fa4c718962e9dd1b7e1bc], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:19:42 GetJSAPI_Ticket2
+2018/8/14 10:19:42 abc
+2018/8/14 10:19:42 bc
+2018/8/14 10:19:42 c
+2018/8/14 10:19:42 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213184_1_21ab9b97fc9fa4c718962e9dd1b7e1bc], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:19:42 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:19:42 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:19:42 t.Item2 
+2018/8/14 10:19:42 rawstring:jsapi_ticket=&noncestr=6aba4d9dc1c04a33beeb05440c618a5a&timestamp=1534213182&url=http://ganwuhua009.iok.la:33735/
+2018/8/14 10:19:42 signature:5db379f6ebf588ec4a0f64d37398fc4965c45a62
+2018/8/14 10:20:05 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:20:05 companyIdwx512ad5972960e003
+2018/8/14 10:20:05 Request.RawUrl.ToString():/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:20:05 GetJSAPI_Parameters
+2018/8/14 10:20:05 i:1
+2018/8/14 10:20:05 根据日期获取第三方应用凭证
+2018/8/14 10:20:05 获取第三方应用凭证:{ "suite_id": "wx4bfea8a0d4feffd0","suite_secret":"YXZuzhc8_SVZknSNgDWAcWUxsDKkx9uMxAD7yxQzw4c","suite_ticket":"rbu_hyeWbP-go7PtbX5fEjelVvdKRz1BUkBezbz5qNI6hm3T_x5PD4ipatzZOY6p"}
+2018/8/14 10:20:05 获取第三方应用凭证返回：{"errcode":60020,"errmsg":"not allow to access from your ip:client ip 113.90.32.238"}
+2018/8/14 10:20:05 获取第三方应用凭证失败
+2018/8/14 10:20:05 第三方授权失败
+2018/8/14 10:20:05 页面：
+2018/8/14 10:20:05 得到企业AccessToken：https://qyapi.weixin.qq.com/cgi-bin/service/get_corp_token?suite_access_token=
+2018/8/14 10:20:05 canshu:{"auth_corpid": "wx512ad5972960e003","permanent_code": "ikcSCxXzLqEFRuKWu9RZ4WbRjtdlTUE-ClwKBcNX_SY"}
+2018/8/14 10:20:05 accessToken:{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213207_4_805240e72ce192dcb69960e00370cb22], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:20:05 GetJSAPI_Ticket2
+2018/8/14 10:20:05 abc
+2018/8/14 10:20:05 bc
+2018/8/14 10:20:05 c
+2018/8/14 10:20:05 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534213207_4_805240e72ce192dcb69960e00370cb22], more info at https://open.work.weixin.qq.com/devtool/query?e=41022"}
+2018/8/14 10:20:05 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/14 10:20:05 t:Sunpn.WebMes.Helper.Ticket
+2018/8/14 10:20:05 t.Item2 
+2018/8/14 10:20:05 rawstring:jsapi_ticket=&noncestr=c4fc60348f0b40b194ad403261ff1626&timestamp=1534213205&url=http://ganwuhua009.iok.la:33735/CompanyRegist/CompanyManager?userID=bHpj&CompanyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/14 10:20:05 signature:c03bdf49448baaf24d1c554f891fb62524cba6de
+2018/8/15 10:02:12 我看看22
+2018/8/15 10:02:13 第三方得到用户信息：GetWechatUserInfo
+2018/8/15 10:02:13 登陆进来userid:
+2018/8/15 10:03:53 我看看22
+2018/8/15 10:03:54 第三方得到用户信息：GetWechatUserInfo
+2018/8/15 10:03:54 登陆进来userid:
+2018/8/15 10:03:54 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298635_6_7a010346b7f9114b76882ac1c9b9f2b2], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:03:54 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298635_6_7a010346b7f9114b76882ac1c9b9f2b2], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:03:54 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:03:54 companyIdwx512ad5972960e003
+2018/8/15 10:03:54 Request.RawUrl.ToString():/
+2018/8/15 10:03:54 GetJSAPI_Parameters
+2018/8/15 10:03:54 i:-1
+2018/8/15 10:03:54 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:03:54 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:03:54 GetJSAPI_Ticket2
+2018/8/15 10:03:54 abc
+2018/8/15 10:03:54 bc
+2018/8/15 10:03:54 c
+2018/8/15 10:03:54 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:03:54 content{"errcode":0,"errmsg":"ok","ticket":"sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg","expires_in":7200}
+2018/8/15 10:03:55 t:Sunpn.WebMes.Helper.Ticket
+2018/8/15 10:03:55 t.Item2 True:sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg
+2018/8/15 10:03:55 rawstring:jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg&noncestr=b40dbe9674474db8a61354192e4bd03a&timestamp=1534298635&url=http://ganwuhua009.iok.la:33735/
+2018/8/15 10:03:55 signature:be283d410fe264499d98f9883fc63534e8f070b0
+2018/8/15 10:03:57 我看看22
+2018/8/15 10:03:57 第三方得到用户信息：GetWechatUserInfo
+2018/8/15 10:03:57 登陆进来userid:
+2018/8/15 10:03:57 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298638_6_a1fa98e71a90c970b7ae3bca7efd1fa1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:03:57 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298638_6_a1fa98e71a90c970b7ae3bca7efd1fa1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:03:57 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:03:57 companyIdwx512ad5972960e003
+2018/8/15 10:03:57 Request.RawUrl.ToString():/
+2018/8/15 10:03:57 GetJSAPI_Parameters
+2018/8/15 10:03:57 i:-1
+2018/8/15 10:03:57 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:03:57 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:03:57 GetJSAPI_Ticket2
+2018/8/15 10:03:57 abc
+2018/8/15 10:03:57 bc
+2018/8/15 10:03:57 t.Item2 True:sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg
+2018/8/15 10:03:57 rawstring:jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg&noncestr=8c6618a0bd27424ea339b6863bee09de&timestamp=1534298637&url=http://ganwuhua009.iok.la:33735/
+2018/8/15 10:03:57 signature:46b6f58323fe5393e5fd2aebcf0a20975e6c48cd
+2018/8/15 10:06:22 我看看22
+2018/8/15 10:06:22 登陆进来userid:bHpj
+2018/8/15 10:06:22 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298783_1_b158a2f79d470c0137b7677825662415], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:22 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298783_1_b158a2f79d470c0137b7677825662415], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:22 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:22 companyIdwx512ad5972960e003
+2018/8/15 10:06:22 Request.RawUrl.ToString():/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:22 GetJSAPI_Parameters
+2018/8/15 10:06:22 i:-1
+2018/8/15 10:06:22 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:22 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:22 GetJSAPI_Ticket2
+2018/8/15 10:06:22 abc
+2018/8/15 10:06:22 bc
+2018/8/15 10:06:22 t.Item2 True:sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg
+2018/8/15 10:06:22 rawstring:jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg&noncestr=65bbe59fbaa04cf79c008323251299a2&timestamp=1534298783&url=http://ganwuhua009.iok.la:33735/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:22 signature:c5a75ac41d18d59acd2de4577b15278836f85ec2
+2018/8/15 10:06:33 我看看22
+2018/8/15 10:06:33 登陆进来userid:bHpj
+2018/8/15 10:06:33 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298794_2_4cd822fd4f40bd6809b0656b03a5ae24], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:33 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298794_2_4cd822fd4f40bd6809b0656b03a5ae24], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:33 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 companyIdwx512ad5972960e003
+2018/8/15 10:06:33 Request.RawUrl.ToString():/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 GetJSAPI_Parameters
+2018/8/15 10:06:33 i:-1
+2018/8/15 10:06:33 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:33 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:33 GetJSAPI_Ticket2
+2018/8/15 10:06:33 abc
+2018/8/15 10:06:33 bc
+2018/8/15 10:06:33 t.Item2 True:sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg
+2018/8/15 10:06:33 rawstring:jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg&noncestr=a9dee71e9a324b7fa47876f1ea95cd95&timestamp=1534298793&url=http://ganwuhua009.iok.la:33735/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 signature:110782d14b4eefab8a5a71ff17be8c02721c2ab1
+2018/8/15 10:06:33 我看看22
+2018/8/15 10:06:33 登陆进来userid:bHpj
+2018/8/15 10:06:33 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298794_2_c05d7ec5aa448b2302aee55044a1c8c7], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:33 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534298794_2_c05d7ec5aa448b2302aee55044a1c8c7], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/15 10:06:33 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 companyIdwx512ad5972960e003
+2018/8/15 10:06:33 Request.RawUrl.ToString():/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 GetJSAPI_Parameters
+2018/8/15 10:06:33 i:-1
+2018/8/15 10:06:33 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:33 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/15 10:06:33 GetJSAPI_Ticket2
+2018/8/15 10:06:33 abc
+2018/8/15 10:06:33 bc
+2018/8/15 10:06:33 t.Item2 True:sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg
+2018/8/15 10:06:33 rawstring:jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMB64ot4PCtPLLqdnvSHMcwvHYTmc2UEO2YFLAi-N70NIIv1u74TVRDxgxvUo6tEYg&noncestr=3352b3e8b06740c686cb4cc89abfe58b&timestamp=1534298794&url=http://ganwuhua009.iok.la:33735/Wo/Index?userId=bHpj&counts=MA==&companyId=d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/15 10:06:33 signature:106fb46467ec2dac8696a81f8bad106068af92a1
+2018/8/17 15:24:47 我看看22
+2018/8/17 15:24:47 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:24:47 登陆进来userid:
+2018/8/17 15:24:48 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490689_6_fa0da84590c62040535f4cfbf45dc780], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:24:48 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490689_6_fa0da84590c62040535f4cfbf45dc780], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:24:48 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:24:48 companyIdwx512ad5972960e003
+2018/8/17 15:24:48 Request.RawUrl.ToString():/
+2018/8/17 15:24:48 GetJSAPI_Parameters
+2018/8/17 15:24:48 i:-1
+2018/8/17 15:24:48 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:48 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:48 GetJSAPI_Ticket2
+2018/8/17 15:24:48 abc
+2018/8/17 15:24:48 bc
+2018/8/17 15:24:48 c
+2018/8/17 15:24:48 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:48 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:24:48 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:24:48 t.Item2 True:
+2018/8/17 15:24:48 rawstring:jsapi_ticket=&noncestr=d9613fc7e5054c438c9ff12f2133ea9d&timestamp=1534490689&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:24:48 signature:2b7e8a392c5b1393e1db7ae42289cd13c0776673
+2018/8/17 15:24:51 我看看22
+2018/8/17 15:24:51 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:24:51 登陆进来userid:
+2018/8/17 15:24:51 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490692_3_c84e4472df1fb2e87d0c0f4f4832762c], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:24:51 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490692_3_c84e4472df1fb2e87d0c0f4f4832762c], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:24:51 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:24:51 companyIdwx512ad5972960e003
+2018/8/17 15:24:51 Request.RawUrl.ToString():/
+2018/8/17 15:24:51 GetJSAPI_Parameters
+2018/8/17 15:24:51 i:-1
+2018/8/17 15:24:51 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:51 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:51 GetJSAPI_Ticket2
+2018/8/17 15:24:51 abc
+2018/8/17 15:24:51 bc
+2018/8/17 15:24:51 c
+2018/8/17 15:24:51 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:24:51 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:24:51 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:24:51 t.Item2 True:
+2018/8/17 15:24:51 rawstring:jsapi_ticket=&noncestr=eb49457e1b254b7bbded7d33ca7df468&timestamp=1534490692&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:24:51 signature:288dfb0f59cd7e4caa10f50ee7ad0ba8da651778
+2018/8/17 15:27:44 我看看22
+2018/8/17 15:27:44 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:27:44 登陆进来userid:
+2018/8/17 15:27:44 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490866_5_48e3fa2a86b4ed07b198637d21e7b9bd], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:27:44 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490866_5_48e3fa2a86b4ed07b198637d21e7b9bd], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:27:44 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:27:44 companyIdwx512ad5972960e003
+2018/8/17 15:27:44 Request.RawUrl.ToString():/
+2018/8/17 15:27:44 GetJSAPI_Parameters
+2018/8/17 15:27:44 i:-1
+2018/8/17 15:27:44 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:44 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:44 GetJSAPI_Ticket2
+2018/8/17 15:27:44 abc
+2018/8/17 15:27:44 bc
+2018/8/17 15:27:44 c
+2018/8/17 15:27:44 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:44 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:27:44 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:27:44 t.Item2 True:
+2018/8/17 15:27:44 rawstring:jsapi_ticket=&noncestr=075ae959b39143afb22ed7d25f798e96&timestamp=1534490865&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:27:44 signature:7367c3557c1a302a8541955a63a30b765b95f989
+2018/8/17 15:27:46 我看看22
+2018/8/17 15:27:46 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:27:46 登陆进来userid:
+2018/8/17 15:27:46 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490868_1_809fa9111cf69d007ba7df73648acfd3], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:27:46 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490868_1_809fa9111cf69d007ba7df73648acfd3], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:27:46 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:27:46 companyIdwx512ad5972960e003
+2018/8/17 15:27:46 Request.RawUrl.ToString():/
+2018/8/17 15:27:46 GetJSAPI_Parameters
+2018/8/17 15:27:46 i:-1
+2018/8/17 15:27:46 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:46 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:46 GetJSAPI_Ticket2
+2018/8/17 15:27:47 abc
+2018/8/17 15:27:47 bc
+2018/8/17 15:27:47 c
+2018/8/17 15:27:47 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:27:47 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:27:47 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:27:47 t.Item2 True:
+2018/8/17 15:27:47 rawstring:jsapi_ticket=&noncestr=3ceb9b3d228e4822bb14a0dffba9c912&timestamp=1534490867&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:27:47 signature:d3f5d4fd512fabf0c773719c2ebc2e94fad510df
+2018/8/17 15:29:06 我看看22
+2018/8/17 15:29:06 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:29:06 登陆进来userid:
+2018/8/17 15:29:07 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490948_6_efa733d2637942338910c134f03f3531], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:29:07 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490948_6_efa733d2637942338910c134f03f3531], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:29:07 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:29:07 companyIdwx512ad5972960e003
+2018/8/17 15:29:07 Request.RawUrl.ToString():/
+2018/8/17 15:29:07 GetJSAPI_Parameters
+2018/8/17 15:29:07 i:-1
+2018/8/17 15:29:07 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:07 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:07 GetJSAPI_Ticket2
+2018/8/17 15:29:07 abc
+2018/8/17 15:29:07 bc
+2018/8/17 15:29:07 c
+2018/8/17 15:29:07 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:07 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:29:07 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:29:07 t.Item2 True:
+2018/8/17 15:29:07 rawstring:jsapi_ticket=&noncestr=980e59efde80401d809421997c8e1a97&timestamp=1534490948&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:29:07 signature:107c46734bb7c76a20f4f6b7070f27ea230c2b15
+2018/8/17 15:29:08 我看看22
+2018/8/17 15:29:08 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:29:08 登陆进来userid:
+2018/8/17 15:29:08 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490949_2_54c5073bc487177157538d9c15d5c777], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:29:08 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534490949_2_54c5073bc487177157538d9c15d5c777], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:29:08 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:29:08 companyIdwx512ad5972960e003
+2018/8/17 15:29:08 Request.RawUrl.ToString():/
+2018/8/17 15:29:08 GetJSAPI_Parameters
+2018/8/17 15:29:08 i:-1
+2018/8/17 15:29:08 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:08 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:08 GetJSAPI_Ticket2
+2018/8/17 15:29:08 abc
+2018/8/17 15:29:08 bc
+2018/8/17 15:29:08 c
+2018/8/17 15:29:08 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:29:08 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:29:08 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:29:08 t.Item2 True:
+2018/8/17 15:29:08 rawstring:jsapi_ticket=&noncestr=310d1c7bd20d407a971c978dfc2bdcd6&timestamp=1534490949&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:29:08 signature:d9e5ad43b060e7d05535e4784ef1d4ba7a8b2b28
+2018/8/17 15:38:17 我看看22
+2018/8/17 15:38:17 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:38:17 登陆进来userid:
+2018/8/17 15:38:17 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491499_1_86b82fd16a770d77c67febf2248877e2], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:38:17 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491499_1_86b82fd16a770d77c67febf2248877e2], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:38:18 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:38:18 companyIdwx512ad5972960e003
+2018/8/17 15:38:18 Request.RawUrl.ToString():/
+2018/8/17 15:38:18 GetJSAPI_Parameters
+2018/8/17 15:38:18 i:-1
+2018/8/17 15:38:18 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:18 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:18 GetJSAPI_Ticket2
+2018/8/17 15:38:18 abc
+2018/8/17 15:38:18 bc
+2018/8/17 15:38:18 c
+2018/8/17 15:38:18 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:18 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:38:18 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:38:18 t.Item2 True:
+2018/8/17 15:38:18 rawstring:jsapi_ticket=&noncestr=73c114c662fb46c8812401809d097c1a&timestamp=1534491498&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:38:18 signature:04c453189aa4c5294fb53a7947307b2275470a7a
+2018/8/17 15:38:19 我看看22
+2018/8/17 15:38:19 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:38:19 登陆进来userid:
+2018/8/17 15:38:19 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491501_2_84d1933aeb8108b90aaf9475eab3c902], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:38:19 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491501_2_84d1933aeb8108b90aaf9475eab3c902], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:38:19 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:38:19 companyIdwx512ad5972960e003
+2018/8/17 15:38:19 Request.RawUrl.ToString():/
+2018/8/17 15:38:19 GetJSAPI_Parameters
+2018/8/17 15:38:19 i:-1
+2018/8/17 15:38:19 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:19 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:19 GetJSAPI_Ticket2
+2018/8/17 15:38:19 abc
+2018/8/17 15:38:19 bc
+2018/8/17 15:38:19 c
+2018/8/17 15:38:19 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:38:19 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:38:19 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:38:19 t.Item2 True:
+2018/8/17 15:38:19 rawstring:jsapi_ticket=&noncestr=7815c62e24c8441d99f6127c496a4fb5&timestamp=1534491500&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:38:19 signature:6baec73a894ebd89379a683b0171385839164bff
+2018/8/17 15:41:05 我看看22
+2018/8/17 15:41:05 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:41:05 登陆进来userid:
+2018/8/17 15:41:06 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491667_5_75856f267d5448bd430b2d06de908747], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:41:06 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491667_5_75856f267d5448bd430b2d06de908747], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:41:06 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:41:06 companyIdwx512ad5972960e003
+2018/8/17 15:41:06 Request.RawUrl.ToString():/
+2018/8/17 15:41:06 GetJSAPI_Parameters
+2018/8/17 15:41:06 i:-1
+2018/8/17 15:41:06 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:06 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:06 GetJSAPI_Ticket2
+2018/8/17 15:41:06 abc
+2018/8/17 15:41:06 bc
+2018/8/17 15:41:06 c
+2018/8/17 15:41:06 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:06 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:41:06 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:41:06 t.Item2 True:
+2018/8/17 15:41:06 rawstring:jsapi_ticket=&noncestr=ee985db16c924e038feb4eebb14711f1&timestamp=1534491666&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:41:06 signature:d7e9fefaec32dbef148b388ec171716e1ae8c40c
+2018/8/17 15:41:08 我看看22
+2018/8/17 15:41:08 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:41:08 登陆进来userid:
+2018/8/17 15:41:08 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491669_7_fa22320c8d83e0e29e91192b626adda4], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:41:08 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491669_7_fa22320c8d83e0e29e91192b626adda4], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:41:08 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:41:08 companyIdwx512ad5972960e003
+2018/8/17 15:41:08 Request.RawUrl.ToString():/
+2018/8/17 15:41:08 GetJSAPI_Parameters
+2018/8/17 15:41:08 i:-1
+2018/8/17 15:41:08 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:08 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:08 GetJSAPI_Ticket2
+2018/8/17 15:41:08 abc
+2018/8/17 15:41:08 bc
+2018/8/17 15:41:08 c
+2018/8/17 15:41:08 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:41:08 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:41:08 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:41:08 t.Item2 True:
+2018/8/17 15:41:08 rawstring:jsapi_ticket=&noncestr=6d9de1d6e77e4b5baf4cd9bcca19a9c2&timestamp=1534491669&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:41:08 signature:4e735fbda44af3db6829b2c08087ca3d4b663168
+2018/8/17 15:43:07 我看看22
+2018/8/17 15:43:07 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:43:07 登陆进来userid:
+2018/8/17 15:43:08 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491789_2_53d16f5716e2aea3597bca7c0e570003], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:43:08 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491789_2_53d16f5716e2aea3597bca7c0e570003], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:43:08 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:43:08 companyIdwx512ad5972960e003
+2018/8/17 15:43:08 Request.RawUrl.ToString():/
+2018/8/17 15:43:08 GetJSAPI_Parameters
+2018/8/17 15:43:08 i:-1
+2018/8/17 15:43:08 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:08 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:08 GetJSAPI_Ticket2
+2018/8/17 15:43:08 abc
+2018/8/17 15:43:08 bc
+2018/8/17 15:43:08 c
+2018/8/17 15:43:08 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:08 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:43:08 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:43:08 t.Item2 True:
+2018/8/17 15:43:08 rawstring:jsapi_ticket=&noncestr=90515a3208854402af3b80ce919bd283&timestamp=1534491789&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:43:08 signature:5bfa867766979a1e858c3b23ec10c2b9221b42d3
+2018/8/17 15:43:10 我看看22
+2018/8/17 15:43:10 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:43:10 登陆进来userid:
+2018/8/17 15:43:10 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491792_6_caee39f9f8d3a1d110ac2c80548d1957], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:43:10 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534491792_6_caee39f9f8d3a1d110ac2c80548d1957], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:43:10 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:43:10 companyIdwx512ad5972960e003
+2018/8/17 15:43:10 Request.RawUrl.ToString():/
+2018/8/17 15:43:10 GetJSAPI_Parameters
+2018/8/17 15:43:10 i:-1
+2018/8/17 15:43:10 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:10 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:10 GetJSAPI_Ticket2
+2018/8/17 15:43:10 abc
+2018/8/17 15:43:10 bc
+2018/8/17 15:43:10 c
+2018/8/17 15:43:10 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:43:11 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:43:11 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:43:11 t.Item2 True:
+2018/8/17 15:43:11 rawstring:jsapi_ticket=&noncestr=ce74bbec9bbe4db78f8eab6c09a611eb&timestamp=1534491791&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:43:11 signature:49bc3ebf650abc4d0e5b303b94e462bae2221fec
+2018/8/17 15:51:44 我看看22
+2018/8/17 15:51:44 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:51:44 登陆进来userid:
+2018/8/17 15:51:45 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492306_5_4a5d749e2e80d47358d111618db3e742], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:51:45 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492306_5_4a5d749e2e80d47358d111618db3e742], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:51:45 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:51:45 companyIdwx512ad5972960e003
+2018/8/17 15:51:45 Request.RawUrl.ToString():/
+2018/8/17 15:51:45 GetJSAPI_Parameters
+2018/8/17 15:51:45 i:-1
+2018/8/17 15:51:45 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:45 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:45 GetJSAPI_Ticket2
+2018/8/17 15:51:45 abc
+2018/8/17 15:51:45 bc
+2018/8/17 15:51:45 c
+2018/8/17 15:51:45 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:45 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:51:45 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:51:45 t.Item2 True:
+2018/8/17 15:51:45 rawstring:jsapi_ticket=&noncestr=01966bc9dd1a4ab4b41c74cd6346ecb4&timestamp=1534492306&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:51:45 signature:9c0b4f12b5ff39b7774d589ae77d08d0384c5afd
+2018/8/17 15:51:47 我看看22
+2018/8/17 15:51:47 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:51:47 登陆进来userid:
+2018/8/17 15:51:47 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492309_4_b2098dda32bb764c0ba0d1c7514fc344], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:51:47 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492309_4_b2098dda32bb764c0ba0d1c7514fc344], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:51:47 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:51:47 companyIdwx512ad5972960e003
+2018/8/17 15:51:47 Request.RawUrl.ToString():/
+2018/8/17 15:51:47 GetJSAPI_Parameters
+2018/8/17 15:51:47 i:-1
+2018/8/17 15:51:47 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:47 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:47 GetJSAPI_Ticket2
+2018/8/17 15:51:47 abc
+2018/8/17 15:51:47 bc
+2018/8/17 15:51:47 c
+2018/8/17 15:51:47 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:51:47 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:51:47 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:51:47 t.Item2 True:
+2018/8/17 15:51:47 rawstring:jsapi_ticket=&noncestr=bd87ef36d9d9447891f62cc0976b0c41&timestamp=1534492308&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:51:47 signature:228ef6318d6519e7843035dac84bc1872fe313ea
+2018/8/17 15:56:10 我看看22
+2018/8/17 15:56:10 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:56:10 登陆进来userid:
+2018/8/17 15:56:46 我看看22
+2018/8/17 15:56:46 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:56:46 登陆进来userid:
+2018/8/17 15:57:21 我看看22
+2018/8/17 15:57:21 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:57:21 登陆进来userid:
+2018/8/17 15:57:22 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492643_6_cc784de0bf026965d2614eced7025b0f], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:57:22 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492643_6_cc784de0bf026965d2614eced7025b0f], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:57:22 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:57:22 companyIdwx512ad5972960e003
+2018/8/17 15:57:22 Request.RawUrl.ToString():/
+2018/8/17 15:57:22 GetJSAPI_Parameters
+2018/8/17 15:57:22 i:-1
+2018/8/17 15:57:22 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:22 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:22 GetJSAPI_Ticket2
+2018/8/17 15:57:22 abc
+2018/8/17 15:57:22 bc
+2018/8/17 15:57:22 c
+2018/8/17 15:57:22 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:22 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:57:22 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:57:22 t.Item2 True:
+2018/8/17 15:57:22 rawstring:jsapi_ticket=&noncestr=c77b1bd837af4b29a93ce3344034121a&timestamp=1534492642&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:57:22 signature:35e021e2686a69c3f740f0cbb26de8c5f03b7326
+2018/8/17 15:57:24 我看看22
+2018/8/17 15:57:24 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 15:57:24 登陆进来userid:
+2018/8/17 15:57:24 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492645_5_047914fdf42f3800beaf8e27cd5ad653], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:57:24 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534492645_5_047914fdf42f3800beaf8e27cd5ad653], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 15:57:24 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 15:57:24 companyIdwx512ad5972960e003
+2018/8/17 15:57:24 Request.RawUrl.ToString():/
+2018/8/17 15:57:24 GetJSAPI_Parameters
+2018/8/17 15:57:24 i:-1
+2018/8/17 15:57:24 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:24 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:24 GetJSAPI_Ticket2
+2018/8/17 15:57:24 abc
+2018/8/17 15:57:24 bc
+2018/8/17 15:57:24 c
+2018/8/17 15:57:24 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 15:57:24 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 15:57:24 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 15:57:24 t.Item2 True:
+2018/8/17 15:57:24 rawstring:jsapi_ticket=&noncestr=6eff5b8d869c40e0b98ade5d5b4b71c7&timestamp=1534492644&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 15:57:24 signature:48115a8fac9fe65b2bac6356428a26e5a1cb491c
+2018/8/17 16:04:48 我看看22
+2018/8/17 16:04:48 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 16:04:48 登陆进来userid:
+2018/8/17 16:04:57 我看看22
+2018/8/17 16:04:57 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 16:04:57 登陆进来userid:
+2018/8/17 16:10:33 我看看22
+2018/8/17 16:10:33 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 16:10:33 登陆进来userid:
+2018/8/17 16:11:17 我看看22
+2018/8/17 16:11:17 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 16:11:17 登陆进来userid:
+2018/8/17 16:11:17 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534493479_3_bfd7488207bc91ea3e97018d4c2ddaad], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 16:11:17 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534493479_3_bfd7488207bc91ea3e97018d4c2ddaad], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 16:11:17 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 16:11:17 companyIdwx512ad5972960e003
+2018/8/17 16:11:17 Request.RawUrl.ToString():/
+2018/8/17 16:11:17 GetJSAPI_Parameters
+2018/8/17 16:11:17 i:-1
+2018/8/17 16:11:17 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:17 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:17 GetJSAPI_Ticket2
+2018/8/17 16:11:17 abc
+2018/8/17 16:11:17 bc
+2018/8/17 16:11:17 c
+2018/8/17 16:11:17 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:17 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 16:11:17 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 16:11:17 t.Item2 True:
+2018/8/17 16:11:17 rawstring:jsapi_ticket=&noncestr=b6db3619f8e049a482f6db40df3d9ace&timestamp=1534493478&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 16:11:17 signature:7978f291850c0464cb0a646b72ae1e08e84fe64f
+2018/8/17 16:11:19 我看看22
+2018/8/17 16:11:19 第三方得到用户信息：GetWechatUserInfo
+2018/8/17 16:11:19 登陆进来userid:
+2018/8/17 16:11:20 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534493481_7_487be30b3ea7622bc200f18462aa8cd1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 16:11:20 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534493481_7_487be30b3ea7622bc200f18462aa8cd1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/17 16:11:20 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/17 16:11:20 companyIdwx512ad5972960e003
+2018/8/17 16:11:20 Request.RawUrl.ToString():/
+2018/8/17 16:11:20 GetJSAPI_Parameters
+2018/8/17 16:11:20 i:-1
+2018/8/17 16:11:20 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:20 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:20 GetJSAPI_Ticket2
+2018/8/17 16:11:20 abc
+2018/8/17 16:11:20 bc
+2018/8/17 16:11:20 c
+2018/8/17 16:11:20 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/17 16:11:20 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/17 16:11:20 t:Sunpn.WebMes.Helper.Ticket
+2018/8/17 16:11:20 t.Item2 True:
+2018/8/17 16:11:20 rawstring:jsapi_ticket=&noncestr=e61641f1aee1417cab2bb4aa60246bef&timestamp=1534493481&url=http://ganwuhua009.iok.la:33735/
+2018/8/17 16:11:20 signature:9d7f0473d8d55990c4fd7d04f679c2f00e918507
+2018/8/22 10:44:13 我看看22
+2018/8/22 10:44:13 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:44:13 登陆进来userid:
+2018/8/22 10:44:18 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905859_6_b5318e0e8eb5cc4ccba6c490a3170fa1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:44:18 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905859_6_b5318e0e8eb5cc4ccba6c490a3170fa1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:44:19 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:44:19 companyIdwx512ad5972960e003
+2018/8/22 10:44:19 Request.RawUrl.ToString():/
+2018/8/22 10:44:19 GetJSAPI_Parameters
+2018/8/22 10:44:19 i:-1
+2018/8/22 10:44:19 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:19 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:19 GetJSAPI_Ticket2
+2018/8/22 10:44:19 abc
+2018/8/22 10:44:19 bc
+2018/8/22 10:44:19 c
+2018/8/22 10:44:19 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:19 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:44:19 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:44:19 t.Item2 True:
+2018/8/22 10:44:19 rawstring:jsapi_ticket=&noncestr=4605a63ba328423cba70958045e2da05&timestamp=1534905859&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:44:19 signature:aae61e1477c113e3d5e9c37c4a4f78865b971a7c
+2018/8/22 10:44:21 我看看22
+2018/8/22 10:44:21 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:44:21 登陆进来userid:
+2018/8/22 10:44:23 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905863_4_37762b91228493bb7828caad2dada8ea], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:44:23 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905863_4_37762b91228493bb7828caad2dada8ea], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:44:23 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:44:23 companyIdwx512ad5972960e003
+2018/8/22 10:44:23 Request.RawUrl.ToString():/
+2018/8/22 10:44:23 GetJSAPI_Parameters
+2018/8/22 10:44:23 i:-1
+2018/8/22 10:44:23 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:23 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:23 GetJSAPI_Ticket2
+2018/8/22 10:44:23 abc
+2018/8/22 10:44:23 bc
+2018/8/22 10:44:23 c
+2018/8/22 10:44:23 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:44:24 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:44:24 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:44:24 t.Item2 True:
+2018/8/22 10:44:24 rawstring:jsapi_ticket=&noncestr=858af777f4f54d36928482e3f034597b&timestamp=1534905865&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:44:24 signature:7223a49d2163fe0edb24d61632ff9bc59c36a746
+2018/8/22 10:46:23 我看看22
+2018/8/22 10:46:23 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:46:23 登陆进来userid:
+2018/8/22 10:46:28 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905989_5_3a6420dc4797fafeaacd018e196016a0], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:46:28 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905989_5_3a6420dc4797fafeaacd018e196016a0], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:46:28 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:46:28 companyIdwx512ad5972960e003
+2018/8/22 10:46:28 Request.RawUrl.ToString():/
+2018/8/22 10:46:28 GetJSAPI_Parameters
+2018/8/22 10:46:28 i:-1
+2018/8/22 10:46:28 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:28 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:28 GetJSAPI_Ticket2
+2018/8/22 10:46:28 abc
+2018/8/22 10:46:28 bc
+2018/8/22 10:46:28 c
+2018/8/22 10:46:28 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:29 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:46:29 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:46:29 t.Item2 True:
+2018/8/22 10:46:29 rawstring:jsapi_ticket=&noncestr=d0f46b938d2f49c8a59fad06eae0b80f&timestamp=1534905989&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:46:29 signature:1660fae6b3d6a08d7dbe23bf7ec832ecf9bf605b
+2018/8/22 10:46:31 我看看22
+2018/8/22 10:46:31 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:46:31 登陆进来userid:
+2018/8/22 10:46:31 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905992_3_e7022b9dec0b1613cea7729f275a66d1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:46:31 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534905992_3_e7022b9dec0b1613cea7729f275a66d1], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:46:31 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:46:31 companyIdwx512ad5972960e003
+2018/8/22 10:46:31 Request.RawUrl.ToString():/
+2018/8/22 10:46:31 GetJSAPI_Parameters
+2018/8/22 10:46:31 i:-1
+2018/8/22 10:46:31 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:31 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:31 GetJSAPI_Ticket2
+2018/8/22 10:46:31 abc
+2018/8/22 10:46:31 bc
+2018/8/22 10:46:31 c
+2018/8/22 10:46:31 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:46:32 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:46:32 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:46:32 t.Item2 True:
+2018/8/22 10:46:32 rawstring:jsapi_ticket=&noncestr=4f8148b242c343ab98dfdae40d7d19c5&timestamp=1534905992&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:46:32 signature:f7a1c1f567ddb5b169ba3e07ccace7576cbc45b2
+2018/8/22 10:47:44 我看看22
+2018/8/22 10:47:44 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:47:44 登陆进来userid:
+2018/8/22 10:47:45 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906065_7_1faaf6be04a55215cc05d8ae883384cd], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:47:45 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906065_7_1faaf6be04a55215cc05d8ae883384cd], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:47:45 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:47:45 companyIdwx512ad5972960e003
+2018/8/22 10:47:45 Request.RawUrl.ToString():/
+2018/8/22 10:47:45 GetJSAPI_Parameters
+2018/8/22 10:47:45 i:-1
+2018/8/22 10:47:45 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:45 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:45 GetJSAPI_Ticket2
+2018/8/22 10:47:45 abc
+2018/8/22 10:47:45 bc
+2018/8/22 10:47:45 c
+2018/8/22 10:47:45 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:45 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:47:45 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:47:45 t.Item2 True:
+2018/8/22 10:47:45 rawstring:jsapi_ticket=&noncestr=13e429dd80fd4967a8e4efa7aef12109&timestamp=1534906065&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:47:45 signature:f0d0088c5adc3bf74aaa29bcdd4eb4e958b209b7
+2018/8/22 10:47:47 我看看22
+2018/8/22 10:47:47 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:47:47 登陆进来userid:
+2018/8/22 10:47:47 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906067_7_c973450cfd50dd2a07b5fdfe04e5bb87], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:47:47 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906067_7_c973450cfd50dd2a07b5fdfe04e5bb87], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:47:47 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:47:47 companyIdwx512ad5972960e003
+2018/8/22 10:47:47 Request.RawUrl.ToString():/
+2018/8/22 10:47:47 GetJSAPI_Parameters
+2018/8/22 10:47:47 i:-1
+2018/8/22 10:47:47 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:47 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:47 GetJSAPI_Ticket2
+2018/8/22 10:47:47 abc
+2018/8/22 10:47:47 bc
+2018/8/22 10:47:47 c
+2018/8/22 10:47:47 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:47:47 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:47:47 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:47:47 t.Item2 True:
+2018/8/22 10:47:47 rawstring:jsapi_ticket=&noncestr=347c05a8633c4b0c9231ff44e0b5414b&timestamp=1534906068&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:47:47 signature:0fa537bba08cdb0db0c0640c55b9f6fc05b1e48e
+2018/8/22 10:52:49 我看看22
+2018/8/22 10:52:49 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:52:49 登陆进来userid:
+2018/8/22 10:52:49 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906370_3_f0513d74d31f92f93ff3d570d275ecb9], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:52:49 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906370_3_f0513d74d31f92f93ff3d570d275ecb9], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:52:49 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:52:49 companyIdwx512ad5972960e003
+2018/8/22 10:52:49 Request.RawUrl.ToString():/
+2018/8/22 10:52:49 GetJSAPI_Parameters
+2018/8/22 10:52:49 i:-1
+2018/8/22 10:52:49 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:49 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:49 GetJSAPI_Ticket2
+2018/8/22 10:52:49 abc
+2018/8/22 10:52:49 bc
+2018/8/22 10:52:49 c
+2018/8/22 10:52:49 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:50 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:52:50 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:52:50 t.Item2 True:
+2018/8/22 10:52:50 rawstring:jsapi_ticket=&noncestr=1ad621f4a62e471692434bf2b41855dc&timestamp=1534906371&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:52:50 signature:146c67d901d14952d7c341b0d05c8308168d4d12
+2018/8/22 10:52:52 我看看22
+2018/8/22 10:52:52 第三方得到用户信息：GetWechatUserInfo
+2018/8/22 10:52:52 登陆进来userid:
+2018/8/22 10:52:53 成员全部详情信息包括头像：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906373_5_d09e1e7760461d60ed0aee8ca9ec4c6d], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:52:53 页面成员信息：{"errcode":41022,"errmsg":"suite_access_token missing, hint: [1534906373_5_d09e1e7760461d60ed0aee8ca9ec4c6d], more info at https://open.work.weixin.qq.com/devtool/query?e=41022","department":[]}
+2018/8/22 10:52:53 companyId1d3g1MTJhZDU5NzI5NjBlMDAz
+2018/8/22 10:52:53 companyIdwx512ad5972960e003
+2018/8/22 10:52:53 Request.RawUrl.ToString():/
+2018/8/22 10:52:53 GetJSAPI_Parameters
+2018/8/22 10:52:53 i:-1
+2018/8/22 10:52:53 accessToken1:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:53 accessToken:X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:53 GetJSAPI_Ticket2
+2018/8/22 10:52:53 abc
+2018/8/22 10:52:53 bc
+2018/8/22 10:52:53 c
+2018/8/22 10:52:53 GetJSAPI_Ticketurl:https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=X_bq_PJSAn17_7WBmpLt2lyFUuru9xhA3IQ6ELaeRhDSDSLAF-X3uwUWWy710kvkMcWLTyqq-dZkzficOA4kcvnu7FPGfMADJAHS34D97SBUMi8AwOuVWfotHsaepNDlwmlfk6l1jtInNeNRUVNACZRY0Tj-Y4pjmopF9m2Fu9AJmwwZwxfC1y5jeVkxulcSUSFrZXcP57y_PEsfYaBhYg
+2018/8/22 10:52:54 content{"errcode":40014,"errmsg":"invalid access_token"}
+2018/8/22 10:52:54 t:Sunpn.WebMes.Helper.Ticket
+2018/8/22 10:52:54 t.Item2 True:
+2018/8/22 10:52:54 rawstring:jsapi_ticket=&noncestr=043a212b4447471ab28aeb1f48a8e404&timestamp=1534906374&url=http://ganwuhua009.iok.la:33735/
+2018/8/22 10:52:54 signature:7d35a3fde6be7c7ad246778f6810cbce20ccdaba

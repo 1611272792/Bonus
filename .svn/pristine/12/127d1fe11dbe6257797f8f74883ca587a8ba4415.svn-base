@@ -1,0 +1,83 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>可授权奖金项</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <style>
+        .delete-swipeout {
+            background-color: #319ee3;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    @*<div class="weui-cells__title">可授权的奖金项列表</div>*@
+    <div class="weui-cells">
+        @if (ViewBag.emp != null)
+        {
+            DataTable emp = ViewBag.emp;
+            @*<a href="/BonusImpower/AddImpower?userID=@emp.Rows[0]["BIPrincipal"]" class="weui-btn weui-btn_mini weui-btn_primary">添加授权</a>*@
+            for (int i = 0; i < emp.Rows.Count; i++)
+            {
+                @*<a class="weui-cell weui-cell_access" href="/BonusImpower/Collect?EmpID=@emp.Rows[i]["BonusItemID"]">
+                    <div class="weui-cell__bd">
+                        <p>@emp.Rows[i]["BIName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>*@
+
+            <a href="/BonusImpower/Collect?BonusItemID=@emp.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.CompanyId" id="@emp.Rows[i]["BonusItemID"]" hidden="hidden"></a>
+                <div class="weui-cell weui-cell_swiped">
+                        <div class="weui-cell__bd">
+                            <div class="weui-cell" onclick="javascript: document.getElementById('@emp.Rows[i]["BonusItemID"]').click();">
+                                <div class="weui-cell__hd"><img src="~/Content/weixin/images/jiangjinxiang.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                                <div class="weui-cell__bd">
+                                    <p>@emp.Rows[i]["BIName"].ToString()</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-cell__ft">
+                            @*<a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/BonusImpower/AddImpower?BonusItemID=@emp.Rows[i]["BonusItemID"]">添加授权</a>*@
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="/BonusImpower/AddImpower?BonusItemID=@emp.Rows[i]["BonusItemID"]&CompanyID=@ViewBag.CompanyId&UserID=@ViewBag.UserID">添加授权</a>
+                        </div>
+                    </div>
+            }
+        }
+        else
+        {
+            @*<a href="/BonusImpower/AddImpower?userID=@ViewBag.userid" class="weui-btn weui-btn_mini weui-btn_primary">添加授权</a>*@
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+
+    </div>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        $(function () {
+            //页面加载时给添加奖金授权按钮赋值登录人id
+            $("#userID").val(GetQueryString("userID"));
+        })
+    </script>
+</body>
+</html>

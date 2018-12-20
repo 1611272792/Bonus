@@ -1,0 +1,378 @@
+﻿@using System.Data
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>奖金提现</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <style type="text/css"> nav      
+        #right_div {
+            width: 100%;
+            float: left;
+        }
+
+        #right_div1 {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #right_divx {
+            width: 100%;
+        }
+
+        #right_div2 {
+            margin-top: -20px;
+            width: 100%;
+            height: auto;
+            overflow: auto;
+        }
+
+        #right_table1 {
+            width: 100%;
+        }
+
+            #right_table1 th {
+                background: #E9F8FF;
+                text-align: center;
+                width: 25%;
+            }
+
+        #right_table2 td {
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <span id="CompanyId" hidden="hidden">@ViewBag.CompanyId</span>
+    <div class="weui-cell" style="width:100%;">
+        <div class="weui-custom-hd">选择类型</div>
+        <div class="weui-cell__bd">
+            <select class="weui-select" name="select2" id="Updepart" onchange="DepOrEmp()">
+                <option value="1"> 个人</option>
+                <option value="0"> 部门</option>
+            </select>
+        </div>
+
+    </div>
+    <div id="search" style="width:50%">
+        <div class="weui-cells__title">查找员工</div>
+        <div class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="qq" pslaceholder="搜索" @*required*@ />
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var kw = $("#qq").val();
+            var CompanyId = $("#CompanyId").html();
+            var empName = "";
+            $("#qq").bigAutocomplete({
+                url: "/BonusDataQuery/GetInfo?keyword=" + kw + "&CompanyId=" + CompanyId,
+                callback: function (data) {
+                    empName = data.title;
+                    if (empName.length > 0) {
+                        $("#EmpDetail").load("/BonusNoGet/SearchInfo?EmpName=" + empName+"&CompanyId=" + CompanyId)
+                    }
+                }
+            });
+
+        })
+
+        //搜索方法
+        function search() {
+            var CompanyId = $("#CompanyId").html();
+            var kw = $("#qq").val();
+            if (kw == "" || kw == null) {
+                location.reload();
+            } else {
+                $("#EmpDetail").load("/BonusNoGet/SearchInfo?EmpName=" + kw + "&CompanyId=" + CompanyId)
+            }
+        }
+
+        //回车键触发的搜索
+        document.onkeydown = function (e) {
+            var ev = document.all ? window.event : e;
+            if (ev.keyCode == 13) {
+                search();
+            }
+        }
+    </script>
+
+    @*部门未领取*@
+    <div id="DepDetail" hidden="hidden">
+        <div style="float:right"><button onclick="DepPayBonus()">发放</button></div>
+        @if (ViewBag.Dep == null)
+        {
+            <br />
+            <br />
+            <center><span style="color:gray">暂无数据</span></center>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>名称</th>
+                                <th>未领取奖金</th>
+                                <th class="thf">
+                                    @*<input id="Checkbox4" onchange="GetAll2()" class="ckstyle2" type="checkbox" />*@
+                                    <div class="weui-cells_checkbox">
+                                        <label for="Checkbox3">
+                                            <input type="checkbox" class="weui-check" id="Checkbox3" onchange="GetAll()" />
+                                            <i class="weui-icon-checked"></i>全选
+                                        </label>
+                                    </div>
+                                </th>
+                                @*<th class="thf"><input id="Checkbox3" onchange="GetAll()" class="ckstyle" type="checkbox" />  全选 </th>*@
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered">
+                        @if (ViewBag.Dep != null)
+                        {
+                            DataTable dsDep = ViewBag.Dep;
+                            for (int i = 0; i < dsDep.Rows.Count; i++)
+                            {
+                                <tr>
+                                    <td onclick="javascript: document.getElementById('@dsDep.Rows[i]["DepartName"]').click();">@dsDep.Rows[i]["DepartName"]</td>
+                                    <td onclick="javascript: document.getElementById('@dsDep.Rows[i]["DepartName"]').click();">@dsDep.Rows[i]["noGet"]</td>
+                                    <td>
+                                        <div class="weui-cells_checkbox">
+                                            <label for="@dsDep.Rows[i]["DepartID"]">
+                                                <input type="checkbox" class="weui-check" id="@dsDep.Rows[i]["DepartID"]" name="cks" value="@dsDep.Rows[i]["DepartID"]" />
+                                                <i class="weui-icon-checked"></i>
+                                            </label>
+                                        </div>
+                                        @*<input type="checkbox" name="cks" class="ckstyle check" value="@dsDep.Rows[i]["DepartID"]" />*@
+                                    </td>
+                                    @*<td>@dsDep.Rows[i]["NoGet"]</td>*@
+                                    @*<td>@dsDep.Rows[i]["sumBonus"]</td>*@
+                                    <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/DepGain?depBounsID=@dsDep.Rows[i]["DepartID"]" id="@dsDep.Rows[i]["DepartName"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    @*个人未领取*@
+    <div id="EmpDetail">
+        <div style="float:right"><button onclick="EmpPayBonus()">发放</button></div>
+        @if (ViewBag.Emp == null)
+        {
+            <br />
+            <br />
+            <center><span style="color:gray">奖金已全部发放,暂无数据</span></center>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>姓名</th>
+                                <th>未领取奖金</th>
+                                <th class="thf2">
+                                    @*<input id="Checkbox4" onchange="GetAll2()" class="ckstyle2" type="checkbox" />*@
+                                    <div class="weui-cells_checkbox">
+                                        <label for="Checkbox4">
+                                            <input type="checkbox" class="weui-check" id="Checkbox4" onchange="GetAll2()" />
+                                            <i class="weui-icon-checked"></i>全选
+                                        </label>
+                                    </div>
+                                </th>
+                                @*<th>全选</th>*@
+                                @*<th>总获得奖金</th>*@
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered">
+                        @if (ViewBag.Emp != null)
+                        {
+                            DataTable dsEmp = ViewBag.Emp;
+                            for (int i = 0; i < dsEmp.Rows.Count; i++)
+                            {
+                                <tr>
+
+                                    <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["Name"]').click();">@dsEmp.Rows[i]["Name"]</td>
+                                    <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["Name"]').click();">@dsEmp.Rows[i]["noGet"]</td>
+                                    <td>
+                                        <div class="weui-cells_checkbox">
+                                            <label for="@dsEmp.Rows[i]["EmpID"]">
+                                                <input type="checkbox" class="weui-check" id="@dsEmp.Rows[i]["EmpID"]" name="cks2" value="@dsEmp.Rows[i]["EmpID"]" />
+                                                <i class="weui-icon-checked"></i>
+                                            </label>
+                                        </div>@*<input type="checkbox" name="cks2" class="ckstyle2 check2" value="@dsEmp.Rows[i]["EmpID"]" />*@
+                                    </td>
+
+
+                                    <td id="bonusID" hidden="hidden"><a href="/BonusDataQuery/EmpGain?empBounsID=@dsEmp.Rows[i]["EmpID"]" id="@dsEmp.Rows[i]["Name"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+    <!--脚本-->
+
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        //部门全选
+        function GetAll() {
+            var che = document.getElementById("Checkbox3");
+            var ischeck = che.checked;
+            if (che.checked == ischeck) {
+                var a = document.getElementsByName("cks");
+                for (var i = 0; i < a.length; i++) {
+                    a[i].checked = ischeck;
+                }
+            }
+        }
+        //员工全选
+        function GetAll2() {
+            var che2 = document.getElementById("Checkbox4");
+            var ischeck = che2.checked;
+            if (che2.checked == ischeck) {
+                var b = document.getElementsByName("cks2");
+                for (var i = 0; i < b.length; i++) {
+                    b[i].checked = ischeck;
+                }
+            }
+        }
+
+        //员工发放奖金
+        function EmpPayBonus() {
+            var b = document.getElementsByName("cks2");
+            //console.log(b);
+            var r = 0;
+            var cheValue = "";
+            for (var i = 0; i < b.length; i++) {
+                //alert("状态：" + b[i].checked);
+                if (b[i].checked == true) {
+                    cheValue += b[i].value + ",";
+                    //alert(b[i].value);
+                }
+                else {
+                    r++;
+                }
+            }
+            if (r == b.length) {
+                alert("请先选中数据");
+
+            } else {
+                cheValue = cheValue.substr(0, cheValue.length - 1);
+                //alert(cheValue);
+                $.post("/BonusNoGet/EmpPayBonus", { EmpID: cheValue }, function (data) {
+                    alert(data);
+                    location.reload();
+                })
+            }
+        }
+        //部门发放奖金
+        function DepPayBonus() {
+            var b = document.getElementsByName("cks");
+            //console.log(b);
+            var r = 0;
+            var cheValue = "";
+            for (var i = 0; i < b.length; i++) {
+                if (b[i].checked == true) {
+                    cheValue += b[i].value + ",";
+                }
+                else {
+                    r++;
+                }
+            }
+            if (r == b.length) {
+                alert("请先选中数据");
+
+            } else {
+                cheValue = cheValue.substr(0, cheValue.length - 1);
+                //alert(cheValue);
+                $.post("/BonusNoGet/DepPayBonus", { DepID: cheValue }, function (data) {
+                    alert(data);
+                    location.reload();
+                })
+            }
+        }
+
+
+        $(function () {
+            if ($("#Updepart").val() == "0") {
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            } else if ($("#Updepart").val() == "1") {
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            }
+        })
+        function DepOrEmp() {
+            if ($("#Updepart").val() == "0") {
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            } else if ($("#Updepart").val() == "1") {
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            }
+        }
+
+
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        if (right_div2 = "") {
+
+        } else {
+            right_div2.onscroll = function () {
+                var right_div2_top = this.scrollTop;
+                var right_div2_left = this.scrollLeft;
+                document.getElementById("right_div1").scrollLeft = right_div2_left;
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>

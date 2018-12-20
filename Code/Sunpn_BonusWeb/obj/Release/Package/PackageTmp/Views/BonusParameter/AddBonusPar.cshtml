@@ -1,0 +1,119 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加奖金参数</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_three.css" rel="stylesheet" />
+    <style>
+        .weui-switch {
+            border-color: #DFDFDF !important;
+            background-color: #319EE3 !important;
+        }
+          
+    </style>
+</head>
+<body>
+       
+        @*<div class="weui-cells__title">奖金参数</div>*@
+    <div class="weui-cells weui-cells_form">
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="CompanyId" value="@ViewBag.CompanyId" hidden="hidden" />
+                <input class="weui-input" id="BPname" value="" placeholder="参数名" onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" />
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">金额(¥)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="BPnum" name="" value="" placeholder="金额（必须为数字）" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " />
+            </div>
+        </div>
+
+
+        @*<div class="weui-cells weui-cells_form">*@
+        <div class="weui-cell weui-cell_switch">
+            <div class="weui-cell__bd">是否有效</div>
+            <div class="weui-cell__ft">
+                <input id="BPstate" class="weui-switch" type="checkbox" checked value="">
+            </div>
+        </div>
+        @*</div>*@
+
+        @*<div class="weui-cells weui-cells_form">*@
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="BPRemark" class="weui-textarea" name="content" placeholder="请输入备注信息" rows="2" maxlength="50"></textarea>
+                <div class="weui-textarea-counter"><span class="textareaInput">0</span>/<span class="textareaTotal">50</span></div>
+            </div>
+        </div>
+        @*</div>*@
+    </div>
+        <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="addSure()" style="margin-top:20px">保存</a>
+            <a href="javascript:window.history.go(-1)" class="weui-btn weui-btn_warn">返回</a>
+        </div>
+    <script>
+
+        //添加
+        function addSure() {
+           
+            if ($("#BPname").val() == "" || $("#BPname").val() == null || $("#BPnum").val() == "" || $("#BPnum").val() == null) {
+                alert("参数名和金额不能为空！");
+            } else {
+                if (isNaN($("#BPnum").val())) {
+                    alert("添加失败，参数必须为数字");
+                    return;
+                }
+                var companyId = $("#CompanyId").val();
+                var bpName = $("#BPname").val();
+                var bpNum = $("#BPnum").val();
+                if ($("#BPstate").is(':checked')) {
+                    $("#BPstate").val("1");
+                } else {
+                    $("#BPstate").val("0");
+                }
+                var bpState = $("#BPstate").val();
+                var bpRemark = $("#BPRemark").val();
+                $.post("/BonusParameter/addBP", { CompanyId: companyId, bpname: bpName, bpnum: bpNum, bpstate: bpState, bpremark: bpRemark }, function (data) {
+                    if (data == "ok") {
+                        $.toast("添加成功");
+                  
+                    } else {
+                        $.toast("添加失败", "cancel");
+                    }
+                });
+            }
+        }
+
+        //输入框计数
+        $(function () {
+            var max = 50;
+            $('.weui-textarea').on('input', function () {
+                var text = $(this).val();
+                var len = text.length;
+                $('.textareaInput').text(len);
+                if (len > max) {
+                    $(this).closest('.weui_cell').addClass('weui_cell_warn');
+                }
+                else {
+                    $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+                }
+            });
+        })
+    </script>
+
+    <script src="~/scripts/jquery-weui.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿@using System.Data;
+ <span hidden="hidden" id="empBounsID">@ViewBag.empBounsID</span>
+<div id="func">
+    @if (ViewBag.Detail == null)
+    {    
+        <br />
+            <br />
+            <center><span style="color:gray">暂无数据</span></center>
+    }
+    else
+    {  
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>交易对象</th>
+                                <th>金额(¥)</th>
+                                <th>日期</th>
+                                <th>类型</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.Detail != null)
+                        {
+                            DataTable detail = ViewBag.Detail;
+                            for (int i = 0; i < detail.Rows.Count; i++)
+                            {
+                                <tr onclick="javascript: document.getElementById('@detail.Rows[i]["BonusDataID"]').click();">
+                                    <td>@detail.Rows[i]["Name"]</td>
+                                    <td>@detail.Rows[i]["EarMoney"]</td>
+                                    <td>@detail.Rows[i]["DisDate"]</td>
+                                    <td id="bonusID" hidden="hidden"><a href="/DepartBouns/Detail2?depBounsID=@detail.Rows[i]["BonusDataID"]" id="@detail.Rows[i]["BonusDataID"]"></a></td>
+                                    <td>@detail.Rows[i]["bty"]</td>
+                                 </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+    }
+</div>
+
+
+

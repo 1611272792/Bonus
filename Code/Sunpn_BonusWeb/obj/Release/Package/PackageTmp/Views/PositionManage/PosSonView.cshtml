@@ -1,0 +1,136 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>职位管理</title>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <style>
+        .weui-badge {
+            background-color: #319EE3;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div class="page__bd" style="background-color:#fff">
+
+
+        @if (ViewBag.dname != null)
+        {
+            @*<div class="weui-cells__title">子部门</div>*@
+            DataTable dn = ViewBag.dname;
+            for (int i = 0; i < dn.Rows.Count; i++)
+            {
+
+                <a class="weui-cell weui-cell_access" href="/PositionManage/PosSonView?depID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId">
+                    <div class="weui-cell__hd">
+                        <img src="/Content/weixin/images/depart.png" style="width:20px;margin-right:5px;display:block" />
+
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>@dn.Rows[i]["DepartName"].ToString()</p>
+                    </div>
+                    @*<div class="">
+                        <span class="weui-badge">  @Session["fuc" + i]</span>
+                    </div>*@
+                    <div class="weui-cell__ft" style="padding-right:25px;">
+                        @Session["fuc" + i]
+                    </div>
+                </a>
+            }
+
+        }
+        else
+        {
+
+        }
+        @*<div class="weui-cells__title">职位</div>*@
+
+        @if (ViewBag.posName != null)
+        {
+            DataTable ds = ViewBag.posName;
+            for (int i = 0; i < ds.Rows.Count; i++)
+            {
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><img src="/Content/weixin/images/zhiwei.png" style="width:25px;height:25px;" /></div>
+
+                            <div class="weui-cell__bd">
+                                <p style="font-size:15px">@ds.Rows[i]["PositionName"]</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/PositionManage/EditView?posID=@ds.Rows[i]["PositionID"]&CompanyId=@ViewBag.CompanyId">编辑</a>
+                        <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure(@ds.Rows[i]["PositionID"])">删除</a>
+                    </div>
+                </div>
+
+
+            }
+
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无职位</span>
+            </div>
+                        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                            <span class="weui-loadmore__tips"></span>
+                        </div>
+        }
+    </div>
+
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+
+       
+       function delete_Sure(posID) {
+           //var deleteDepID = $("#se_depID").val();
+           //var deleteDepID = $("#se_depID").val();
+
+           $.confirm("确认删除该职位？", function () {
+               $.post("/PositionManage/delPosID", { PosID: posID }, function (data) {
+                   if (data = "删除成功") {
+                       $.toast("删除成功");
+                       location.reload();
+                   }
+                   else {
+                       $.toast("删除失败", "cancel");
+                   }
+               })
+           }, function () {
+               //点击取消后的回调函数
+           });
+       }
+
+
+       $(function(){
+           if(window.name != "bencalie"){
+               location.reload();
+               window.name = "bencalie";
+           }else{
+               window.name = "";
+           }
+       });
+       var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+       if (browserRule.test(navigator.userAgent)) {
+           window.onpageshow = function (event) {
+               if (event.persisted) {
+                   window.location.reload()
+               }
+           };
+       }
+    </script>
+</body>
+</html>

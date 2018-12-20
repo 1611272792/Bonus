@@ -1,0 +1,54 @@
+﻿@using System.Data
+@if (ViewBag.ProblemData == null)
+{
+    <br />
+            <br />
+            <center><span style="color:gray">暂无记录</span></center>
+}
+else
+{
+
+
+    <div id="right_div">
+        <div id="right_div1">
+            <div id="right_divx">
+                <table id="right_table1" class="table table-bordered">
+                    <tr>
+                        <th>公司名称</th>
+                        <th>时间</th>
+                        <th>联系人</th>
+                        <th>联系方式</th>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="right_div2">
+            <table id="right_table2" class="table table-bordered table-striped table-hover">
+                @if (ViewBag.ProblemData != null)
+                {
+                    DataTable DeBonData = ViewBag.ProblemData;
+                    for (int i = 0; i < DeBonData.Rows.Count; i++)
+                    {
+                        <tr onclick="javascript: document.getElementById('@DeBonData.Rows[i]["resonId"]').click();">
+                            <td>@DeBonData.Rows[i]["CompanyName"]</td>
+                            <td>@DeBonData.Rows[i]["CommitTime"]</td>
+                            <td>@DeBonData.Rows[i]["Name"]</td>
+                            <td>@DeBonData.Rows[i]["lxType"]</td>
+                            <td hidden="hidden">
+                                <a href="/Wo/ImageDetail?ResonId=@DeBonData.Rows[i]["resonId"]" id="@DeBonData.Rows[i]["resonId"]">查看</a>
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                }
+
+            </table>
+        </div>
+    </div>
+
+}

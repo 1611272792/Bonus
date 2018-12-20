@@ -1,0 +1,134 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>职位编辑</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body>
+    @*<div class="weui-cells__title">编辑职位</div>*@
+    @if (ViewBag.showPos == null)
+    {
+
+    }
+    else
+    {
+        DataTable sondt = ViewBag.showPos;
+
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入职位名称" id="edit_pos" value="@sondt.Rows[0]["PositionName"]" />
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_select weui-cell_select-after">
+                <div class="weui-cell__hd"><label class="weui-label">部门</label></div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select2" id="edit_depart">
+                        @if (ViewBag.depName != null)
+                        {
+                            DataTable ds = ViewBag.depName;
+                            @*<option value="0">无</option>*@
+                            for (int i = 0; i < ds.Rows.Count; i++)
+                            {
+                                if (ds.Rows[i]["DepartID"].ToString() == sondt.Rows[0]["DepartID"].ToString())
+                                {
+                                    <option selected="selected" value=@ds.Rows[i]["DepartID"]>@ds.Rows[i]["DepartName"]</option>
+                                }
+                                else
+                                {
+                                    <option value=@ds.Rows[i]["DepartID"]>@ds.Rows[i]["DepartName"]</option>
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            <option value="null">请添加部门</option>
+                        }
+
+                    </select>
+                </div>
+            </div>
+          
+            @*<div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入备注" id="edit_remark" value="@sondt.Rows[0]["Remark"]" />
+                </div>
+                <div class="weui-cell__bd" hidden="hidden">
+                    <input class="weui-input" type="text" placeholder="存职位id专用" id="edit_posID" value="@sondt.Rows[0]["PositionID"]" />
+                </div>
+            </div>*@
+            <input hidden="hidden" type="text" placeholder="存职位id专用" id="edit_posID" value="@sondt.Rows[0]["PositionID"]" />
+            <div class="weui-cells__title"><span style="font-size:18px;color:black">备注</span></div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="请输入备注" rows="3" id="edit_remark">@sondt.Rows[0]["Remark"]</textarea>
+                        <div class="weui-textarea-counter"><span class="textareaInput">0</span>/<span class="textareaTotal">200</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+            <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="edit_Sure()" style="margin-top:20px">保存</a>
+            <a href="javascript:window.history.go(-1)"  class="weui-btn weui-btn_warn">返回</a>
+        </div>
+    }
+
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script>
+        //保存
+        function edit_Sure() {
+            if ($("#edit_pos").val() == "" || $("#edit_pos").val() == null || $("#edit_depart").val() == "" || $("#edit_depart").val() == null) {
+                alert("不能为空，请输入合适的值！");
+            } else {
+                var  posName = $("#edit_pos").val();
+                var depart = $("#edit_depart").val();
+                var  remark = $("#edit_remark").val();
+                var  posID = $("#edit_posID").val();
+                $.post("/PositionManage/eidtPos", { PosName: posName, DepID: depart, Remark: remark, PosID: posID }, function (data) {
+                    $.toast("编辑成功");
+                    //location.reload();
+                })
+            }
+        }
+        //输入框计数
+        $(function () {
+            var num = $("#edit_remark").text().length;
+            $('.textareaInput').text(num);
+            var max = 200;
+            $('.weui-textarea').on('input', function () {
+                var text = $(this).val();
+                var len = text.length;
+                $('.textareaInput').text(len);
+                if (len > max) {
+                    $(this).closest('.weui_cell').addClass('weui_cell_warn');
+                }
+                else {
+                    $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+                }
+            });
+        })
+
+
+
+    </script>
+
+</body>
+</html>

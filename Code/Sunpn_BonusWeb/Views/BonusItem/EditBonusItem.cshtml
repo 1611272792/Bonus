@@ -1,0 +1,125 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>编辑奖金项</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+</head>
+<body>
+@if (ViewBag.bodt != null)
+{
+    DataTable bodt = ViewBag.bodt;
+    @*<div class="weui-cells__title">编辑奖金项信息</div>*@
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">编号</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="edit_BonusItemID" name="" placeholder="" required="required" value="@bodt.Rows[0]["BonusItemID"]" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" id="edit_BIName" name="" placeholder="" required="required" value="@bodt.Rows[0]["BIName"]"/>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
+            <div class="weui-cell__bd">
+                <input type="text" id="pri" name="name" value="@bodt.Rows[0]["BIPrincipal"]" hidden="hidden" />
+                <select class="weui-select" name="select" id="edit_Pri">
+                    @if (ViewBag.pri != null)
+                    {
+                        DataTable pri = ViewBag.pri;
+                        for (int i = 0; i < pri.Rows.Count; i++)
+                        {
+                            <option value="@pri.Rows[i]["EmpID"]">@pri.Rows[i]["Name"]</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">暂无可选</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">是否启用</label></div>
+            <div class="weui-cell__hd">
+                <input type="text" id="BIState" name="name" value="@bodt.Rows[0]["BIState"]" hidden="hidden" />
+                <select class="weui-select" name="select" id="edit_BIState">
+                    <option value="0">已启用</option>
+                    <option value="1">已禁用</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">类型</label></div>
+            <div class="weui-cell__hd">
+                <input type="text" id="BIType" name="name" value="@bodt.Rows[0]["BIType"]" hidden="hidden" />
+                <select class="weui-select" name="select" id="edit_BIType">
+                    <option value="0">公司级奖金</option>
+                    <option value="1">部门级奖金</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="page__bd page__bd_spacing" style="margin: 20px 0px;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="editSure()">保存</a>
+        <a href="javascript:history.go(-1)" class="weui-btn weui-btn_warn">取消</a>
+    </div>
+}
+else
+{
+    <div class="weui-loadmore weui-loadmore_line">
+        <span class="weui-loadmore__tips">暂无数据</span>
+    </div>
+        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+            <span class="weui-loadmore__tips"></span>
+        </div>
+}
+
+    <script>
+        $(function(){
+            var pri = $("#pri").val();
+            var BIState = $("#BIState").val();
+            var BIType = $("#BIType").val();
+            $("#edit_Pri").val(pri);
+            $("#edit_BIState").val(BIState);
+            $("#edit_BIType").val(BIType);
+        })
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        //编辑确认按钮
+        function editSure() {
+            if ($("#edit_BonusItemID").val() == "" || $("#edit_BonusItemID").val() == null || $("#edit_BIName").val() == "" || $("#edit_BIName").val() == null || $("#edit_Pri").val() == "" || $("#edit_Pri").val() == null || $("#edit_BIState").val() == "" || $("#edit_BIState").val() == null || $("#edit_BIType").val() == "" || $("#edit_BIType").val() == null) {
+                alert("请填写完整信息！");
+                return false;
+            }
+            else {
+                var BonusItemID = $("#edit_BonusItemID").val();
+                var BIName = $("#edit_BIName").val();
+                var BIPrincipal = $("#edit_Pri").val();
+                var BIState = $("#edit_BIState").val();
+                var BIType = $("#edit_BIType").val();
+                $.post("/BonusItem/editSure", { BonusItemID: BonusItemID, BIName: BIName, BIPrincipal: BIPrincipal, BIState: BIState, BIType: BIType }, function (data) {
+                    alert(data);
+                    location.reload();
+                });
+            }
+        }
+    </script>
+</body>
+</html>

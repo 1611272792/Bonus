@@ -1,0 +1,136 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <title>myDetail</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+        #right_div {
+            float: left;
+        }
+
+        #right_div1 {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        #right_divx {
+            width: 100%;
+        }
+
+        #right_div2 {
+            margin-top: -20px;
+            width: 100%;
+            height: 400px;
+            overflow: auto;
+        }
+
+        #right_table1 {
+            width: 100%;
+        }
+
+            #right_table1 th {
+                background: #E9F8FF;
+                text-align: center;
+                width: 25%;
+            }
+
+        #right_table2 td {
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    @if (ViewBag.dt == null)
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+    else
+    {
+        DataTable dt = ViewBag.dt;
+        DataTable dts = ViewBag.dts;
+        DataTable cq = ViewBag.cq;
+        <label>累计金额：@dts.Rows[0]["AllMoney"] &nbsp;&nbsp;&nbsp;</label>
+        <label>剩余金额：@dts.Rows[0]["RemainMoney"]</label>
+        <label>长期金额：@cq.Rows[0]["Allmoney"]</label>
+        @*<label>授权人：@dt.Rows[0]["Name"]</label>*@
+        <div id="right_div">
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table table-bordered">
+                        <tr>
+                            <th>授权金额</th>
+                            <th>剩余金额</th>
+                            <th>有效期限</th>
+                            <th>授权日期</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="right_div2">
+                <table id="right_table2" class="table table-bordered">
+
+                        @for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            <tr onclick="javascript: document.getElementById('@dt.Rows[i]["ImpowerID"]').click();">
+                                @*<td>@dt.Rows[i]["Name"]</td>*@
+                                <td>@dt.Rows[i]["AddMoney"]</td>
+                                <td>@dt.Rows[i]["AddMoney"]</td>
+                                <td>
+                                    @if (dt.Rows[i]["Model"].ToString() == "0")
+                                    {
+                                        <span>长期有效</span>
+                                    }
+                                    else
+                                    {
+                                        <span>当月有效</span>
+                                    }
+                                </td>
+                                <td>@dt.Rows[i]["ImpowerDate"]</td>
+                                <td id="bonusID" hidden="hidden"><a href="/BonusImpower/Reason?ImpowerID=@dt.Rows[i]["ImpowerID"]" id="@dt.Rows[i]["ImpowerID"]"></a></td>
+                            </tr>
+                        }
+                </table>
+            </div>
+        </div>
+    }
+    <!--脚本-->
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+
+        //    //进入详情页面
+        //function inDetail() {
+        //    var depBounsID = $("#bonusID").html();
+        //    window.location.href = "/DepartBouns/Detail2?depBounsID=" + depBounsID;
+        //}
+
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        right_div2.onscroll = function () {
+            var right_div2_top = this.scrollTop;
+            var right_div2_left = this.scrollLeft;
+            document.getElementById("right_div1").scrollLeft = right_div2_left;
+
+
+        }
+    </script>
+</body>
+</html>

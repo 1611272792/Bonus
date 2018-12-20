@@ -1,0 +1,154 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>员工收入查询</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <script src="~/Scripts/datePicker.js"></script>
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+   
+</head>
+<body>
+    <div class="weui-cells__title">选择日期</div>
+    <div class="weui-cell">
+        <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+            <input class="weui-input" value="" id="startTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+        </div> <span style="color:gray">&nbsp;到&nbsp;</span>
+        <div class="weui-cell__ft" style="border:1px solid; width:38%;">
+            <input class="weui-input" value="" id="endTime" style="text-align:center;" placeholder="年/月/日" readonly="readonly">
+        </div>
+        <input type="button" name="name" onclick="selectData()" display="block" class="weui-btn weui-btn_mini weui-btn_primary" style="background-image: url('../../Content/weixin/images/搜索.png'); background-repeat: no-repeat;background-position: center;width:40px; margin-top: 1px; " />
+        @*<a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="selectData()">查询</a>*@
+    </div>
+    <script>
+	var starttime = new datePicker();
+	starttime.init({
+    'trigger': '#startTime', /*按钮选择器，用于触发弹出插件*/
+	'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+	'minDate':'1900-1-1',/*最小日期*/
+	'maxDate': (new Date().getFullYear()) + '-' + 12 + '-' + 31,/*最大日期*/
+	'onSubmit':function(){/*确认时触发事件*/
+	    var theSelectData = starttime.value;
+	},
+	'onClose':function(){/*取消时触发事件*/
+	}
+});
+var endtime = new datePicker();
+endtime.init({
+    'trigger': '#endTime', /*按钮选择器，用于触发弹出插件*/
+    'type': 'date',/*模式：date日期；datetime日期时间；time时间；ym年月；*/
+    'minDate': '1900-1-1',/*最小日期*/
+    'maxDate': '2100-12-31',/*最大日期*/
+    'onSubmit': function () {/*确认时触发事件*/
+        var theSelectData = endtime.value;
+    },
+    'onClose': function () {/*取消时触发事件*/
+    }
+});
+    </script>
+    <span hidden="hidden" id="empBounsID">@ViewBag.empBounsID</span>
+    <div id="EmpDetail">
+        @if (ViewBag.Emp == null)
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>来源</th>
+                                <th>金额(¥)</th>
+                                <th>日期</th>
+                                <th>状态</th>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                  
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.Emp != null)
+                        {
+                            DataTable dsEmp = ViewBag.Emp;
+                            for (int i = 0; i < dsEmp.Rows.Count; i++)
+                            {
+                                <tr>
+                                    <td>@dsEmp.Rows[i]["Bonusform"]</td>
+                                    <td>@dsEmp.Rows[i]["EarMoney"]</td>
+                                    <td>@dsEmp.Rows[i]["EarDate"]</td>
+                                    <td>@dsEmp.Rows[i]["isget"]</td>
+                                
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+     <script src="~/scripts/bootstrap.min.js"></script>
+    <!--脚本-->
+    <script type="text/javascript">
+        //判断开始日期是否大于结束日期
+            function selectData() {
+                var startTime = $("#startTime").val();
+                var endTime = $("#endTime").val();
+                var empBounsID = $("#empBounsID").html();
+                if (startTime.length > 0 && endTime.length > 0) {
+                    var startTmp = startTime.split("-");
+                    var endTmp = endTime.split("-");
+                    var sd = new Date(startTmp[0], startTmp[1], startTmp[2]);
+                    var ed = new Date(endTmp[0], endTmp[1], endTmp[2]);
+                    if (sd.getTime() > ed.getTime()) {
+                        alert("开始日期不能大于结束日期");   
+                        return false;
+                    }
+                }
+                if (startTime == "" || endTime == "" || empBounsID == "" || startTime == null || endTime == null || empBounsID == null ){
+                    
+                } else {
+                    $("#EmpDetail").load("/BonusDataQuery/SelectEmpTime", { StartTime: startTime, EndTime: endTime, EmpID: empBounsID });
+                    //$.post("/BonusDataQuery/SelectEmpTime", { StartTime: startTime, EndTime: endTime, EmpID: empBounsID })
+                }
+              
+            }
+
+            //固定和滚动
+            var right_div2 = document.getElementById("right_div2");
+            if (right_div2 = "") {
+
+            } else {
+                right_div2.onscroll = function () {
+                    var right_div2_top = this.scrollTop;
+                    var right_div2_left = this.scrollLeft;
+                    document.getElementById("right_div1").scrollLeft = right_div2_left;
+                }
+            }
+    </script>
+    
+</body>
+</html>

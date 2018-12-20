@@ -1,0 +1,79 @@
+﻿@using Sunpn_BonusWeb.Models
+@using System.Data
+
+<!--显示点击的是哪一个字母-->
+<div id="showLetter" class="showLetter"><span>A</span></div>
+<!--城市索引查询-->
+<div class="letter">
+    <ul>
+        @if (ViewBag.zimu == null)
+            {
+
+            }
+            else
+            {
+                DataTable dt = ViewBag.zimu;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                <li><a href="javascript:;">@dt.Rows[i][0].ToString()</a></li>
+            }
+        }
+
+
+    </ul>
+</div>
+<!--城市列表-->
+<div class="container">
+    <div class="city" id="userDetial">
+        @if (ViewBag.userList == null)
+            {
+
+            }
+            else
+            {
+                List<Users> userList = ViewBag.userList;
+                foreach (var item in userList)
+                {
+                <div class="city-list">
+                    <span class="city-letter" id="@item.Shou">@item.Shou</span>
+                    @foreach (var items in item.user)
+                    {
+                        <label class="u-checkbox aa" data-name="xzry" style="float:right;margin-top:10px;">
+                            <input name="xzry" type="checkbox" value="@items.userid" isEmp="@items.isEmp">
+                            <i class="icon"></i>
+                            <span class="text"></span>
+                        </label>
+                            @*<input name="xzry" type="checkbox" value="@items.userid" checked>*@
+                            <p data-id="@items.userid">
+                                @*<img src="~/Content/Images/del.png" />*@
+                                @items.name
+                                :
+                                @items.userid
+                                @*<div style="width:30px;border:1px solid red;float:left;margin-top:-85%;">
+                                        <img src="~/Content/Images/del.png" />
+
+                                    </div>
+                                    <span style="float:left;"></span>*@
+
+                            </p>
+
+                    }
+
+
+                </div>
+            }
+
+
+        }
+
+
+
+
+    </div>
+
+</div>
+
+<script>
+    $('.u-radio').jRadio();
+    $('.u-checkbox').jCheckbox();
+</script>

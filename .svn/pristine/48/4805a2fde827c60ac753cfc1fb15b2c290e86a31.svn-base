@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>常见问题</title>
+    <style>
+        .addinfo {
+            width: auto;
+            height: 180px;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div class="weui-cells__title" style="font-weight:bolder;">如何进行奖金授权?</div>
+    <div>
+        <p>1.通过点击底部导航栏的【功能】按钮,进入功能界面->点击【奖金授权管理】（只有奖金项负责人才有权力进入此页面对自己所负责的奖金项进行授权）进入页面后可以看到自己可以授权的奖金项列表</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/impower/impower.png" class="addinfo"/>
+            <img src="~/Content/Images/faq/impower/info.png" class="addinfo"/>
+        </div>
+    </div>
+    <div>
+        <p>2.左滑点击【添加授权】可以对此奖金项进行授权</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/impower/left.png" class="addinfo"/>
+            <img src="~/Content/Images/faq/impower/addimpower.png" class="addinfo"/>
+        </div>
+    </div>
+    <div>
+        <p>2.通过点击奖金项列表可以看到对应的授权记录，然后点击对应的被授权人可以查询详细的授权记录；列表默认显示当月授权记录，也可以通过时间筛选其他时间段的记录，点击每一行可以看到备注信息；同时奖金负责人也可以收回对应的奖金授权</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/impower/click.png" class="addinfo" />
+            <img src="~/Content/Images/faq/impower/impowerinfo2.png" class="addinfo" />
+            <img src="~/Content/Images/faq/impower/bz.png" class="addinfo" />
+        </div>
+    </div>
+</body>
+</html>

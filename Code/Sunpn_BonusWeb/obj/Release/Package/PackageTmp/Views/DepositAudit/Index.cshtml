@@ -1,0 +1,394 @@
+﻿@using System.Data
+@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="jack">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,
+ 		user-scalable=no" />
+    <!-- 适应手机屏幕，防止屏幕缩放 -->
+    <!--样式-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>提现审核</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baseCss_one.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            font-size: 14px !important;
+        }
+        /*单选框样式的颜色*/
+.weui-cells_checkbox .iconshift:checked + .iconshift:before {
+    content: '\EA06';
+    color: red!important;
+}
+    </style>
+</head>
+
+<body ontouchstart style="background-color:#f8f8f8">
+    <span id="CompanyId" hidden="hidden">@ViewBag.CompanyId</span>
+    <span id="UserID" hidden="hidden">@ViewBag.UserID</span>
+    <div class="weui-cell" style="float:left">
+
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="empOrDep" value="1" checked="checked" />
+                <i class="weui-icon-checked"></i><span id="emp">审核</span>
+            </label>
+        </div>
+        <div class="weui-cells_checkbox">
+            <label>
+                <input type="radio" class="weui-check" name="empOrDep" value="0" />
+                <i class="weui-icon-checked"></i><span id="dep">记录</span>
+            </label>
+        </div>
+    </div>
+   @*<div id="search" style="width:50%">
+        <div class="weui-cells__title">查找员工</div>
+        <div class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="text" class="weui-search-bar__input" id="qq" pslaceholder="搜索"/>
+            </div>
+        </div>
+    </div>*@ 
+
+
+
+
+
+    @*个人未领取*@
+    <div id="EmpDetail" >
+        <input type="button" class="weui-btn weui-btn_mini weui-btn_primary"  value="批准" onclick="EmpPayBonus()" style="margin-top:8px;margin-left:20px;"/>
+        <input type="button" class="weui-btn weui-btn_mini weui-btn_primary" value="驳回" onclick="Reject()" style="margin-top:8px;"/>
+        @*<div style="float:right"><button onclick="EmpPayBonus()">批准</button></div>
+        <div style="float:right"><button onclick="Reject()">驳回</button></div>*@
+        @if (ViewBag.Emp == null)
+        {
+            <div style="margin-top:50px;">
+                <div class="weui-loadmore weui-loadmore_line">
+                    <span class="weui-loadmore__tips">暂无数据</span>
+                </div>
+                <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                    <span class="weui-loadmore__tips"></span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>姓名</th>
+                                <th>金额(¥)</th>
+                                <th>申请时间</th>
+                                <th class="thf2">
+                                    <div class="weui-cells_checkbox">
+                                        <label for="Checkbox4">
+                                            <input type="checkbox" class="weui-check iconshift" id="Checkbox4" onchange="GetAll2()"/>
+                                            <i class="weui-icon-checked iconshift" id="iconshift"></i>全选
+                                        </label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.Emp != null)
+                        {
+                            DataTable dsEmp = ViewBag.Emp;
+                            for (int i = 0; i < dsEmp.Rows.Count; i++)
+                            {
+                                <tr>
+
+                                    <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["AuditBonusID"]').click();">@dsEmp.Rows[i]["Name"]</td>
+                                    <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["AuditBonusID"]').click();">@dsEmp.Rows[i]["GetMoney"]</td>
+                                    <td onclick="javascript: document.getElementById('@dsEmp.Rows[i]["AuditBonusID"]').click();">@dsEmp.Rows[i]["GetTime"]</td>
+                                     <td>
+                                        <div class="weui-cells_checkbox">
+                                            <label for="@dsEmp.Rows[i]["GetTime"]">
+                                                <input type="checkbox" class="weui-check" id="@dsEmp.Rows[i]["GetTime"]" name="cks2" value="@dsEmp.Rows[i]["AuditBonusID"]" />
+                                                <i class="weui-icon-checked"></i>
+                                            </label>
+                                        </div>@*<input type="checkbox" name="cks2" class="ckstyle2 check2" value="@dsEmp.Rows[i]["EmpID"]" />*@
+                                    </td>
+                                    <td id="bonusID" hidden="hidden"><a href="/DepositAudit/DepositBonusData?empBounsID=@dsEmp.Rows[i]["GetBonusID"]" id="@dsEmp.Rows[i]["AuditBonusID"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+ 
+    @*审核记录*@
+   
+    <div id="DepDetail" hidden="hidden">
+   
+       
+       <a class="weui-btn weui-btn_mini weui-btn_primary" ></a>
+        @if (ViewBag.Dep == null)
+        {
+
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+        else
+        {
+            <div id="right_div">
+                <div id="right_div1">
+                    <div id="right_divx">
+                        <table id="right_table1" class="table table-bordered">
+                            <tr>
+                                <th>申请人</th>
+                                <th>金额(¥)</th>
+                                <th>申请时间</th>
+                                <th>状态</th>
+
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="right_div2">
+                    <table id="right_table2" class="table table-bordered table-striped table-hover">
+                        @if (ViewBag.Dep != null)
+                        {
+                            DataTable dsDep = ViewBag.Dep;
+                            for (int i = 0; i < dsDep.Rows.Count; i++)
+                            {
+                                <tr onclick="javascript: document.getElementById('@dsDep.Rows[i]["GetBonusID"]').click();">
+                                    <td>@dsDep.Rows[i]["Name"]</td>
+                                    <td>@dsDep.Rows[i]["GetMoney"]</td>
+                                    <td>@dsDep.Rows[i]["GetTime"]</td>
+                                    <td>@dsDep.Rows[i]["isOrNO"]</td>
+                                    <td id="bonusID" hidden="hidden"><a href="/DepositAudit/DepositBonusData?empBounsID=@dsDep.Rows[i]["GetBonusID"]" id="@dsDep.Rows[i]["GetBonusID"]"></a></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        //审核记录单选框
+        $(":radio[name='empOrDep']").click(function () {
+            if ($(this).val() == "1") {
+                $("#emp").addClass("ziticolor");
+                $("#dep").removeClass("ziticolor");
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+
+            } else {
+                $("#dep").addClass("ziticolor");
+                $("#emp").removeClass("ziticolor");
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            }
+        });
+
+        $(function () {
+            //选择字体颜色变化
+            if ($(":radio[name='empOrDep']:checked").val() == "1") {
+                $("#emp").addClass("ziticolor");
+                $("#dep").removeClass("ziticolor");
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            } else if ($(":radio[name='empOrDep']:checked").val() == "0") {
+                $("#dep").addClass("ziticolor");
+                $("#emp").removeClass("ziticolor");
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            }
+        })
+
+        //function jiazai() {
+        //    $("#jiazai").show();
+        //}
+
+        //$(function () {
+        //    var kw = $("#qq").val();
+        //    var CompanyId = $("#CompanyId").html();
+        //    var empName = "";
+        //    $("#qq").bigAutocomplete({
+        //        url: "/BonusDataQuery/GetInfo?keyword=" + kw + "&CompanyId=" + CompanyId,
+        //        callback: function (data) {
+        //            empName = data.title;
+        //            if (empName.length > 0) {
+        //                $("#EmpDetail").load("/BonusNoGet/SearchInfo?EmpName=" + empName+"&CompanyId=" + CompanyId)
+        //            }
+        //        }
+        //    });
+
+        //})
+
+        //搜索方法
+        //function search() {
+        //    var CompanyId = $("#CompanyId").html();
+        //    var kw = $("#qq").val();
+        //    if (kw == "" || kw == null) {
+        //        location.reload();
+        //    } else {
+        //        $("#EmpDetail").load("/BonusNoGet/SearchInfo?EmpName=" + kw + "&CompanyId=" + CompanyId)
+        //    }
+        //}
+
+        ////回车键触发的搜索
+        //document.onkeydown = function (e) {
+        //    var ev = document.all ? window.event : e;
+        //    if (ev.keyCode == 13) {
+        //        search();
+        //    }
+        //}
+    </script>
+    <script type="text/javascript">
+        ////部门全选
+        //function GetAll() {
+        //    var che = document.getElementById("Checkbox3");
+        //    var ischeck = che.checked;
+        //    if (che.checked == ischeck) {
+        //        var a = document.getElementsByName("cks");
+        //        for (var i = 0; i < a.length; i++) {
+        //            a[i].checked = ischeck;
+        //        }
+        //    }
+        //}
+        //全选
+        function GetAll2() {
+            var che2 = document.getElementById("Checkbox4");
+            var ischeck = che2.checked;
+            if (che2.checked == ischeck) {
+                var b = document.getElementsByName("cks2");
+                for (var i = 0; i < b.length; i++) {
+                    b[i].checked = ischeck;
+                }
+            }
+        }
+
+        //批准 
+        function EmpPayBonus() {
+            var userID = $("#UserID").text();
+            var b = document.getElementsByName("cks2");
+            //console.log(b);
+            var r = 0;
+            var cheValue = "";
+            for (var i = 0; i < b.length; i++) {
+                //alert("状态：" + b[i].checked);
+                if (b[i].checked == true) {
+                    cheValue += b[i].value + ",";
+                    //alert(b[i].value);
+                }
+                else {
+                    r++;
+                }
+            }
+            if (r == b.length) {
+                alert("请先选中数据");
+
+            } else {
+                cheValue = cheValue.substr(0, cheValue.length - 1);
+                //alert(cheValue);
+                $.post("/DepositAudit/Ratify", { EmpID: cheValue, UserID: userID }, function (data) {
+                    alert(data);
+                    location.reload();
+                })
+            }
+        }
+        //驳回
+        function Reject() {
+            var userID = $("#UserID").text();
+            var b = document.getElementsByName("cks2");
+            //console.log(b);
+            var r = 0;
+            var cheValue = "";
+            for (var i = 0; i < b.length; i++) {
+                //alert("状态：" + b[i].checked);
+                if (b[i].checked == true) {
+                    cheValue += b[i].value + ",";
+                    //alert(b[i].value);
+                }
+                else {
+                    r++;
+                }
+            }
+            if (r == b.length) {
+                alert("请先选中数据");
+
+            } else {
+                cheValue = cheValue.substr(0, cheValue.length - 1);
+                //alert(cheValue);
+                $.post("/DepositAudit/Reject", { EmpID: cheValue, UserID: userID }, function (data) {
+                    alert(data);
+                    location.reload();
+                })
+            }
+        }
+
+
+
+        $(function () {
+            if ($("#Updepart").val() == "0") {
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            } else if ($("#Updepart").val() == "1") {
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            }
+        })
+        function DepOrEmp() {
+            if ($("#Updepart").val() == "0") {
+                $("#EmpDetail,#search").hide();
+                $("#DepDetail").show();
+            } else if ($("#Updepart").val() == "1") {
+                $("#DepDetail").hide();
+                $("#EmpDetail,#search").show();
+            }
+        }
+
+
+        //固定和滚动
+        var right_div2 = document.getElementById("right_div2");
+        if (right_div2 = "") {
+
+        } else {
+            right_div2.onscroll = function () {
+                var right_div2_top = this.scrollTop;
+                var right_div2_left = this.scrollLeft;
+                document.getElementById("right_div1").scrollLeft = right_div2_left;
+            }
+        }
+
+    </script>
+</body>
+</html>

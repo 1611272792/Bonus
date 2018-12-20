@@ -1,0 +1,91 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>奖金参数管理</title> 
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <a href="/BonusParameter/AddBonusPar?CompanyId=@ViewBag.CompanyId" @*class="weui-btn weui-btn_mini weui-btn_primary"*@ style="background-image: url('../../Content/weixin/images/添加.png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 48px;    margin-left: 3%;"></a>
+ 
+ 
+        <div class="page__bd">
+            @*<div class="weui-cells__title">奖金参数设置</div>*@
+          @if(ViewBag.Par!= null)
+          {
+              DataTable ds = ViewBag.Par;
+              for (int i = 0; i < ds.Rows.Count; i++)
+              {
+             
+                    <div class="weui-cell weui-cell_swiped">
+                        <div class="weui-cell__bd">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd"></div>
+                              
+                                <div class="weui-cell__bd">
+                                    <p>@ds.Rows[i]["TypeName"]</p>
+                                </div>
+
+                                <div class="weui-cell__ft">金额：@ds.Rows[i]["BonusNum"].ToString()  ¥</div>
+                            </div>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/BonusParameter/Detail?BonusID=@ds.Rows[i]["BonusSetID"]">编辑</a>
+                            <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="deltePB(@ds.Rows[i]["BonusSetID"])">删除</a>
+                        </div>
+                    </div>
+              
+              }
+
+          }
+               
+    </div>
+
+    @*<a href="/BonusParameter/AddBonusPar?CompanyId=@ViewBag.CompanyId" class="weui-btn weui-btn_mini weui-btn_primary" id="addBounsPar">添加</a>*@
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/scripts/jquery-weui.js"></script>
+    <script type="text/javascript">
+        function deltePB(bid) {
+            $.confirm("确认删除该奖金参数？", function () {
+                $.post("/BonusParameter/DeleteBP",{BonusID:bid},function(data){
+                    if (data == "ok") {
+                        $.toast("删除成功");
+                        location.reload();
+                    } else {
+                        $.toast("删除失败", "cancel");
+                    }
+                })
+            }, function () {
+                //点击取消后的回调函数
+                location.reload();
+            });
+        }
+
+        $(function(){
+            if(window.name != "bencalie"){
+                location.reload();
+                window.name = "bencalie";
+            }else{
+                window.name = "";
+            }
+        });
+        var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+        if (browserRule.test(navigator.userAgent)) {
+            window.onpageshow = function (event) {
+                if (event.persisted) {
+                    window.location.reload()
+                }
+            };
+        }
+    
+    </script>
+    
+</body>
+</html>

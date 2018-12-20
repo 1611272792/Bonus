@@ -1,0 +1,27 @@
+﻿@using Sunpn_BonusWeb.Models
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_LayoutFooter.cshtml";
+}
+<link href="~/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layui/layui.js"></script>
+<div>
+    <input type="checkbox" name="" title="写作" lay-skin="primary" checked>
+</div>
+<div class="layui-colla-item">
+    <h2 class="layui-colla-title">金额选择</h2>
+    <div class="layui-colla-content layui-show" style="overflow:hidden;">
+        <input type="hidden" value="a" id="xzfs" />
+        111
+
+
+
+
+    </div>
+</div>
+
+<script>
+     
+        
+</script>
+

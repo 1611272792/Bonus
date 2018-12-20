@@ -1,0 +1,232 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>详情</title>
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*部门信息*@
+
+    <div id="a">
+        <div class="page">
+            <div class="page__hd">
+                <h1 class="page__title">部门信息</h1>
+
+            </div>
+            @if (ViewBag.showDeps==null)
+                    {
+
+                    }
+                    else
+                    {
+                        DataTable ds = ViewBag.showDeps;
+
+                    <div class="page__bd">
+                <div class="weui-form-preview">
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">部门名称</label>
+                            <em class="weui-form-preview__value" id="depName">@ds.Rows[0]["DepartName"]</em>
+                        </div>
+                    </div>
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+
+                            <label class="weui-form-preview__label">负责人</label>
+                            <em class="weui-form-preview__value" id="depMan">@ds.Rows[0]["Name"]</em>
+                        </div>
+                    </div>
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">上级部门</label>
+                          
+                                <em class="weui-form-preview__value" id="updep">@ViewBag.upName</em>
+                         
+                           
+
+                        </div>
+                    </div>
+                    <div class="weui-form-preview__hd">
+                        <div class="weui-form-preview__item">
+                            <label class="weui-form-preview__label">备注</label>
+                            <em class="weui-form-preview__value" id="depRemark">@ds.Rows[0]["Remark"]</em>
+                        </div>
+
+                    </div>
+                    <div class="weui-form-preview__hd" hidden="hidden">
+                        <div class="weui-form-preview__item">
+
+                            <label class="weui-form-preview__label">部门ID</label>
+
+                            <input class="weui-input" type="text" placeholder="存部门id专用" id="se_depID" value="@ds.Rows[0]["DepartID"]"/>
+                        </div>
+                    </div>
+                    @*<div class="weui-form-preview__ft" id="OpearDep">
+                        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" id="EditDep" onclick="getEdit()">编辑</a>
+                        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:" id="DeleteDep" style="color:red">删除</a>
+                    </div>*@
+                  
+                </div>
+            </div>
+            }
+            <div class="page__bd page__bd_spacing" style="margin-top:5px;">
+                <a href="javascript:;" class="weui-btn weui-btn_primary" id="showAndroidDialog2" onclick="getEdit()">编辑</a>
+                <a href="javascript:;" class="weui-btn weui-btn_warn" id="DeleteDep">删除</a>
+            </div>           
+             <div class="page__ft">
+                <a href="javascript:home()"></a>
+            </div>
+        </div>
+    </div>
+         
+    @*编辑部门弹框*@
+    <div id="dialogs">
+        <div class="js_dialog" id="androidDialog2" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog weui-skin_android">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">编辑部门</strong></div>
+                <div class="weui-dialog__bd" style="height:auto;">
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">名称</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" placeholder="请输入部门名称" id="edit_depart" />
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">上级部门</label></div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="select2" id="edit_Updepart">
+                                    @if (ViewBag.dname != null)
+                                    {
+                                        DataTable dn = ViewBag.dname;
+                                        for (int i = 0; i < dn.Rows.Count; i++)
+                                        {
+                                            <option value=@dn.Rows[i]["DepartName"]>@dn.Rows[i]["DepartName"]</option>
+                                        }
+                                        <option value="无">无</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="null">请添加部门</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">负责人</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" placeholder="请输入负责人名称" id="edit_resman" />
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="text" placeholder="请输入备注" id="edit_remark" />
+                            </div>
+                            <div class="weui-cell__bd" hidden="hidden">
+                                <input class="weui-input" type="text" placeholder="存部门id专用" id="edit_DepID" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="quxiao()">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="add" onclick="edit_Sure()">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*删除部门弹框*@
+    <div id="dialogs">
+        <div class="js_dialog" id="androidDialog3" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog weui-skin_android">
+                确认删除？
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default" onclick="quxiao()">取消</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" onclick="delete_Sure()">确认</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        //获取编辑的信息
+        function getEdit() {
+            var depname = $("#se_depID").val();
+            $.post("/DepartManger/SelectDep", { SelectDep: depname }, function (data) {
+                if (data != "no") {
+                    debugger;
+                    var info = data.split(".");
+                    $("#edit_depart").val(info[0]);
+                    $("#edit_Updepart").val(info[1]);
+                    $("#edit_resman").val(info[2]);
+                    $("#edit_remark").val(info[3]);
+                    $("#edit_DepID").val(info[4]);
+                    $('#androidDialog2').fadeIn(200);
+                }
+            })
+        }
+        //取消按钮清空数据
+        function quxiao() {
+            $('#androidDialog2').fadeOut(200);
+            $('#androidDialog3').fadeOut(200);
+        }
+        //添加部门弹框
+        $(function () {
+            
+            var $androidDialog3 = $('#androidDialog3');
+
+            $('#dialogs').on('click', '.weui-dialog__btn', function () {
+                $(this).parents('.js_dialog').fadeOut(200);
+            });
+           
+            $('#DeleteDep').on('click', function () {
+                $androidDialog3.fadeIn(200);
+            });
+        });
+        //编辑
+        function edit_Sure() {
+            if ($("#edit_depart").val() == "" || $("#edit_depart").val() == null || $("#edit_Updepart").val() == "" || $("#edit_Updepart").val() == null || $("#edit_resman").val() == "" || $("#edit_resman").val() == null) {
+                alert("不能为空，请输入合适的值！");
+            } else {
+                debugger;
+                var editDep = $("#edit_depart").val();
+                var editPID = $("#edit_Updepart").val();
+                var editResman = $("#edit_resman").val();
+                var editRemark = $("#edit_remark").val();
+                var editDepID = $("#edit_DepID").val();
+                $.post("/DepartManger/EidtDep", { DepartName: editDep, UpDep: editPID, Resman: editResman, Remark: editRemark, DepID: editDepID }, function (data) {
+                    alert(data);
+                    location.reload();
+                })
+            }
+        }
+        //删除
+        function delete_Sure() {
+            //var deleteDepID = $("#se_depID").val();
+            var deleteDepID = $("#se_depID").val();
+            $.post("/DepartManger/DelDep", { DepID: deleteDepID }, function (data) {
+                if (data = "删除成功") {
+                    alert(data);
+                    window.location.href = document.referrer;//返回上一页并刷新 
+                }
+                else {
+                    alert(data);
+                }
+            })
+
+        }
+    </script>
+</body>
+</html>

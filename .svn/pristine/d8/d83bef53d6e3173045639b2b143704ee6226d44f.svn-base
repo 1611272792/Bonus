@@ -1,0 +1,228 @@
+﻿@using System.Data
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>选择人员</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    @*<link href="~/Content/weixin/css/ydui.css" rel="stylesheet" />
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/css/JCheck.css" rel="stylesheet" />
+    <script src="~/Content/js/JCheck.js"></script>
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/searchJS/jquery.bigautocomplete.css" rel="stylesheet" />
+    
+    <script src="~/Content/searchJS/jquery.bigautocomplete.js"></script>
+</head>
+<body>
+    <input type="button" value="确定" id="btnok" />
+    <input type="hidden" id="companyid" value="@ViewBag.companyId"/>
+    @*<input type="text" id="userId"/>*@
+    <div class="weui-search-bar__form" style="width:84%;float:left;">
+        <div class="weui-search-bar__box">
+            <i class="weui-icon-search"></i>
+            <input type="text" class="weui-search-bar__input" id="qq" placeholder="搜索员工" />
+        </div>
+    </div>
+    <input type="button" value="搜索" onclick="search()"/>
+    <div class="weui-cells" id="emp">
+        <div class="weui-cells__title">部门信息</div>
+        @if (ViewBag.depList != null)
+                    {
+                        DataTable dt = ViewBag.depList;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                <a class="weui-cell weui-cell_access" href="/UserManager/Detail?DepartID=@dt.Rows[i]["DepartID"].ToString()">
+                    <div class="weui-cell__bd">
+                        <p>@dt.Rows[i]["DepartName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <label class="u-checkbox" data-name="radio1" style="float:right">
+                            <input name="xzry" type="checkbox" value="@dt.Rows[i]["DepartID"].ToString()">
+                            <i class="icon"></i>
+                            <span class="text"></span>
+                        </label>
+                    </div>
+                </a>
+            }
+        }
+        <div class="weui-cells__title">员工信息</div>
+        @if (ViewBag.empList != null)
+        {
+            DataTable dt = ViewBag.empList;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><img src="~/Content/Images/GreenSelect.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd">
+                                <input type="text" name="name" value="张三" hidden="hidden" id="name" />
+                                <p>@dt.Rows[i]["Name"].ToString()</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <label class="u-checkbox" data-name="radio1" style="float:right">
+                                    <input name="xzry" type="checkbox" value="@dt.Rows[i]["EmpID"].ToString()">
+                                    <i class="icon"></i>
+                                    <span class="text"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+     
+
+    </div>
+
+    <style>
+        *,
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        [class*="radio-group-"],
+        [class*="checkbox-group-"] {
+            padding-left: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+            [class*="radio-group-"] > h3,
+            [class*="checkbox-group-"] > h3 {
+                margin-bottom: 10px;
+            }
+
+        .u-radio,
+        .u-checkbox {
+            line-height: 24px;
+        }
+
+            .u-radio .icon,
+            .u-checkbox .icon {
+                display: inline-block;
+                *zoom: 1;
+                *display: inline;
+                position: relative;
+                top: -2px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+            }
+
+            .u-radio .icon {
+                background: url("/Content/Images/rnocheck.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-radio.z-checked .icon {
+                background-image: url("/Content/Images/rcheck.png");
+                ;
+            }
+
+            .u-checkbox .icon {
+                background: url("/Content/Images/noSelect.png");
+                -webkit-background-size: contain;
+                background-size: contain;
+            }
+
+            .u-checkbox.z-checked .icon {
+                background-image: url("/Content/Images/check_icon.png");
+            }
+    </style>
+
+    <script>
+        $('.u-radio').jRadio();
+        $('.u-checkbox').jCheckbox();
+        //自动补全
+        $(function ()
+        {
+            var CompanyId = $("#companyid").val();
+            debugger;
+            var kw = $("#qq").val().trim().replace(/\s|\xA0/g, "");
+            debugger;
+            var empName = "";
+            $("#qq").bigAutocomplete({
+                url: "/SendBonus/SelectUsersZidong?keyword=" + kw + "&CompanyId=" + CompanyId,
+                callback: function (data)
+                {
+                    if (data != "" && data != null)
+                    {
+                        empName = data.title;
+                        //alert(empName);
+                        if (empName.length > 0)
+                        {
+                            $("#emp").load("/SendBonus/SearchEmp?Name=" + empName + "&CompanyID=" + CompanyId)
+                        }
+                    }
+                }
+            });
+        })
+        
+        //确定
+        $("#btnok").click(function ()
+        {
+            
+            var spCodesTemp = "";
+            $('input:checkbox[name=xzry]:checked').each(function (i)
+            {
+                if (0 == i)
+                {
+                    spCodesTemp = $(this).val();
+                } else
+                {
+                    spCodesTemp += ("," + $(this).val());
+                }
+            });
+            //得到所有选中的复选框
+            //var BonusMoney = $("input[type=checkbox]").val();
+            alert("BonusMoney:" + spCodesTemp);
+        });
+        //搜索方法
+        function search()
+        {
+            var CompanyId = $("#companyid").val();
+            var kw = $("#userId").val().trim();;
+            if (kw == "" || kw == null)
+            {
+                location.reload();
+            }
+            else
+            {
+                $("#emp").load("/SendBonus/SearchEmp?Name=" + kw + "&CompanyID=" + CompanyId)
+            }
+        }
+
+    </script>
+</body>
+</html>

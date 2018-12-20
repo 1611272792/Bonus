@@ -1,0 +1,354 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>交易</title>
+   
+</head>
+<body>
+    <div>
+        
+        
+        <section class="g-scrollview">
+            <div class="m-celltitle">
+                
+                <input type="hidden" value="@ViewBag.userId " id="comUserid" />
+                <input type="hidden" value="@ViewBag.yue" id="yue"/>
+                <input type="hidden" value="@ViewBag.companyId" id="companyId" />
+            </div>
+            <div class="m-cell demo-small-pitch">
+                <div class="cell-item">
+                    <div class="cell-left"></div>
+                    <div class="cell-right">
+                        <input type="text" class="cell-input" placeholder="请输入拼音简写" autocomplete="off" id="PingJian" />
+                    </div>
+                    <input type="hidden" value="" id="Userid" />
+                    <i class="icon-qrscan" style="font-size:30px;padding-top:12px;padding-right:12px;" onclick="dj()"></i>
+                    @*<i class="weui-icon-search"></i>
+                        <input type="text" class="weui-search-bar__input" id="qq" placeholder="搜索" required />*@
+
+                </div>
+            </div>
+            <div class="m-celltitle"><span style="color:red">*</span> 金额</div>
+            <div class="m-cell demo-small-pitch">
+                <div class="cell-item">
+                    <div class="cell-left">￥</div>
+                    <div class="cell-right">
+                        <input type="number" class="cell-input" onkeyup="this.value=this.value.replace(/[^\d]/g,'') " onafterpaste="this.value=this.value.replace(/[^\d]/g,'') " placeholder="请输入金额" autocomplete="off" id="TradingMoney" />
+                    </div>
+                    <input type="hidden" id="beizhuContent2" />
+                </div>
+            </div>
+            <div class="m-celltitle">备注</div>
+            <div class="m-cell demo-small-pitch">
+                <div class="cell-item">
+                    <div class="cell-left"></div>
+                    <div class="cell-right">
+                        <input type="text" class="cell-input" placeholder="请输入备注内容，不能超过10个字" autocomplete="off" id="beizhuContent" />
+                    </div>
+                    
+                </div>
+            </div>
+
+            <button type="button" id="btnTraing" class="btn-block btn-primary">付款</button>
+            @*<p href="#" id="beizhu" style="color:#0063cf;text-align:center;font-size:16px;padding-top:10px;">添加备注</p>*@
+
+        </section>
+    </div>
+
+    @*添加备注*@
+    <div class="weui_dialog_confirm" id="beizhuAlert" style="display:none;">
+        <div class="weui_mask"></div>
+        <div class="weui_dialog">
+            <div class="weui_dialog_hd"><strong class="weui_dialog_title">添加备注</strong></div>
+            <div class="weui_dialog_bd">
+                <div class="m-cell demo-small-pitch">
+                    <div class="cell-item">
+                        <textarea class="cell-textarea" placeholder="请输入备注内容" id="beizhuContent"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui_dialog_ft">
+                <a href="javascript:;" class="weui_btn_dialog default" id="btnCancel">取消</a>
+                <a href="javascript:;" class="weui_btn_dialog primary" id="btnOK">确定</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weixin/css/ydui.css" rel="stylesheet" />
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>
+    @*<link href="~/wexin/dist/style/weui.css" rel="stylesheet" />*@
+    @*<link href="~/wexin/dist/example/example.css" rel="stylesheet" />*@
+    <link href="~/Content/css/weui.css" rel="stylesheet" />
+    <link href="~/Content/css/example.css" rel="stylesheet" />
+    <script src="~/Content/weixin/js/ydui.js"></script>
+    <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+    
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <style type="text/css">
+        .btn-primary {
+            background-color: #319ee3;
+        }
+        .btn-primary:active { background-color: #319ee3; }
+        .weui_btn_dialog.primary {
+  color: #319ee3;
+}
+    </style>
+    <script>
+        wx.config({
+            beta: true,
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '@ViewBag.appid', // 必填，企业号的唯一标识，此处填写企业号corpid
+            timestamp: '@ViewBag.timestamp', // 必填，生成签名的时间戳
+            nonceStr: '@ViewBag.noncestr', // 必填，生成签名的随机串
+            signature: '@ViewBag.signature',// 必填，签名，见附录1
+            jsApiList: ['checkJsApi', 'scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.error(function (res)
+        {
+            alert("出错了:" + res.errMsg);
+        });
+        wx.ready(function ()
+        {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+            wx.checkJsApi({
+                //调用微信扫一扫功能
+                jsApiList: ['scanQRCode', 'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'],
+                success: function (res)
+                {
+
+                }
+            });
+        });
+        var dialog;
+        !function (win, $)
+        {
+            dialog = win.YDUI.dialog;
+        }(window, jQuery);
+        //出现条码
+        function dj()
+        {
+
+            wx.scanQRCode({
+                desc: 'scandesc',
+                needResult: 1,
+                scanType: ["qrCode", "barCode"],
+                success: function (res)
+                {
+
+                    //alert("s");
+                    //alert("s");
+                    //alert("二维码:" + res.resultStr);
+                    var GetPerson = res.resultStr;
+                    ////判断是否是给自己发奖金
+                    var comUserid = $("#comUserid").val();//进来的id
+                    //alert(comUserid + "进来的");
+                    ////alert("扫码的");
+                    var companyId = $("#companyId").val();//公司id
+                    if (comUserid == GetPerson)
+                    {
+                        dialog.notify('不能给自己交易', 5000, function ()
+                        {
+                            return false;
+                        });
+                    }
+                    else
+                    {
+                        //判断是否是本公司的员工
+                        $.post("/Tradding/IsPersons", { GetPerson: res.resultStr, comUserid: comUserid, companyId: companyId }, function (data)
+                        {
+                            if (data == "no")
+                            {
+                                dialog.notify('不属于同一个公司', 5000, function ()
+                                {
+                                    return false;
+                                });
+                            }
+                            else if (data == "不能给自己交易")
+                            {
+                                dialog.notify('不能给自己交易', 5000, function ()
+                                {
+                                    return false;
+                                });
+                            }
+                            else
+                            {
+                                $("#PingJian").val(data);
+                                $("#Userid").val(GetPerson);
+                            }
+                        });
+                    }
+
+
+                }
+            });
+        }
+
+        //付款-交易
+        $("#btnTraing").click(function ()
+        {
+
+            //交易的userid
+            var Userid = $("#Userid").val().trim();
+            //金额
+            var TradingMoney = $("#TradingMoney").val().trim();
+            //备注
+            var beizhuContent = $("#beizhuContent").val().trim();
+            //发送的id
+            var comUserid = $("#comUserid").val().trim();
+            //余额
+            var yue = $("#yue").val().trim();
+          
+
+            if (parseInt(yue) <= 0)
+            {
+                dialog.notify('当前余额不足', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+            if (parseInt(yue) < parseInt(TradingMoney))
+            {
+                dialog.notify('当前余额不足', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+
+            if (Userid == "")
+            {
+                dialog.notify('请选择收益人', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+            else if (comUserid == Userid)
+            {
+                dialog.notify('不能给自己交易', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+            else if (!isNaN(TradingMoney) && parseInt(TradingMoney) <= 0)
+            {
+                dialog.notify('金额输入有误', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+            else if (parseInt(TradingMoney) > 200)
+            {
+                dialog.notify('金额最多不能超过200', 5000, function ()
+                {
+                    return false;
+                });
+                return false;
+            }
+            else if (beizhuContent.length > 0)
+            {
+                if (beizhuContent.length > 10)
+                {
+                    dialog.notify('备注不能超过10个字', 5000, function ()
+                    {
+                        return false;
+                    });
+                    return false;
+                }
+                
+            }
+            var companyId = $("#companyId").val();
+
+
+            $.post("/Tradding/AddTrading", { Userid: Userid, TradingMoney: TradingMoney, beizhuContent: beizhuContent, comUserid: comUserid, companyId: companyId }, function (data)
+            {
+                if (data == "ok")
+                {
+                    dialog.toast('付款成功！', 'success', 1000);
+                    document.location.reload();
+                }
+                else
+                {
+                    dialog.toast(data, 'error', 1000, function ()
+                    {
+                    });
+                    return false;
+                }
+            })
+            //alert("UserID:" + Userid + "TradingMoney:" + TradingMoney + "beizhuContent:" + beizhuContent);
+        });
+
+        //点击备注出来备注
+        $("#beizhu").click(function ()
+        {
+            //dialog.notify('不属于同一个公司', 5000, function ()
+            //{
+            //    return false;
+            //});
+
+            //普通确认框
+            $("#beizhuAlert").show();
+            $("#btnOK").click(function ()
+            {
+                var beizhuContent = $("#beizhuContent").val();
+               //alert("内容:" + beizhuContent);
+                $("#beizhuContent2").val(beizhuContent);
+                $("#beizhuAlert").hide();
+
+            });
+            //取消
+            $("#btnCancel").click(function ()
+            {
+                $("#beizhuAlert").hide();
+            })
+
+        });
+        var cc = $("#comUserid").val();
+        var companyId2 = $("#companyId").val();//公司id
+        //自动补全
+        $("#PingJian").autocomplete({
+            source: "/Tradding/GetPersons?EmpId=" + cc + "&CompanyId=" + companyId2,
+            focus: function (event, ui)
+            {
+                $("#PingJian").val(ui.item.label);
+                return false;
+            },
+            select: function (event, ui)
+            {
+                $("#PingJian").val(ui.item.label);
+                $("#Userid").val(ui.item.value);
+                
+
+
+                return false;
+            }
+        });
+
+        //!function (win, $)
+        //{
+        //    var dialog = win.YDUI.dialog;
+        //    $('#beizhu').on('click', function ()
+        //    {
+        //        dialog.confirm('添加备注', '<div class="m-cell demo-small-pitch"><div class="cell-item"><input type="text" class="cell-input" placeholder="请输入备注内容" autocomplete="off" id="beizhuContent" /></div></div>', function ()
+        //        {
+        //            var beizhuContent = $("#beizhuContent").val();
+        //            alert("内容:" + beizhuContent);
+        //            $("#beizhuContent2").val(beizhuContent);
+        //       });
+        //    });
+        //}(window, jQuery);
+    </script>
+</body>
+</html>

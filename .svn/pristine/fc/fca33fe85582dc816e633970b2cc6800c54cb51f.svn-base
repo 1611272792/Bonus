@@ -1,0 +1,174 @@
+﻿using Sunpn.WebMes.Helper;
+using Sunpn_BonusWeb.Models;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Web;
+using System.Web.Security;
+
+namespace Sunpn_BonusWeb.BonusHelper
+{
+    public class JSAPI
+    {
+        /// <summary>
+        /// 生成时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数
+        /// </summary>
+        /// <returns>时间戳</returns>
+        Log log = new Log();
+        private Sunpn.Data.SqlServer.SQLConnection sql = new Sunpn.Data.SqlServer.SQLConnection(BonusHelper.AppConfig.ConnString);
+
+        private static string GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }
+
+        /// <summary>
+        /// 生成随机串，随机串包含字母或数字
+        /// </summary>
+        /// <returns>随机串</returns>
+        private static string GetNonceStr()
+        {
+            return Guid.NewGuid().ToString().Replace("-", "");
+        }
+
+        /// <summary>
+        /// 获取JSSDK所需要的参数信息，返回Hashtable结合
+        /// </summary>
+        /// <param name="appId">微信AppID</param>
+        /// <param name="jsTicket">根据Token获取到的JSSDK ticket</param>
+        /// <param name="url">页面URL</param>
+        /// <returns></returns>
+        private static Hashtable GetParameters(string appId, string jsTicket, string url)
+        {
+            string timestamp = GetTimeStamp();
+            string nonceStr = GetNonceStr();
+            Log logs = new Log();
+            // 这里参数的顺序要按照 key 值 ASCII 码升序排序  
+            string rawstring = "jsapi_ticket=" + jsTicket + "&noncestr=" + nonceStr + "&timestamp=" + timestamp + "&url=" + url + "";
+            logs.AppenLog("rawstring:" + rawstring);
+            string signature = GetSignature(rawstring);
+            logs.AppenLog("signature:" + signature);
+            Hashtable signPackage = new Hashtable();
+            signPackage.Add("appid", appId);
+            signPackage.Add("noncestr", nonceStr);
+            signPackage.Add("timestamp", timestamp);
+            signPackage.Add("url", url);
+            signPackage.Add("signature", signature);
+            signPackage.Add("jsapi_ticket", jsTicket);
+            signPackage.Add("rawstring", rawstring);
+
+
+            return signPackage;
+        }
+
+        /// <summary>
+        /// 使用SHA1哈希加密算法生成签名
+        /// </summary>
+        /// <param name="rawstring">待处理的字符串</param>
+        /// <returns></returns>
+        private static string GetSignature(string rawstring)
+        {
+            return FormsAuthentication.HashPasswordForStoringInConfigFile(rawstring, "SHA1").ToLower();
+
+            ////下面和上面代码等价
+            //SHA1 sha1 = new SHA1CryptoServiceProvider();
+            //byte[] bytes_sha1_in = System.Text.UTF8Encoding.Default.GetBytes(rawstring);
+            //byte[] bytes_sha1_out = sha1.ComputeHash(bytes_sha1_in);
+            //string signature = BitConverter.ToString(bytes_sha1_out);
+            //signature = signature.Replace("-", "").ToLower();
+            //return signature;
+        }
+
+        /// <summary>
+        /// 获取用于JS-SDK的相关参数列表（该方法对accessToken和JSTicket都进行了指定时间的缓存处理，多次调用不会重复生成）
+        /// 集合里面包括jsapi_ticket、noncestr、timestamp、url、signature、appid、rawstring
+        /// </summary>
+        /// <param name="appid">应用ID</param>
+        /// <param name="Longcode">长期授权码</param>
+        /// <param name="url">页面URL</param>
+        /// <returns></returns>
+        public Hashtable GetJSAPI_Parameters(string appid,string Longcode, string token,DateTime expressYxq, string url)
+        {
+            log.AppenLog("GetJSAPI_Parameters");
+            //string accessToken = AccessTokenHelper.IsExistAccess_Token();
+            string accessToken = AccessTokenHelper.GetQiye(Longcode,appid,token,expressYxq);
+            if (accessToken.Contains("expires_in"))
+            {
+                //跟环数据库中的token和时间
+                DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(QiYeaccess_token));
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(accessToken));
+                QiYeaccess_token obj = (QiYeaccess_token)ser.ReadObject(ms);
+                string sqlstr2 = string.Format($"exec proc_Weixin 'UpdateAtoken','','','','','{appid}','','{obj.access_token}','{DateTime.Now.AddSeconds(int.Parse(obj.expires_in)).ToString("yyyy-MM-dd HH:mm:ss")}'");
+                string info2 = sql.EditDataCommand(sqlstr2);
+                accessToken = obj.access_token;
+            }
+            log.AppenLog("accessToken:" + accessToken);
+            Tuple<bool, string> t = GetJSAPI_Ticket(accessToken);
+            log.AppenLog("t.Item2 " + t.Item2);
+            //TextHelper.Fun_WriteTxt($"appid:{appid}\r\nappSecret:{appSecret}\r\nurl:{url}\r\naccessToken:{accessToken}\r\njsTicket:{t.Item2}");
+            // WriteLog("jsTicket:" + t.Item2);
+            return GetParameters(appid, t.Item2, url);
+        }
+
+        //TjzNwNC9IY4Q00Ah7nz8zSxsVels6g4B2-oEUK6IfTqGh64FKQxhDut_LrNm9roth_Na7eDogHTvRJsegP-Daq6m8iIH6s17LTu5ifdJ8YIhUKcxQ68gzc54Gh8vQffCOA-qA5CzV9TphwqvRRg6yehgTxWjn7U9Zo_9bX5QSBimZkq75rYk6lc_xdD8PeBGktQDk6JyDwqMKVb6DHTaqg
+        //TjzNwNC9IY4Q00Ah7nz8zSxsVels6g4B2-oEUK6IfTqGh64FKQxhDut_LrNm9roth_Na7eDogHTvRJsegP-Daq6m8iIH6s17LTu5ifdJ8YIhUKcxQ68gzc54Gh8vQffCOA-qA5CzV9TphwqvRRg6yehgTxWjn7U9Zo_9bX5QSBimZkq75rYk6lc_xdD8PeBGktQDk6JyDwqMKVb6DHTaqg
+        //TjzNwNC9IY4Q00Ah7nz8zSxsVels6g4B2-oEUK6IfTqGh64FKQxhDut_LrNm9roth_Na7eDogHTvRJsegP-Daq6m8iIH6s17LTu5ifdJ8YIhUKcxQ68gzc54Gh8vQffCOA-qA5CzV9TphwqvRRg6yehgTxWjn7U9Zo_9bX5QSBimZkq75rYk6lc_xdD8PeBGktQDk6JyDwqMKVb6DHTaqg
+        private Tuple<bool, string> GetJSAPI_Ticket(string accessToken)
+        {
+            log.AppenLog("GetJSAPI_Ticket2");
+            string ticket = AppConfig.JSAPI_Ticket;
+            log.AppenLog("abc");
+            DateTime dt = AppConfig.Ticket_YouXRQ;
+            log.AppenLog("bc");
+            if (!string.IsNullOrWhiteSpace(ticket) && dt > DateTime.Now)
+                return new Tuple<bool, string>(true, ticket);
+            log.AppenLog("c");
+            var url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token={0}", accessToken);
+            log.AppenLog("GetJSAPI_Ticketurl:" + url);
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
+            req.Method = "GET";
+            try
+            {
+                WebResponse wr = req.GetResponse();
+                HttpWebResponse myResponse = (HttpWebResponse)req.GetResponse();
+                StreamReader reader = new StreamReader(myResponse.GetResponseStream(), Encoding.UTF8);
+                string content = reader.ReadToEnd();
+                log.AppenLog("content" + content);
+                Ticket t = Newtonsoft.Json.JsonConvert.DeserializeObject<Ticket>(content);
+                //Ticket t = JsonHelper.DeserializeJsonToObject<Ticket>(content);
+                log.AppenLog("t:" + t);
+                if (t != null)
+                {
+                    AppConfig.JSAPI_Ticket = t.ticket;
+                    AppConfig.Ticket_YouXRQ = DateTime.Now.AddSeconds(7000);
+                    return new Tuple<bool, string>(true, t.ticket);
+                }
+                else
+                {
+                    return new Tuple<bool, string>(false, "");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.AppenLog("GetJSAPI_Ticket错误：" + ex.Message);
+                return new Tuple<bool, string>(false, ex.Message);
+            }
+        }
+        private static void WriteLog(string strmsg)
+        {
+            strmsg = $"{strmsg}\r\n";
+            using (FileStream fs = System.IO.File.Open("D:\\奖金系统的.txt", FileMode.Append, FileAccess.Write, FileShare.Write))
+            {
+                byte[] bys = Encoding.Default.GetBytes(strmsg);
+                fs.Write(bys, 0, bys.Length);
+                fs.Close();
+            }
+        }
+    }
+}

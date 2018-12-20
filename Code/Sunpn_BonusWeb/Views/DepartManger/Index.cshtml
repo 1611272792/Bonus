@@ -1,0 +1,209 @@
+﻿@using System.Data;
+@using Sunpn_BonusWeb.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>部门管理</title>
+    @*<script src="~/scripts/jquery-1.10.2.min.js"></script>*@
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/weui.min.css" rel="stylesheet" />
+
+    <link href="~/Content/jquery-weui.css" rel="stylesheet" />
+
+    <link href="~/Content/css/baceCss_two.css" rel="stylesheet" />
+
+
+    <style>
+        .weui-badge {
+            background-color: #319EE3;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div>
+        @*<a href="/DepartManger/addDepart?CompanyId=@ViewBag.CompanyId" style="background-image: url('../../Content/weixin/images/添加.png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 28px; float: left; margin-top: 1%; margin-left: 3%;margin-bottom:0.8%"></a>
+            <input type="button" class="weui-btn weui-btn_mini weui-btn_primary" id="btn_Tongbu" value="微信同步" />*@
+        <a href="javascript:;" id="btn_Tongbu" style="background-image: url('../../Content/weixin/images/同步zzz.png'); background-repeat: no-repeat; background-position: 50% 50%; display: block; width: 10%; height: 38px; float: left; margin-top: 5px; margin-left: 3%;margin-bottom:0.8%;background-size:38px;"></a>
+        @* <a href="/DepartManger/addDepart?CompanyId=@ViewBag.CompanyId" class="weui-btn weui-btn_mini weui-btn_primary" >添加部门</a>*@
+        <input type="hidden" value="@ViewBag.CompanyId" id="compid" />
+    </div>
+    <div class="weui-cells" id="emp" style="float:left;width:100%;margin-top:0px;">
+        @*<div class="weui-cells__title">选择部门</div>*@
+
+        @if (ViewBag.dname != null)
+        {
+            List<Dep> dn = ViewBag.dname;
+
+            foreach (var item in dn)
+            {
+                <a href="/DepartManger/sonView?depID=@item.depId&CompanyId=@ViewBag.CompanyId" id="@item.depId" hidden="hidden"></a>
+
+                <div class="weui-cell weui-cell_swiped">
+                    <div class="weui-cell__bd">
+                        <div class="weui-cell weui-cell_access" onclick="javascript: document.getElementById('@item.depId').click();">
+                            <div class="weui-cell__hd">
+                                <img src="/Content/weixin/images/depart.png" style="width:20px;height:20px;" />
+                            </div>
+
+                            <div class="weui-cell__bd">
+                                <p>@item.depName</p>
+                            </div>
+                            <div class="weui-cell__ft" style="padding-right:25px;">
+                                @item.sonCount
+                            </div>
+                            @*<div class="weui-cell__ft"> <span class="weui-badge"> @item.sonCount </span> </div>*@
+                        </div>
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/DepartManger/EditView?depID=@item.depId&CompanyId=@ViewBag.CompanyId">编辑</a>
+                        @*<a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure(@dn.Rows[i]["DepartID"])">删除</a>*@
+                        </div>
+                                    </div>
+                            }
+                            @*{
+                                @*for (int i = 0; i < dn.Rows.Count; i++)
+                                {
+                                    <a href="/DepartManger/sonView?depID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId" id="@dn.Rows[i]["DepartID"]" hidden="hidden"></a>
+                                    <div class="weui-cell weui-cell_swiped">
+                                        <div class="weui-cell__bd">
+                                            <div class="weui-cell weui-cell_access" onclick="javascript: document.getElementById('@dn.Rows[i]["DepartID"]').click();">
+                                                <div class="weui-cell__hd">
+                                                    <img src="/Content/weixin/images/depart.png" style="width:20px;height:20px;" />
+                                                </div>
+
+                                                <div class="weui-cell__bd">
+                                                    <p>@dn.Rows[i]["DepartName"]</p>
+                                                </div>
+                                                <div class="weui-cell__ft" style="padding-right:25px;">
+                                                    @dn.Rows[i]["SonNum"]
+                                                </div>
+                                                <div class="weui-cell__ft"> <span class="weui-badge"> @dn.Rows[i]["SonNum"] </span> </div>
+                                            </div>
+                                        </div>
+                                        <div class="weui-cell__ft">
+                                            <a class="weui-swiped-btn weui-swiped-btn_default close-swipeout" href="/DepartManger/EditView?depID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId">编辑</a>
+                                            @*<a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:;" onclick="delete_Sure(@dn.Rows[i]["DepartID"])">删除</a>*@
+                        @*</div>
+                            </div>*@
+
+                        @* }*@
+
+                        @*}*@
+
+
+                        }
+                        else
+                        {
+                        <div class="weui-loadmore weui-loadmore_line">
+                            <span class="weui-loadmore__tips">暂无子部门</span>
+                        </div>
+                        <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                            <span class="weui-loadmore__tips"></span>
+                        </div>
+                        }
+
+                    </div>
+
+
+                    <script src="~/Scripts/jquery-weui.js"></script>
+                    <script type="text/javascript">
+                        //删除
+                        function delete_Sure(depID)
+                        {
+                            $.confirm("确认删除该部门？", function ()
+                            {
+                                $.post("/DepartManger/DelDep", { DepID: depID }, function (data)
+                                {
+                                    if (data == "删除成功")
+                                    {
+                                        $.toast("删除成功");
+                                        location.reload();
+                                    }
+                                    else
+                                    {
+                                        alert(data);
+                                    }
+                                })
+                            }, function ()
+                            {
+                                //点击取消后的回调函数
+                            });
+                        }
+                        $(function ()
+                        {
+                            if (window.name != "bencalie")
+                            {
+                                location.reload();
+                                window.name = "bencalie";
+                            } else
+                            {
+                                window.name = "";
+                            }
+
+                            //微信同步
+                            $("#btn_Tongbu").click(function ()
+                            {
+                                var compid = $("#compid").val();
+                                $.ajax({
+                                    type: "POST",
+                                    url: '/DepartManger/SelectDep',
+                                    data: { compid: compid },
+                                    success: function (data)
+                                    {
+
+                                        $.hideLoading();//移除loading
+                                        if (data == "ok")
+                                        {
+
+                                            $.toast("同步成功");
+                                            document.location.reload();
+                                        }
+                                        else
+                                        {
+                                            $.toast(data, "forbidden");
+
+                                            return false;
+                                        }
+                                    },
+                                    beforeSend: function ()
+                                    {
+
+                                        $.showLoading("同步中");
+
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown)
+                                    {
+                                        $.toast("错误", "cancel");
+                                        return false;
+                                    }
+
+                                });
+                                //$.post("/DepartManger/SelectDep", { compid:compid}, function (data)
+                                //{
+                                //    alert(data);
+                                //});
+                            })
+                        });
+                        var browserRule = /^.*((iPhone)|(iPad)|(Safari))+.*$/;
+                        if (browserRule.test(navigator.userAgent))
+                        {
+                            window.onpageshow = function (event)
+                            {
+                                if (event.persisted)
+                                {
+                                    window.location.reload()
+                                }
+                            };
+                        }
+                    </script>
+</body>
+</html>

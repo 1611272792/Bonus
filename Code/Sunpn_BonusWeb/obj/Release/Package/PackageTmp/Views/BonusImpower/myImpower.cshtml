@@ -1,0 +1,45 @@
+﻿@using System.Data;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>被授权的奖金项</title>
+    <link href="~/Content/weui.css" rel="stylesheet" />
+    <link href="~/Content/example.css" rel="stylesheet" />
+    <script src="~/scripts/zepto.min.js"></script>
+    <script src="~/scripts/example.js"></script>
+</head>
+<body>
+    <div class="weui-cells__title">被授权奖金项列表</div>
+    <div class="weui-cells">
+        @if (ViewBag.dt != null)
+        {
+            DataTable dt = ViewBag.dt;
+            for (int j = 0; j < dt.Rows.Count; j++)
+            {
+                <a class="weui-cell weui-cell_access" href="/BonusImpower/myDetail?BonusItemID=@dt.Rows[j]["BonusItemID"]&EmpID=@dt.Rows[j]["EmpID"]">
+                    <div class="weui-cell__bd">
+                        <p>@dt.Rows[j]["BIName"].ToString()</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="weui-loadmore weui-loadmore_line">
+                <span class="weui-loadmore__tips">暂无数据</span>
+            </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+        }
+    </div>
+</body>
+</html>

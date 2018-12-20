@@ -1,0 +1,58 @@
+﻿@using System.Data;
+
+@*<div class="weui-cells" id="departshit">
+    @if (ViewBag.dname != null)
+    {
+        DataTable dn = ViewBag.dname;
+        for (int i = 0; i < dn.Rows.Count; i++)
+        {
+            <a class="weui-cell weui-cell_access" href="/DepartBouns/Detail?DepartID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId">
+                <div class="weui-cell__bd">
+                    <p>@dn.Rows[i]["DepartName"].ToString()</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+
+</div>*@
+
+ 
+    @if (ViewBag.dname != null)
+    {
+        DataTable dn = ViewBag.dname;
+        for (int i = 0; i < dn.Rows.Count; i++)
+        {
+            <a class="weui-cell weui-cell_access" href="/DepartBouns/Detail?DepartID=@dn.Rows[i]["DepartID"]&CompanyId=@ViewBag.CompanyId">
+                <div class="weui-cell__hd">
+                    <img src="/Content/weixin/images/depart.png" style="width:20px;margin-right:5px;display:block" />
+                </div>
+                <div class="weui-cell__bd">
+                    <p>@dn.Rows[i]["DepartName"].ToString()</p>
+                </div>
+                <div class="weui-cell__ft">
+                </div>
+            </a>
+        }
+    }
+    else
+    {
+        <div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+            <div class="weui-loadmore weui-loadmore_line weui-loadmore_dot">
+                <span class="weui-loadmore__tips"></span>
+            </div>
+    }
+
+ 

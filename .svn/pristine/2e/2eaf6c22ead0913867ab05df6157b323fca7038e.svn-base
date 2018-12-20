@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>常见问题</title>
+    <style>
+        .addinfo {
+            width: auto;
+            height: 180px;
+        }
+    </style>
+</head>
+<body ontouchstart style="background-color:#f8f8f8">
+    <div class="weui-cells__title" style="font-weight:bolder;">奖金系统如何设置奖金项?</div>
+    <div>
+        <p>1.通过点击底部导航栏的【功能】按钮,进入功能界面->点击【奖金项管理】->通过点击加号图片进行添加添加奖金项</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/item/item.png" class="addinfo"/>
+            <img src="~/Content/Images/faq/item/additem.png" class="addinfo"/>
+            <img src="~/Content/Images/faq/item/addinfo.png" class="addinfo"/>
+        </div>
+    </div>
+    <div>
+        <p>2.通过填写奖金项的编号、名称、类型、负责人等基本信息并保存即可添加奖金项；添加完成后列表中可以在列表中点击进行设置奖金项；左滑进行【注入金额】和【设置规则】</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/item/left1.png" class="addinfo" />
+            <img src="~/Content/Images/faq/item/left2.png" class="addinfo" />
+        </div>
+    </div>
+    <div>
+        <p>3.通过点击【注入金额】可以输入任意数额注入到奖金项中；而通过【添加规则】可以通过您输入的对应的规则自动计算出注入的奖金数额，下个月一号生效；已经添加规则的奖金则可以进行【设置规则】，重新设置规则后会在下个月一号生效</p>
+        <div style="display:flex;justify-content:space-around;">
+            <img src="~/Content/Images/faq/item/zhuru.png" class="addinfo" />
+            <img src="~/Content/Images/faq/item/addgz.png" class="addinfo"/>
+            <img src="~/Content/Images/faq/item/editgz.png" class="addinfo"/>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>牛工厂</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="~/Content/weixin/css/ydui.css" rel="stylesheet" />
+    <link href="~/Content/weixin/css/demo.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/weixin/js/ydui.flexible.js"></script>
+    
+<style>
+    .g-view:before {
+            height: 0px;
+        }
+    .demo-icons-list:before{
+        color:gray;
+
+    }
+    .tabbar-item.tabbar-active { color: #4599d5; }
+    .caidan{
+        color:red;
+    }
+</style>
+</head>
+<body>
+    <div class="g-view">
+        @RenderBody()
+        <footer class="m-tabbar tabbar-fixed">
+            <a href="/Wo/Index?userId=@ViewBag.userID&counts=@ViewBag.count&companyId=@ViewBag.CompanyID" id="wo" class="tabbar-item">
+                <span class="tabbar-icon">
+                    <i class="demo-icons-me"></i>
+                </span>
+                <span class="tabbar-txt">我</span>
+            </a>
+            <a href="/Main/Index?userId=@ViewBag.userID&counts=@ViewBag.count&companyId=@ViewBag.CompanyID" id="gongneng" class="tabbar-item">
+                <span class="tabbar-icon">
+                    <i class="demo-icons-list"></i>
+                    
+                </span>
+                <span class="tabbar-txt">功能</span>
+            </a>
+            @if (ViewBag.counts > 0)
+            {
+                <a href="/SendBonus/Index?userId=@ViewBag.userID&counts=@ViewBag.count&companyId=@ViewBag.CompanyID" id="jjff" class="tabbar-item">
+                    <span class="tabbar-icon">
+                        @*<i class="demo-icons-contact"></i>*@
+                        @*<span style="background-image:url('../../Content/Images/钱 (2).png');"></span>*@
+                        <img id="qian" src="~/Content/Images/钱 (2).png" />
+                    </span>
+                    <span class="tabbar-txt">奖金发放</span>
+                </a>
+            }
+           
+            
+
+            
+
+        </footer>
+    </div>
+    <script>
+        //$('.u-checkbox').jCheckbox();
+        //$('.u-jRadio').jRadio();
+    </script>
+    @*<script>
+        $(".tabbar-item").click(function ()
+        {
+            var a = $(this).find(".tabbar-txt").html();
+            $(this).removeClass("tabbar-active");
+           
+        });
+    </script>*@
+</body>
+</html>

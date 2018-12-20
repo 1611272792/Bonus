@@ -1,0 +1,16 @@
+﻿@using Sunpn_BonusWeb.Models
+@if (ViewBag.BonusResonList != null)
+{
+    List<BonusReson> BonusResonlist = ViewBag.BonusResonList;
+    <select id="Select1" class="SelectBonus weui-select" disabled>
+
+        @foreach (var item in BonusResonlist)
+        {
+            <option value="@item.BonusResonName">@item.BonusResonName</option>
+        }
+    </select>
+}
+else
+{
+    <input type="text" value="无常用原因" disabled="disabled" class="InputBonus" />
+}
